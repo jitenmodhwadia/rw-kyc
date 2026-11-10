@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Richwealth Re-KYC</title>
+<meta name="description" content="Richwealth partner re-KYC — PAN, Aadhaar and how your money works.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Noto+Serif+Gujarati:wght@500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf6ec; --cream2:#f3ecd9; --paper:#fffdf7;
+    --gold:#b08d2e; --gold-dk:#8a6d1f; --line:#e2d5ae;
+    --navy:#14213d; --ink:#1f2433; --muted:#6b6553;
+    --green:#6f9e2b; --green-bg:#f2f7e8; --err:#b3261e; --err-bg:#fdf1f0;
+    --head:"Playfair Display",Georgia,serif; --body:Inter,system-ui,sans-serif;
+  }
+  html[lang=gu]{--head:"Noto Serif Gujarati","Playfair Display",serif; --body:"Noto Serif Gujarati",Inter,sans-serif}
+  html[lang=hi]{--head:"Noto Serif Devanagari","Playfair Display",serif; --body:"Noto Serif Devanagari",Inter,sans-serif}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:linear-gradient(180deg,var(--cream) 0%,var(--cream2) 100%) fixed; color:var(--ink); font:17px/1.6 var(--body); -webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px; margin:0 auto; padding:0 16px}
+  h1,h2,h3{font-family:var(--head); line-height:1.3; margin:0}
+
+  .gate{position:fixed; inset:0; z-index:50; background:rgba(20,33,61,.94); display:flex; align-items:center; justify-content:center; padding:16px}
+  .gate[hidden]{display:none}
+  .gatebox{background:var(--paper); border:2px solid var(--gold); border-radius:16px; padding:26px 22px; width:100%; max-width:360px; text-align:center}
+  .gatebox img{width:180px; height:auto}
+  .gatebox p{margin:10px 0 16px; color:var(--gold-dk); font:600 15px/1.6 "Noto Serif Gujarati","Noto Serif Devanagari",Inter,sans-serif}
+  .gatebox button{display:block; width:100%; margin-top:10px; padding:14px; border-radius:10px; border:1.5px solid var(--gold); background:#fff; color:var(--navy); cursor:pointer;
+    font:700 18px/1.2 "Noto Serif Gujarati","Noto Serif Devanagari",Inter,sans-serif}
+  .gatebox button:hover,.gatebox button:focus{background:var(--gold); color:#fff; outline:none}
+
+  header{padding:18px 0 4px; text-align:center}
+  .langbar{display:flex; justify-content:flex-end; gap:6px; margin-bottom:6px}
+  .langbar button{background:transparent; border:1px solid var(--line); color:var(--gold-dk); border-radius:999px; padding:5px 12px; cursor:pointer;
+    font:600 13px/1.2 "Noto Serif Gujarati","Noto Serif Devanagari",Inter,sans-serif}
+  .langbar button[aria-pressed=true]{background:var(--gold); border-color:var(--gold); color:#fff}
+  .logo{width:200px; max-width:60%; height:auto}
+  header h1{font-size:clamp(25px,6vw,34px); color:var(--navy); margin:10px 0 6px}
+  header .sub{color:var(--muted); margin:0 auto; max-width:560px}
+  .steps3{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:14px 0 0; padding:0; list-style:none}
+  .steps3 li{background:#fff; border:1px solid var(--line); border-radius:999px; padding:5px 12px; font-size:14px; color:var(--gold-dk)}
+  .steps3 b{color:var(--navy)}
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 18px; margin-top:16px; box-shadow:0 2px 10px rgba(138,109,31,.06)}
+  .card h2{font-size:clamp(20px,4.6vw,24px); color:var(--navy); display:flex; gap:10px; align-items:center; margin-bottom:4px}
+  .num{flex:none; width:30px; height:30px; border-radius:50%; background:var(--gold); color:#fff; font:700 15px/30px Inter,sans-serif; text-align:center}
+  .intro{color:var(--muted); font-size:15px; margin:0 0 16px}
+
+  .field{margin-bottom:16px; border:0; padding:0; min-width:0}
+  .field > label, .field > .lbl, .field legend{display:block; font-weight:600; font-size:16px; margin-bottom:6px; padding:0}
+  .req{color:var(--err)}
+  .hint{display:block; font-weight:400; color:var(--muted); font-size:13.5px; margin:2px 0 6px}
+  input[type=text],input[type=tel],textarea{width:100%; font:17px var(--body); color:var(--ink); background:var(--paper); border:1.5px solid #d9c98f; border-radius:9px; padding:12px 13px}
+  textarea{min-height:90px; resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(176,141,46,.2); background:#fff}
+  .phone{display:flex; gap:8px}
+  .phone select{flex:none; max-width:130px; font:16px var(--body); background:var(--paper); border:1.5px solid #d9c98f; border-radius:9px; padding:12px 8px}
+  .row2{display:grid; gap:0 14px; grid-template-columns:1fr}
+  @media(min-width:520px){ .row2{grid-template-columns:1fr 1fr} }
+  .chips{display:flex; flex-direction:column; gap:8px}
+  .chip{display:flex; align-items:center; gap:10px; border:1.5px solid #d9c98f; background:var(--paper); border-radius:10px; padding:12px 14px; cursor:pointer}
+  .chip input{width:20px; height:20px; margin:0; accent-color:var(--gold-dk); flex:none}
+  .chip:has(input:checked){background:#fbf1d3; border-color:var(--gold)}
+  .err{display:none; color:var(--err); font-size:14px; margin-top:5px}
+  .field.bad .err{display:block}
+  .field.bad input,.field.bad textarea,.field.bad .chip,.field.bad .drop,.field.bad .agree{border-color:var(--err)}
+  .hide{display:none !important}
+
+  .drop{display:flex !important; align-items:center; gap:12px; border:1.5px dashed #cdb873; background:var(--paper); border-radius:10px; padding:12px; cursor:pointer; margin:0 !important; font-weight:400 !important}
+  .drop:hover{background:#fdf7e6}
+  .drop .ic{flex:none; width:44px; height:44px; border-radius:9px; background:#f3e8c6; display:flex; align-items:center; justify-content:center; color:var(--gold-dk)}
+  .drop .tx{font-size:14px; color:var(--muted)}
+  .drop .tx b{display:block; color:var(--ink); font-size:15.5px}
+  .drop input{position:absolute; width:1px; height:1px; opacity:0}
+  .drop.has{border-style:solid; border-color:var(--green); background:var(--green-bg)}
+  .drop.has .ic{background:var(--green); color:#fff}
+  .prev{display:flex; align-items:center; gap:10px; margin-top:8px}
+  .prev img{width:92px; height:62px; object-fit:cover; border-radius:6px; border:1px solid var(--line)}
+  .prev .pdf{width:92px; height:62px; display:flex; align-items:center; justify-content:center; font:700 15px Inter,sans-serif; color:var(--err); background:var(--err-bg); border-radius:6px}
+  .prev button{background:none; border:0; color:var(--err); text-decoration:underline; cursor:pointer; font:600 14px var(--body)}
+
+  /* awareness */
+  .facts{display:grid; gap:10px}
+  .fact{background:var(--cream); border:1px solid var(--line); border-left:4px solid var(--gold); border-radius:10px; padding:12px 14px}
+  .fact h3{font:700 16.5px/1.4 var(--body); color:var(--navy); margin:0 0 3px}
+  .fact p{margin:0; font-size:15px; color:#3d3a30}
+  .fact.risk{border-left-color:var(--err); background:#fffaf8}
+  .partner{text-align:center; background:var(--navy); color:#fff; border-radius:12px; padding:16px 14px; margin-bottom:12px}
+  .partner b{display:block; font:700 clamp(19px,4.6vw,23px)/1.35 var(--head); color:#f1dfa6; margin-bottom:4px}
+  .partner span{font-size:15px; color:#dfe4ee}
+  .agree{display:flex; gap:12px; align-items:flex-start; border:1.5px solid #d9c98f; background:var(--paper); border-radius:10px; padding:12px 14px; cursor:pointer; margin-top:10px; font-size:15.5px}
+  .field > .agree{display:flex; margin-bottom:0; font-weight:500}
+  .agree input{width:22px; height:22px; margin-top:2px; flex:none; accent-color:var(--gold-dk)}
+  .agree:has(input:checked){background:#fbf1d3; border-color:var(--gold)}
+
+  .tdsnote{margin-top:14px; background:#fff8e6; border:1px solid #ecd9a6; border-left:4px solid var(--gold); border-radius:9px; padding:12px 14px; font-size:14.5px; color:#4d3d12}
+  .tdsnote > b{display:block; color:var(--navy); font-size:15.5px; margin-bottom:3px}
+  .tdsnote span b{color:var(--err)}
+  .tdsnote a{color:var(--gold-dk); font-weight:700}
+  .note{margin:-4px 0 16px; background:#eef3fb; border-left:4px solid var(--navy); border-radius:8px; padding:10px 12px; font-size:14.5px; color:#22314f}
+  .lt-ver{margin:12px 0 0; font-size:12.5px; color:var(--muted); text-align:right}
+  .pid{display:inline-block; margin-top:4px; font-weight:700; color:var(--navy)}
+
+  /* consent letter */
+  .letter{background:var(--paper); border:1px solid var(--line); border-top:4px solid var(--gold); border-radius:10px; padding:16px 14px; margin-top:4px}
+  .lt-top{display:flex; justify-content:space-between; gap:12px; font-size:14px; color:var(--muted); line-height:1.5}
+  .lt-top span:last-child{text-align:right; white-space:nowrap}
+  .lt-sub{font:700 16px/1.45 var(--body); color:var(--navy); margin:12px 0 6px; padding-bottom:8px; border-bottom:1px solid var(--line)}
+  .lt-open{font-size:15.5px; margin:8px 0 10px}
+  .lt-h{font:700 15px/1.4 var(--body) !important; color:var(--gold-dk)}
+  .allbtn{background:none; border:0; color:var(--gold-dk); text-decoration:underline; cursor:pointer; font:600 14.5px var(--body); padding:0; margin:0 0 6px}
+  .consent{border:1px solid var(--line); border-radius:9px; background:#fff; padding:0 12px}
+  .ck{display:flex; gap:11px; align-items:flex-start; padding:11px 0; border-bottom:1px solid #eee3c4; font-size:15px; cursor:pointer}
+  .ck:last-child{border-bottom:0}
+  .ck input{width:20px; height:20px; margin-top:3px; flex:none; accent-color:var(--gold-dk)}
+  .ck b{color:var(--navy)}
+  .field.bad .consent{border-color:var(--err)}
+  .sig{font-family:"Playfair Display",Georgia,serif !important; font-style:italic; font-size:19px !important}
+
+  .btn{display:block; width:100%; border:0; cursor:pointer; border-radius:12px; font:700 18px/1.2 var(--body); padding:17px 22px; margin-top:18px; background:var(--gold); color:#fff}
+  .btn:hover{background:var(--gold-dk)}
+  .btn:disabled{opacity:.65; cursor:wait}
+  .formmsg{display:none; margin-top:14px; padding:12px 14px; border-radius:9px; background:var(--err-bg); color:#4a1c18; font-size:15px}
+  .formmsg.show{display:block}
+  .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+
+  .done{display:none; background:#fff; border:2px solid var(--gold); border-radius:16px; padding:26px 20px; text-align:center; margin-top:16px}
+  .done .tick{width:64px; height:64px; border-radius:50%; background:var(--green-bg); color:var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 10px}
+  .done h2{color:var(--navy); font-size:clamp(23px,5.4vw,28px)}
+  .ref{display:inline-block; margin:12px 0 6px; background:var(--cream); border:1px dashed var(--gold); border-radius:8px; padding:7px 16px; font:700 19px Inter,sans-serif; color:var(--gold-dk); letter-spacing:.04em}
+  .done p{color:#3d3a30; margin:10px 0 0}
+  .app{margin-top:18px; background:var(--navy); color:#fff; border-radius:14px; padding:18px 16px; display:flex; gap:14px; align-items:center; text-align:left}
+  .app .ph{flex:none; width:46px; height:74px; border:3px solid #f1dfa6; border-radius:10px; display:flex; align-items:center; justify-content:center; font:700 12px Inter,sans-serif; color:#f1dfa6}
+  .app b{display:block; font:700 18px/1.35 var(--head); color:#f1dfa6}
+  .app span{font-size:15px; color:#dfe4ee}
+
+  footer{padding:24px 0 36px; text-align:center; font-size:14px; color:var(--muted)}
+  footer a{color:var(--gold-dk); font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Choose language" hidden>
+  <div class="gatebox">
+    <img src="logo.png" alt="Richwealth">
+    <p>ભાષા પસંદ કરો · भाषा चुनें<br>Choose your language</p>
+    <button type="button" data-lang="gu">ગુજરાતી</button>
+    <button type="button" data-lang="hi">हिन्दी</button>
+    <button type="button" data-lang="en">English</button>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="langbar" aria-label="Language">
+      <button type="button" data-lang="gu">ગુજરાતી</button>
+      <button type="button" data-lang="hi">हिन्दी</button>
+      <button type="button" data-lang="en">English</button>
+    </div>
+    <img class="logo" src="logo.png" alt="Richwealth — Trusted since 2011" width="640" height="302">
+    <h1 data-t="h1"></h1>
+    <p class="sub" data-t="sub"></p>
+    <ol class="steps3"><li data-t="p1"></li><li data-t="p2"></li><li data-t="p3"></li></ol>
+  </div>
+</header>
+
+<main class="wrap">
+  <form id="kyc" novalidate autocomplete="on">
+    <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <!-- 1 · who + documents -->
+    <section class="card">
+      <h2><span class="num">1</span><span data-t="s1"></span></h2>
+      <p class="intro" data-t="s1_i"></p>
+      <div class="field" data-k="name"><label for="f-name"><span data-t="name"></span> <span class="req">*</span></label>
+        <input id="f-name" type="text" maxlength="80" autocomplete="name"><span class="err" data-t="e_req"></span></div>
+      <div class="field" data-k="mobile"><label for="f-mob"><span data-t="mobile"></span> <span class="req">*</span></label>
+        <span class="hint" data-t="mobile_h"></span>
+        <div class="phone"><select id="f-cc" aria-label="Country code"></select><input id="f-mob" type="tel" inputmode="numeric" maxlength="13" autocomplete="tel-national"></div>
+        <span class="err" data-t="e_mob"></span></div>
+      <div class="field" data-k="email"><label for="f-email" data-t="email"></label>
+        <span class="hint" data-t="email_h"></span>
+        <input id="f-email" type="email" maxlength="80" autocomplete="email" inputmode="email"><span class="err" data-t="e_email"></span></div>
+      <div id="docs"></div>
+      <fieldset class="field" data-k="panlink" style="margin-bottom:0"><legend><span data-t="pl_q"></span> <span class="req">*</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="panlink" value="Linked"><span data-t="pl_yes"></span></label>
+          <label class="chip"><input type="radio" name="panlink" value="Not linked"><span data-t="pl_no"></span></label>
+          <label class="chip"><input type="radio" name="panlink" value="Not sure"><span data-t="pl_ns"></span></label>
+        </div><span class="err" data-t="e_choose"></span></fieldset>
+      <div class="tdsnote" role="note"><b data-t="tds_h"></b><span data-t="tds_p"></span></div>
+    </section>
+
+    <!-- 2 · address -->
+    <section class="card">
+      <h2><span class="num">2</span><span data-t="s2"></span></h2>
+      <fieldset class="field" data-k="addr_same"><legend><span data-t="addr_q"></span> <span class="req">*</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="addr_same" value="Same as Aadhaar"><span data-t="addr_yes"></span></label>
+          <label class="chip"><input type="radio" name="addr_same" value="Different"><span data-t="addr_no"></span></label>
+        </div><span class="err" data-t="e_choose"></span></fieldset>
+      <div class="field hide" data-k="new_address"><label for="f-addr"><span data-t="new_addr"></span> <span class="req">*</span></label>
+        <textarea id="f-addr" maxlength="300" autocomplete="street-address"></textarea><span class="err" data-t="e_req"></span></div>
+      <div class="row2 hide" id="addr2">
+        <div class="field" data-k="city"><label for="f-city"><span data-t="city"></span> <span class="req">*</span></label>
+          <input id="f-city" type="text" maxlength="60" autocomplete="address-level2"><span class="err" data-t="e_req"></span></div>
+        <div class="field" data-k="pin"><label for="f-pin"><span data-t="pin"></span> <span class="req">*</span></label>
+          <input id="f-pin" type="text" maxlength="10" autocomplete="postal-code"><span class="err" data-t="e_req"></span></div>
+      </div>
+      <fieldset class="field" data-k="bank_same"><legend><span data-t="bank_q"></span> <span class="req">*</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="bank_same" value="Same account"><span data-t="bank_yes"></span></label>
+          <label class="chip"><input type="radio" name="bank_same" value="Changed"><span data-t="bank_no"></span></label>
+        </div><span class="err" data-t="e_choose"></span></fieldset>
+      <p class="note hide" id="bank-note" data-t="bank_note"></p>
+      <fieldset class="field" data-k="nom_same"><legend><span data-t="nom_q"></span> <span class="req">*</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="nom_same" value="Same nominee"><span data-t="nom_yes"></span></label>
+          <label class="chip"><input type="radio" name="nom_same" value="Update"><span data-t="nom_no"></span></label>
+        </div><span class="err" data-t="e_choose"></span></fieldset>
+      <p class="note hide" id="nom-note" data-t="nom_note"></p>
+    </section>
+
+    <!-- 3 · how your money works -->
+    <section class="card">
+      <h2><span class="num">3</span><span data-t="s3"></span></h2>
+      <p class="intro" data-t="s3_i"></p>
+      <div class="partner"><b data-t="pt_h"></b><span data-t="pt_p"></span></div>
+
+      <div class="letter">
+        <div class="lt-top"><span data-t="lt_to"></span><span><span id="lt-date"></span><br><span class="pid" id="lt-pid"></span></span></div>
+        <p class="lt-sub" data-t="lt_sub"></p>
+        <p class="lt-open" id="lt-open"></p>
+        <div class="field" data-k="consent" style="margin:0">
+          <button type="button" class="allbtn" id="tickall" data-t="tickall"></button>
+          <div class="consent" id="consents"></div>
+          <span class="err" data-t="e_tickall"></span>
+        </div>
+        <div class="field" data-k="decl" style="margin:14px 0 0">
+          <span class="lbl lt-h" data-t="decl_h"></span>
+          <label class="agree"><input type="checkbox" id="f-decl"><span data-t="decl"></span></label>
+          <span class="err" data-t="e_tick"></span>
+        </div>
+        <div class="row2" style="margin-top:14px">
+          <div class="field" data-k="sign"><label for="f-sign"><span data-t="sign"></span> <span class="req">*</span></label>
+            <input id="f-sign" type="text" class="sig" maxlength="80"><span class="hint" data-t="sign_h"></span><span class="err" data-t="e_sign"></span></div>
+          <div class="field" data-k="place"><label for="f-place"><span data-t="place"></span> <span class="req">*</span></label>
+            <input id="f-place" type="text" maxlength="60"><span class="err" data-t="e_req"></span></div>
+        </div>
+        <p class="lt-ver" id="lt-ver"></p>
+      </div>
+
+      <div class="field" style="margin:12px 0 0">
+        <label class="agree"><input type="checkbox" id="f-call"><span data-t="ag3"></span></label></div>
+    </section>
+
+    <div class="formmsg" id="formmsg" role="alert"></div>
+    <button type="submit" class="btn" id="subbtn" data-t="submit"></button>
+  </form>
+
+  <div class="done" id="done" tabindex="-1">
+    <div class="tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+    <h2 id="d-h"></h2>
+    <div class="ref" id="d-ref"></div>
+    <p data-t="d_p1"></p>
+    <p data-t="d_p2"></p>
+    <div class="app"><div class="ph">24/7</div><div><b data-t="app_h"></b><span data-t="app_p"></span></div></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p data-t="help"></p>
+    <p data-t="privacy"></p>
+    <p>© Richwealth · Trusted since 2011</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+// Apps Script web-app /exec URL. Empty = page refuses to submit and shows the help number.
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbzGERg5w4vrki5SgFIOJLZwu4pKEKbVFJcV_NYEGektxlo_IB2r5TzvlD1bDl6WfA4H/exec";
+var HELP = '<a href="https://wa.me/919913121121">+91 99131 21121</a>';
+var LINK = '<a href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/link-aadhaar-status" target="_blank" rel="noopener">Income Tax e-filing portal (Link Aadhaar Status)</a>';
+
+var T = {
+en:{
+ title:"Richwealth Re-KYC",
+ h1:"Re-KYC — takes 2 minutes",
+ sub:"We already have your details. Just share your PAN and Aadhaar, and read how your money works.",
+ p1:"<b>1</b> PAN &amp; Aadhaar", p2:"<b>2</b> Address &amp; bank", p3:"<b>3</b> How your money works",
+ s1:"Your PAN &amp; Aadhaar", s1_i:"Take clear photos with your phone camera. Nothing else to fill.",
+ name:"Your name", mobile:"Your WhatsApp number", mobile_h:"The number registered with Richwealth.",
+ tap:"Tap to take a photo or choose a file", added:"Added", change:"Change",
+ d_pan:"PAN card", d_aadf:"Aadhaar card — front", d_aadb:"Aadhaar card — back",
+ pl_q:"Is your PAN linked with your Aadhaar?", pl_yes:"Yes, linked", pl_no:"No, not linked", pl_ns:"Not sure",
+ tds_h:"Important: PAN–Aadhaar link and TDS",
+ tds_p:"Under the Income-tax Act, 1961, if your PAN is not linked with Aadhaar it becomes inoperative and TDS must be deducted at <b>20% instead of 10%</b>. Please make sure your PAN is linked. You can check your status on the " + LINK + ".",
+ s2:"Address, bank &amp; nominee", addr_q:"Is your current address the same as on your Aadhaar card?",
+ addr_yes:"Yes, same as Aadhaar", addr_no:"No, I live at a different address now",
+ new_addr:"Your current address", city:"City", pin:"PIN code",
+ s3:"Consent &amp; acknowledgement", s3_i:"Please read each point carefully and tick it. Your Relationship Manager (RM) will explain any point in detail.",
+ pt_h:"We are partners — not client and company.", pt_p:"Richwealth is not a scheme or a plan. Your income is contractual income — like two business partners who do business together and earn together.",
+ lt_to:"To,<br>Richwealth<br>Ranmal Lake, Gate No. 1, Jamnagar 361001", lt_sub:"Subject: Re-KYC and partner consent",
+ lt_open:"I, <b>{name}</b>, hereby confirm, acknowledge and agree that:",
+ c1:"<b>Partnership.</b> My association with Richwealth is that of a business partner. My earnings from Richwealth are contractual income from the business we carry on together — like two business partners working and earning together. It is not a scheme, a plan or a deposit.",
+ c2:"<b>Use of funds.</b> My funds are deployed by Richwealth in business activities under its 40-40-20 model — equity markets, real estate (including projects such as Vishram Dwarka) and bank deposits.",
+ c3:"<b>Source of payouts.</b> My monthly payouts are my contractual share of the earnings of this business. They are not bank interest, and my investment is not a bank fixed deposit.",
+ c4:"<b>Returns and risk.</b> The business aims to earn returns higher than a bank fixed deposit. However, business and market-linked activities carry risk, returns are not fixed, and there is no guarantee from any government body or bank. Past payment record does not assure future returns.",
+ c5:"<b>Privé membership.</b> My Relationship Manager has explained, or will explain, the Privé membership plans, membership fees and related benefits (including the EV car programme). I may ask for any clarification at any time.",
+ c6:"<b>Payouts and TDS.</b> All payouts are made only by bank transfer to my own registered bank account and never to any third party. TDS is deducted and deposited against my PAN at 10%. <b>If my PAN is not linked with my Aadhaar (inoperative PAN), TDS will be deducted at the higher rate of 20%</b> as required under the Income-tax Act, 1961, and Richwealth will not be responsible for this higher deduction.",
+ c7:"<b>Early exit.</b> Closure or withdrawal before maturity may attract a penalty or deduction as per the terms of my certificate or agreement.",
+ c8:"<b>Voluntary participation.</b> I have invested voluntarily, from my own lawful sources of income, after understanding the above. No one has pressured or misled me.",
+ c9:"<b>Use of my data.</b> I authorise Richwealth to store and use my KYC details and documents for verification, payouts, statutory compliance, and to set up my account on the upcoming Richwealth mobile application.",
+ c10:"<b>Updates.</b> I will inform Richwealth within 7 days of any change in my bank account, mobile number or address.",
+ c11:"<b>Official accounts only.</b> All amounts I pay to Richwealth are paid only into Richwealth's official company bank accounts. I will not pay any amount to any employee, agent or other person personally, and I will never share any OTP or password with anyone.",
+ c12:"<b>Communication.</b> I agree to receive calls and messages from Richwealth on WhatsApp, SMS, email and phone about my investment, payouts and updates.",
+ c13:"<b>Nominee.</b> In the event of my death, my investment and payouts will pass to my registered nominee or legal heirs as per Richwealth records, after due verification.",
+ c14:"<b>Electronic consent.</b> I agree that this online consent, given by ticking each point and typing my name, is as valid and binding as a physically signed document under the Information Technology Act, 2000.",
+ c15:"<b>Jurisdiction.</b> Any dispute shall be subject to the jurisdiction of the courts at Jamnagar, Gujarat.",
+ email:"Email (optional)", email_h:"For your TDS certificate (Form 16A) and the Richwealth app.", e_email:"Please enter a valid email or leave it blank.",
+ bank_q:"Should your payouts continue to the same bank account as before?", bank_yes:"Yes, same account", bank_no:"No, my account has changed",
+ bank_note:"No problem — your RM will call you to update it. Please keep a cancelled cheque or passbook ready. Your balance will be paid after the new account is verified.",
+ nom_q:"Is your nominee still the same?", nom_yes:"Yes, same nominee", nom_no:"No, I want to update it",
+ nom_note:"Your RM will call you to update your nominee.",
+ pid:"Partner ID", ver:"Consent version {v}",
+ tickall:"I have read all the points — tick all",
+ decl_h:"Declaration", decl:"I hereby declare that the information and documents submitted by me are true, correct and complete. I understand that Richwealth may withhold payouts until any discrepancy is resolved.",
+ sign:"Signature — type your full name", sign_h:"Your typed name is your signature on this consent.", place:"Place", date:"Date",
+ ag3:"Please ask my RM to call me and explain. (optional)",
+ e_tickall:"Please read and tick every point.", e_sign:"Please type your full name.",
+ submit:"Submit", saving:"Uploading… please wait",
+ e_req:"Please fill this.", e_choose:"Please choose one.", e_mob:"Please enter a valid mobile number.", e_doc:"Please add this photo.",
+ e_big:"This file is too large (max 8 MB). Please take a new photo.", e_type:"Please add a photo or PDF.", e_tick:"Please tick to continue.",
+ not_open:"The form is not open yet.", save_fail:"It could not be submitted. Please check your internet and try again.",
+ help:"Need help? WhatsApp us on " + HELP + ".",
+ privacy:"Your documents are stored privately by Richwealth and used only for KYC, payouts and your Richwealth app account.",
+ d_h:"Thank you{n}!", d_p1:"Your re-KYC is received. Please keep this reference number.",
+ d_p2:"After our team verifies it, your remaining payout will be credited within 48 hours.",
+ app_h:"Richwealth is coming to your mobile — 24/7", app_p:"Thank you for sharing your details. We are building the Richwealth app, and this information will set up your account in it. Very soon Richwealth will be available on your phone, anytime.",
+ cc_other:"Other"
+},
+gu:{
+ title:"રિચવેલ્થ રી-KYC",
+ h1:"રી-KYC — ફક્ત 2 મિનિટ",
+ sub:"તમારી વિગતો અમારી પાસે છે જ. ફક્ત PAN અને આધાર આપો, અને તમારા પૈસા કેવી રીતે કામ કરે છે તે વાંચો.",
+ p1:"<b>1</b> PAN અને આધાર", p2:"<b>2</b> સરનામું અને બેંક", p3:"<b>3</b> તમારા પૈસા કેવી રીતે કામ કરે છે",
+ s1:"તમારું PAN અને આધાર", s1_i:"ફોનના કેમેરાથી સ્પષ્ટ ફોટા લો. બીજું કંઈ ભરવાનું નથી.",
+ name:"તમારું નામ", mobile:"તમારો વોટ્સએપ નંબર", mobile_h:"રિચવેલ્થમાં રજિસ્ટર થયેલો નંબર.",
+ tap:"ફોટો લેવા અથવા ફાઇલ પસંદ કરવા ટેપ કરો", added:"ઉમેર્યું", change:"બદલો",
+ d_pan:"PAN કાર્ડ", d_aadf:"આધાર કાર્ડ — આગળની બાજુ", d_aadb:"આધાર કાર્ડ — પાછળની બાજુ",
+ pl_q:"શું તમારું PAN આધાર સાથે લિંક છે?", pl_yes:"હા, લિંક છે", pl_no:"ના, લિંક નથી", pl_ns:"ખબર નથી",
+ tds_h:"મહત્વપૂર્ણ: PAN–આધાર લિંક અને TDS",
+ tds_p:"આવકવેરા કાયદો, 1961 મુજબ, PAN આધાર સાથે લિંક ન હોય તો તે નિષ્ક્રિય બને છે અને TDS <b>10% ને બદલે 20%</b> કાપવો ફરજિયાત છે. કૃપા કરીને ખાતરી કરો કે તમારું PAN લિંક છે. તમારું સ્ટેટસ " + LINK + " પર ચકાસી શકો છો.",
+ s2:"સરનામું, બેંક અને નોમિની", addr_q:"શું તમારું હાલનું સરનામું આધાર કાર્ડ પર છે તે જ છે?",
+ addr_yes:"હા, આધાર મુજબ જ", addr_no:"ના, હવે હું બીજા સરનામે રહું છું",
+ new_addr:"તમારું હાલનું સરનામું", city:"શહેર", pin:"પિન કોડ",
+ s3:"સંમતિ અને સ્વીકૃતિ", s3_i:"કૃપા કરીને દરેક મુદ્દો ધ્યાનથી વાંચો અને ટિક કરો. કોઈ પણ મુદ્દો તમારા રિલેશનશિપ મેનેજર (RM) વિગતે સમજાવશે.",
+ pt_h:"આપણે પાર્ટનર છીએ — ક્લાયન્ટ અને કંપની નહીં.", pt_p:"રિચવેલ્થ કોઈ સ્કીમ કે પ્લાન નથી. તમારી આવક કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે — જેમ બે બિઝનેસ પાર્ટનર સાથે મળીને બિઝનેસ કરે અને સાથે કમાય.",
+ lt_to:"પ્રતિ,<br>રિચવેલ્થ<br>રણમલ તળાવ, ગેટ નં. 1, જામનગર 361001", lt_sub:"વિષય: રી-KYC અને પાર્ટનર સંમતિ",
+ lt_open:"હું, <b>{name}</b>, આથી પુષ્ટિ કરું છું, સ્વીકારું છું અને સંમત છું કે:",
+ c1:"<b>પાર્ટનરશિપ.</b> રિચવેલ્થ સાથે મારો સંબંધ બિઝનેસ પાર્ટનર તરીકેનો છે. રિચવેલ્થમાંથી મારી કમાણી આપણે સાથે મળીને કરતા બિઝનેસમાંથી મળતી કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે — જેમ બે બિઝનેસ પાર્ટનર સાથે કામ કરે અને સાથે કમાય. આ કોઈ સ્કીમ, પ્લાન કે ડિપોઝિટ નથી.",
+ c2:"<b>ભંડોળનો ઉપયોગ.</b> રિચવેલ્થ મારું ભંડોળ તેના 40-40-20 મોડેલ હેઠળ બિઝનેસમાં રોકે છે — શેરબજાર, રિયલ એસ્ટેટ (વિશ્રામ દ્વારકા જેવા પ્રોજેક્ટ સહિત) અને બેંક ડિપોઝિટ.",
+ c3:"<b>પેમેન્ટનો સ્રોત.</b> મારું માસિક પેમેન્ટ આ બિઝનેસની કમાણીમાંથી કરાર મુજબનો મારો હિસ્સો છે. તે બેંકનું વ્યાજ નથી, અને મારું રોકાણ બેંક ફિક્સ્ડ ડિપોઝિટ નથી.",
+ c4:"<b>વળતર અને જોખમ.</b> બિઝનેસનો હેતુ બેંક ફિક્સ્ડ ડિપોઝિટ કરતાં વધુ વળતર મેળવવાનો છે. પરંતુ બિઝનેસ અને બજાર સાથે જોડાયેલી પ્રવૃત્તિમાં જોખમ હોય છે, વળતર ફિક્સ નથી, અને કોઈ સરકારી સંસ્થા કે બેંકની ગેરંટી નથી. ભૂતકાળનો પેમેન્ટ રેકોર્ડ ભવિષ્યના વળતરની ખાતરી નથી.",
+ c5:"<b>પ્રિવે મેમ્બરશિપ.</b> મારા રિલેશનશિપ મેનેજરે પ્રિવે મેમ્બરશિપ પ્લાન, મેમ્બરશિપ ફી અને સંબંધિત લાભો (EV કાર પ્રોગ્રામ સહિત) સમજાવ્યા છે અથવા સમજાવશે. હું ગમે ત્યારે કોઈ પણ સ્પષ્ટતા માગી શકું છું.",
+ c6:"<b>પેમેન્ટ અને TDS.</b> બધા પેમેન્ટ ફક્ત બેંક ટ્રાન્સફરથી મારા પોતાના રજિસ્ટર્ડ બેંક ખાતામાં જ થાય છે — બીજા કોઈના ખાતામાં ક્યારેય નહીં. TDS 10% ના દરે કપાઈને મારા PAN સામે જમા થાય છે. <b>જો મારું PAN આધાર સાથે લિંક ન હોય (નિષ્ક્રિય PAN), તો આવકવેરા કાયદો, 1961 મુજબ TDS 20% ના ઊંચા દરે કપાશે</b>, અને આ વધારાની કપાત માટે રિચવેલ્થ જવાબદાર રહેશે નહીં.",
+ c7:"<b>વહેલું બહાર નીકળવું.</b> મુદત પહેલાં રોકાણ બંધ કરવા કે ઉપાડવા પર મારા સર્ટિફિકેટ અથવા કરારની શરતો મુજબ પેનલ્ટી કે કપાત થઈ શકે છે.",
+ c8:"<b>સ્વૈચ્છિક ભાગીદારી.</b> ઉપરની બાબતો સમજીને, મારી પોતાની કાયદેસર આવકમાંથી, મેં સ્વેચ્છાએ રોકાણ કર્યું છે. કોઈએ મારા પર દબાણ કર્યું નથી કે મને ગેરમાર્ગે દોર્યો નથી.",
+ c9:"<b>મારી માહિતીનો ઉપયોગ.</b> હું રિચવેલ્થને મારી KYC વિગતો અને દસ્તાવેજો વેરિફિકેશન, પેમેન્ટ, કાયદાકીય પાલન અને આવનારી રિચવેલ્થ મોબાઇલ એપમાં મારું એકાઉન્ટ બનાવવા માટે રાખવા અને વાપરવાની મંજૂરી આપું છું.",
+ c10:"<b>ફેરફારની જાણ.</b> મારું બેંક ખાતું, મોબાઇલ નંબર કે સરનામું બદલાય તો હું 7 દિવસમાં રિચવેલ્થને જાણ કરીશ.",
+ c11:"<b>ફક્ત સત્તાવાર ખાતાં.</b> હું રિચવેલ્થને જે પણ રકમ ચૂકવું તે ફક્ત રિચવેલ્થના સત્તાવાર કંપની બેંક ખાતામાં જ ચૂકવીશ. હું કોઈ કર્મચારી, એજન્ટ કે અન્ય વ્યક્તિને અંગત રીતે કોઈ રકમ ચૂકવીશ નહીં, અને મારો OTP કે પાસવર્ડ ક્યારેય કોઈને આપીશ નહીં.",
+ c12:"<b>સંદેશાવ્યવહાર.</b> મારા રોકાણ, પેમેન્ટ અને અપડેટ્સ અંગે રિચવેલ્થ તરફથી વોટ્સએપ, SMS, ઇમેઇલ અને ફોન પર કોલ અને મેસેજ મેળવવા હું સંમત છું.",
+ c13:"<b>નોમિની.</b> મારા અવસાનના સંજોગોમાં, યોગ્ય ચકાસણી પછી, મારું રોકાણ અને પેમેન્ટ રિચવેલ્થના રેકોર્ડ મુજબ મારા રજિસ્ટર્ડ નોમિની અથવા કાયદેસર વારસદારોને મળશે.",
+ c14:"<b>ઇલેક્ટ્રોનિક સંમતિ.</b> હું સંમત છું કે દરેક મુદ્દો ટિક કરીને અને મારું નામ લખીને આપેલી આ ઓનલાઇન સંમતિ, માહિતી ટેકનોલોજી કાયદો, 2000 હેઠળ, હાથે સહી કરેલા દસ્તાવેજ જેટલી જ માન્ય અને બંધનકર્તા છે.",
+ c15:"<b>ન્યાયક્ષેત્ર.</b> કોઈ પણ વિવાદ જામનગર, ગુજરાતની અદાલતોના ન્યાયક્ષેત્રને આધીન રહેશે.",
+ email:"ઇમેઇલ (વૈકલ્પિક)", email_h:"તમારા TDS સર્ટિફિકેટ (ફોર્મ 16A) અને રિચવેલ્થ એપ માટે.", e_email:"કૃપા કરીને સાચો ઇમેઇલ લખો અથવા ખાલી રાખો.",
+ bank_q:"શું તમારું પેમેન્ટ પહેલાંના જ બેંક ખાતામાં ચાલુ રાખવાનું છે?", bank_yes:"હા, એ જ ખાતું", bank_no:"ના, મારું ખાતું બદલાયું છે",
+ bank_note:"કોઈ વાંધો નહીં — તમારા RM તમને ફોન કરીને ખાતું અપડેટ કરશે. કૃપા કરીને કેન્સલ ચેક કે પાસબુક તૈયાર રાખો. નવું ખાતું વેરિફાય થયા પછી તમારું બાકીનું પેમેન્ટ થશે.",
+ nom_q:"શું તમારા નોમિની એ જ છે?", nom_yes:"હા, એ જ નોમિની", nom_no:"ના, મારે બદલવા છે",
+ nom_note:"તમારા RM તમને ફોન કરીને નોમિની અપડેટ કરશે.",
+ pid:"પાર્ટનર ID", ver:"સંમતિ આવૃત્તિ {v}",
+ tickall:"મેં બધા મુદ્દા વાંચ્યા છે — બધા ટિક કરો",
+ decl_h:"જાહેરનામું", decl:"હું આથી જાહેર કરું છું કે મેં આપેલી માહિતી અને દસ્તાવેજો સાચા, યોગ્ય અને સંપૂર્ણ છે. હું સમજું છું કે કોઈ વિસંગતતા દૂર ન થાય ત્યાં સુધી રિચવેલ્થ પેમેન્ટ રોકી શકે છે.",
+ sign:"સહી — તમારું પૂરું નામ લખો", sign_h:"તમે લખેલું નામ આ સંમતિ પર તમારી સહી ગણાશે.", place:"સ્થળ", date:"તારીખ",
+ ag3:"મારા RMને મને ફોન કરીને સમજાવવા કહો. (વૈકલ્પિક)",
+ e_tickall:"કૃપા કરીને દરેક મુદ્દો વાંચીને ટિક કરો.", e_sign:"કૃપા કરીને તમારું પૂરું નામ લખો.",
+ submit:"સબમિટ કરો", saving:"અપલોડ થઈ રહ્યું છે… રાહ જુઓ",
+ e_req:"કૃપા કરીને આ ભરો.", e_choose:"કૃપા કરીને એક પસંદ કરો.", e_mob:"કૃપા કરીને સાચો મોબાઇલ નંબર લખો.", e_doc:"કૃપા કરીને આ ફોટો ઉમેરો.",
+ e_big:"આ ફાઇલ બહુ મોટી છે (મહત્તમ 8 MB). નવો ફોટો લો.", e_type:"કૃપા કરીને ફોટો અથવા PDF ઉમેરો.", e_tick:"આગળ વધવા માટે ટિક કરો.",
+ not_open:"ફોર્મ હજી શરૂ થયું નથી.", save_fail:"સબમિટ થઈ શક્યું નથી. ઇન્ટરનેટ તપાસીને ફરી પ્રયાસ કરો.",
+ help:"મદદ જોઈએ છે? અમને વોટ્સએપ કરો " + HELP + ".",
+ privacy:"તમારા દસ્તાવેજો રિચવેલ્થ ખાનગી રીતે રાખે છે અને ફક્ત KYC, પેમેન્ટ અને તમારા રિચવેલ્થ એપ એકાઉન્ટ માટે જ વાપરે છે.",
+ d_h:"આભાર{n}!", d_p1:"તમારું રી-KYC મળી ગયું છે. આ રેફરન્સ નંબર સાચવી રાખો.",
+ d_p2:"અમારી ટીમ વેરિફાય કરે પછી 48 કલાકમાં તમારું બાકીનું પેમેન્ટ જમા થશે.",
+ app_h:"રિચવેલ્થ હવે તમારા મોબાઇલમાં — 24/7", app_p:"તમારી વિગતો આપવા બદલ આભાર. અમે રિચવેલ્થ એપ બનાવી રહ્યા છીએ, અને આ માહિતીથી તેમાં તમારું એકાઉન્ટ તૈયાર થશે. ખૂબ જલ્દી રિચવેલ્થ ગમે ત્યારે તમારા ફોનમાં ઉપલબ્ધ હશે.",
+ cc_other:"અન્ય"
+},
+hi:{
+ title:"रिचवेल्थ री-KYC",
+ h1:"री-KYC — सिर्फ़ 2 मिनट",
+ sub:"आपकी जानकारी हमारे पास पहले से है। बस PAN और आधार दें, और पढ़ें कि आपका पैसा कैसे काम करता है।",
+ p1:"<b>1</b> PAN और आधार", p2:"<b>2</b> पता और बैंक", p3:"<b>3</b> आपका पैसा कैसे काम करता है",
+ s1:"आपका PAN और आधार", s1_i:"फ़ोन के कैमरे से साफ़ फ़ोटो लें। और कुछ भरने की ज़रूरत नहीं।",
+ name:"आपका नाम", mobile:"आपका व्हाट्सऐप नंबर", mobile_h:"रिचवेल्थ में रजिस्टर्ड नंबर।",
+ tap:"फ़ोटो लेने या फ़ाइल चुनने के लिए टैप करें", added:"जोड़ा गया", change:"बदलें",
+ d_pan:"PAN कार्ड", d_aadf:"आधार कार्ड — आगे का हिस्सा", d_aadb:"आधार कार्ड — पीछे का हिस्सा",
+ pl_q:"क्या आपका PAN आधार से लिंक है?", pl_yes:"हाँ, लिंक है", pl_no:"नहीं, लिंक नहीं है", pl_ns:"पता नहीं",
+ tds_h:"महत्वपूर्ण: PAN–आधार लिंक और TDS",
+ tds_p:"आयकर अधिनियम, 1961 के अनुसार, PAN आधार से लिंक न होने पर निष्क्रिय हो जाता है और TDS <b>10% की जगह 20%</b> काटना अनिवार्य है। कृपया सुनिश्चित करें कि आपका PAN लिंक है। आप अपना स्टेटस " + LINK + " पर जाँच सकते हैं।",
+ s2:"पता, बैंक और नॉमिनी", addr_q:"क्या आपका वर्तमान पता वही है जो आधार कार्ड पर है?",
+ addr_yes:"हाँ, आधार के अनुसार ही", addr_no:"नहीं, अब मैं दूसरे पते पर रहता/रहती हूँ",
+ new_addr:"आपका वर्तमान पता", city:"शहर", pin:"पिन कोड",
+ s3:"सहमति और स्वीकृति", s3_i:"कृपया हर बिंदु ध्यान से पढ़ें और टिक करें। कोई भी बिंदु आपके रिलेशनशिप मैनेजर (RM) विस्तार से समझाएँगे।",
+ pt_h:"हम पार्टनर हैं — क्लाइंट और कंपनी नहीं।", pt_p:"रिचवेल्थ कोई स्कीम या प्लान नहीं है। आपकी आय कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है — जैसे दो बिज़नेस पार्टनर साथ मिलकर बिज़नेस करते हैं और साथ कमाते हैं।",
+ lt_to:"सेवा में,<br>रिचवेल्थ<br>रणमल तालाब, गेट नं. 1, जामनगर 361001", lt_sub:"विषय: री-KYC और पार्टनर सहमति",
+ lt_open:"मैं, <b>{name}</b>, एतद्द्वारा पुष्टि करता/करती हूँ, स्वीकार करता/करती हूँ और सहमत हूँ कि:",
+ c1:"<b>पार्टनरशिप।</b> रिचवेल्थ के साथ मेरा संबंध एक बिज़नेस पार्टनर का है। रिचवेल्थ से मेरी कमाई हमारे साथ मिलकर किए जा रहे बिज़नेस से मिलने वाली कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है — जैसे दो बिज़नेस पार्टनर साथ काम करते हैं और साथ कमाते हैं। यह कोई स्कीम, प्लान या डिपॉज़िट नहीं है।",
+ c2:"<b>धन का उपयोग।</b> रिचवेल्थ मेरा धन अपने 40-40-20 मॉडल के तहत बिज़नेस में लगाता है — शेयर बाज़ार, रियल एस्टेट (विश्राम द्वारका जैसे प्रोजेक्ट सहित) और बैंक डिपॉज़िट।",
+ c3:"<b>भुगतान का स्रोत।</b> मेरा मासिक भुगतान इस बिज़नेस की कमाई में से अनुबंध के अनुसार मेरा हिस्सा है। यह बैंक का ब्याज नहीं है, और मेरा निवेश बैंक फ़िक्स्ड डिपॉज़िट नहीं है।",
+ c4:"<b>रिटर्न और जोखिम।</b> बिज़नेस का उद्देश्य बैंक फ़िक्स्ड डिपॉज़िट से अधिक रिटर्न कमाना है। लेकिन बिज़नेस और बाज़ार से जुड़ी गतिविधियों में जोखिम होता है, रिटर्न फ़िक्स नहीं है, और किसी सरकारी संस्था या बैंक की गारंटी नहीं है। पिछला भुगतान रिकॉर्ड भविष्य के रिटर्न का आश्वासन नहीं है।",
+ c5:"<b>प्रिवे मेंबरशिप।</b> मेरे रिलेशनशिप मैनेजर ने प्रिवे मेंबरशिप प्लान, मेंबरशिप फ़ीस और संबंधित लाभ (EV कार प्रोग्राम सहित) समझाए हैं या समझाएँगे। मैं कभी भी कोई भी स्पष्टीकरण माँग सकता/सकती हूँ।",
+ c6:"<b>भुगतान और TDS।</b> सभी भुगतान केवल बैंक ट्रांसफ़र से मेरे अपने रजिस्टर्ड बैंक खाते में ही होते हैं — किसी और के खाते में कभी नहीं। TDS 10% की दर से काटकर मेरे PAN पर जमा किया जाता है। <b>यदि मेरा PAN आधार से लिंक नहीं है (निष्क्रिय PAN), तो आयकर अधिनियम, 1961 के अनुसार TDS 20% की ऊँची दर से काटा जाएगा</b>, और इस अधिक कटौती के लिए रिचवेल्थ ज़िम्मेदार नहीं होगा।",
+ c7:"<b>जल्दी निकासी।</b> मियाद से पहले निवेश बंद करने या निकालने पर मेरे सर्टिफ़िकेट या अनुबंध की शर्तों के अनुसार पेनल्टी या कटौती हो सकती है।",
+ c8:"<b>स्वैच्छिक भागीदारी।</b> ऊपर की बातें समझकर, अपनी वैध आय से, मैंने स्वेच्छा से निवेश किया है। किसी ने मुझ पर दबाव नहीं डाला और न ही गुमराह किया।",
+ c9:"<b>मेरी जानकारी का उपयोग।</b> मैं रिचवेल्थ को अपनी KYC जानकारी और दस्तावेज़ वेरिफ़िकेशन, भुगतान, क़ानूनी अनुपालन और आने वाले रिचवेल्थ मोबाइल ऐप में मेरा अकाउंट बनाने के लिए रखने और उपयोग करने की अनुमति देता/देती हूँ।",
+ c10:"<b>बदलाव की सूचना।</b> मेरा बैंक खाता, मोबाइल नंबर या पता बदलने पर मैं 7 दिनों के भीतर रिचवेल्थ को सूचित करूँगा/करूँगी।",
+ c11:"<b>केवल आधिकारिक खाते।</b> रिचवेल्थ को मैं जो भी राशि दूँगा/दूँगी, वह केवल रिचवेल्थ के आधिकारिक कंपनी बैंक खातों में ही दूँगा/दूँगी। मैं किसी कर्मचारी, एजेंट या अन्य व्यक्ति को निजी तौर पर कोई राशि नहीं दूँगा/दूँगी, और अपना OTP या पासवर्ड कभी किसी को नहीं बताऊँगा/बताऊँगी।",
+ c12:"<b>संचार।</b> मैं अपने निवेश, भुगतान और अपडेट के बारे में रिचवेल्थ से व्हाट्सऐप, SMS, ईमेल और फ़ोन पर कॉल और संदेश प्राप्त करने के लिए सहमत हूँ।",
+ c13:"<b>नॉमिनी।</b> मेरी मृत्यु की स्थिति में, उचित सत्यापन के बाद, मेरा निवेश और भुगतान रिचवेल्थ के रिकॉर्ड के अनुसार मेरे रजिस्टर्ड नॉमिनी या क़ानूनी वारिसों को मिलेगा।",
+ c14:"<b>इलेक्ट्रॉनिक सहमति।</b> मैं सहमत हूँ कि हर बिंदु पर टिक करके और अपना नाम लिखकर दी गई यह ऑनलाइन सहमति, सूचना प्रौद्योगिकी अधिनियम, 2000 के तहत, हाथ से हस्ताक्षरित दस्तावेज़ जितनी ही मान्य और बाध्यकारी है।",
+ c15:"<b>क्षेत्राधिकार।</b> कोई भी विवाद जामनगर, गुजरात की अदालतों के क्षेत्राधिकार के अधीन होगा।",
+ email:"ईमेल (वैकल्पिक)", email_h:"आपके TDS सर्टिफ़िकेट (फ़ॉर्म 16A) और रिचवेल्थ ऐप के लिए।", e_email:"कृपया सही ईमेल लिखें या खाली छोड़ दें।",
+ bank_q:"क्या आपका भुगतान पहले वाले बैंक खाते में ही जारी रखना है?", bank_yes:"हाँ, वही खाता", bank_no:"नहीं, मेरा खाता बदल गया है",
+ bank_note:"कोई बात नहीं — आपके RM आपको फ़ोन करके खाता अपडेट करेंगे। कृपया कैंसल चेक या पासबुक तैयार रखें। नया खाता वेरिफ़ाई होने के बाद आपका बाकी भुगतान होगा।",
+ nom_q:"क्या आपका नॉमिनी वही है?", nom_yes:"हाँ, वही नॉमिनी", nom_no:"नहीं, मुझे बदलना है",
+ nom_note:"आपके RM आपको फ़ोन करके नॉमिनी अपडेट करेंगे।",
+ pid:"पार्टनर ID", ver:"सहमति संस्करण {v}",
+ tickall:"मैंने सभी बिंदु पढ़ लिए हैं — सब टिक करें",
+ decl_h:"घोषणा", decl:"मैं एतद्द्वारा घोषणा करता/करती हूँ कि मेरे द्वारा दी गई जानकारी और दस्तावेज़ सत्य, सही और पूर्ण हैं। मैं समझता/समझती हूँ कि किसी भी विसंगति के दूर होने तक रिचवेल्थ भुगतान रोक सकता है।",
+ sign:"हस्ताक्षर — अपना पूरा नाम लिखें", sign_h:"आपका लिखा नाम इस सहमति पर आपके हस्ताक्षर माना जाएगा।", place:"स्थान", date:"तारीख",
+ ag3:"मेरे RM से कहें कि मुझे फ़ोन करके समझाएँ। (वैकल्पिक)",
+ e_tickall:"कृपया हर बिंदु पढ़कर टिक करें।", e_sign:"कृपया अपना पूरा नाम लिखें।",
+ submit:"सबमिट करें", saving:"अपलोड हो रहा है… कृपया रुकें",
+ e_req:"कृपया इसे भरें।", e_choose:"कृपया एक चुनें।", e_mob:"कृपया सही मोबाइल नंबर लिखें।", e_doc:"कृपया यह फ़ोटो जोड़ें।",
+ e_big:"यह फ़ाइल बहुत बड़ी है (अधिकतम 8 MB)। नई फ़ोटो लें।", e_type:"कृपया फ़ोटो या PDF जोड़ें।", e_tick:"आगे बढ़ने के लिए टिक करें।",
+ not_open:"फ़ॉर्म अभी शुरू नहीं हुआ है।", save_fail:"सबमिट नहीं हो सका। इंटरनेट जाँचकर फिर से कोशिश करें।",
+ help:"मदद चाहिए? हमें व्हाट्सऐप करें " + HELP + "।",
+ privacy:"आपके दस्तावेज़ रिचवेल्थ निजी तौर पर रखता है और केवल KYC, भुगतान और आपके रिचवेल्थ ऐप अकाउंट के लिए उपयोग करता है।",
+ d_h:"धन्यवाद{n}!", d_p1:"आपका री-KYC मिल गया है। यह रेफ़रेंस नंबर सँभालकर रखें।",
+ d_p2:"हमारी टीम के वेरिफ़ाई करने के बाद 48 घंटे में आपका बाकी भुगतान जमा होगा।",
+ app_h:"रिचवेल्थ अब आपके मोबाइल में — 24/7", app_p:"अपनी जानकारी देने के लिए धन्यवाद। हम रिचवेल्थ ऐप बना रहे हैं, और इस जानकारी से उसमें आपका अकाउंट तैयार होगा। बहुत जल्द रिचवेल्थ कभी भी आपके फ़ोन में उपलब्ध होगा।",
+ cc_other:"अन्य"
+}};
+
+var CC = [["+91","🇮🇳 +91"],["+971","🇦🇪 +971"],["+966","🇸🇦 +966"],["+968","🇴🇲 +968"],["+974","🇶🇦 +974"],["+965","🇰🇼 +965"],["+973","🇧🇭 +973"],["+1","🇺🇸 +1"],["+44","🇬🇧 +44"],["+61","🇦🇺 +61"],["+65","🇸🇬 +65"],["+254","🇰🇪 +254"]];
+var DOCS = [{k:"pan", t:"d_pan"}, {k:"aadhaar_front", t:"d_aadf"}, {k:"aadhaar_back", t:"d_aadb"}];
+var CONSENTS = ["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15"];
+var CONSENT_VERSION = "v1.1 (10-Nov-2026)";   // change when the wording changes; stored with every submission
+var PID = ((location.search.match(/[?&](?:id|p)=([A-Za-z0-9-]{1,20})/) || [])[1] || "").toUpperCase();   // personal link: ?id=RI-1234
+var MAX_RAW = 8*1024*1024, MAX_EDGE = 1700, JPEG_Q = 0.8;
+var NOW = new Date(), TODAY = ("0"+NOW.getDate()).slice(-2) + "-" + ("0"+(NOW.getMonth()+1)).slice(-2) + "-" + NOW.getFullYear();
+
+var LANG = "en", files = {};
+var form = document.getElementById("kyc"), msg = document.getElementById("formmsg"), btn = document.getElementById("subbtn");
+function $(id){ return document.getElementById(id); }
+function t(k){ return (T[LANG] && T[LANG][k]) || T.en[k] || ""; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function val(id){ return $(id).value.trim(); }
+function digits(s){ return s.replace(/\D/g, ""); }
+
+/* ---------- documents ---------- */
+function buildDocs(){
+  var box = $("docs"); box.innerHTML = "";
+  DOCS.forEach(function(d){
+    var f = document.createElement("div"); f.className = "field"; f.setAttribute("data-k", "doc_"+d.k);
+    f.innerHTML = '<span class="lbl">'+t(d.t)+' <span class="req">*</span></span>' +
+      '<label class="drop"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h3l2-3h8l2 3h3v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg></span>' +
+      '<span class="tx"><b>'+t("tap")+'</b>JPG · PNG · PDF</span><input type="file" accept="image/*,application/pdf"></label>' +
+      '<div class="prev"></div><span class="err">'+t("e_doc")+'</span>';
+    var inp = f.querySelector("input");
+    inp.addEventListener("change", function(){ if (inp.files[0]) addFile(d, inp.files[0], f); inp.value = ""; });
+    box.appendChild(f);
+    drawPrev(d, f);
+  });
+}
+function addFile(d, file, field){
+  var errEl = field.querySelector(".err");
+  var isPdf = /pdf$/i.test(file.type) || /\.pdf$/i.test(file.name), isImg = /^image\//.test(file.type) || /\.(heic|heif)$/i.test(file.name);
+  function bad(k){ errEl.textContent = t(k); field.classList.add("bad"); }
+  if (!isPdf && !isImg) return bad("e_type");
+  if (isPdf && file.size > MAX_RAW) return bad("e_big");
+  (isPdf ? readRaw(file) : shrink(file)).then(function(r){
+    if (!r) return bad("e_big");
+    files[d.k] = r; field.classList.remove("bad"); errEl.textContent = t("e_doc"); drawPrev(d, field);
+  });
+}
+function readRaw(file){
+  return new Promise(function(res){
+    var fr = new FileReader();
+    fr.onload = function(){ res({name:file.name, mime:file.type||"application/pdf", data:String(fr.result).split(",")[1], preview:null}); };
+    fr.onerror = function(){ res(null); };
+    fr.readAsDataURL(file);
+  });
+}
+function shrink(file){
+  return new Promise(function(res){
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function(){
+      var w = img.naturalWidth, h = img.naturalHeight, s = Math.min(1, MAX_EDGE / Math.max(w, h));
+      var c = document.createElement("canvas"); c.width = Math.round(w*s); c.height = Math.round(h*s);
+      var g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0,0,c.width,c.height); g.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      var d = c.toDataURL("image/jpeg", JPEG_Q);
+      res({name:file.name.replace(/\.[^.]+$/, "")+".jpg", mime:"image/jpeg", data:d.split(",")[1], preview:d});
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); if (file.size > MAX_RAW) return res(null); readRaw(file).then(res); };   // e.g. HEIC
+    img.src = url;
+  });
+}
+function drawPrev(d, field){
+  var box = field.querySelector(".prev"), r = files[d.k], drop = field.querySelector(".drop");
+  drop.classList.toggle("has", !!r);
+  drop.querySelector(".tx b").textContent = r ? "✓ " + t("added") : t("tap");
+  box.innerHTML = "";
+  if (!r) return;
+  box.innerHTML = (r.preview ? '<img src="'+r.preview+'" alt="">' : '<div class="pdf">PDF</div>') + '<button type="button">'+t("change")+'</button>';
+  box.querySelector("button").addEventListener("click", function(){ field.querySelector("input").click(); });
+}
+
+/* ---------- consent letter ---------- */
+function buildConsents(){
+  var box = $("consents"), was = {};
+  box.querySelectorAll("input:checked").forEach(function(i){ was[i.value] = 1; });
+  box.innerHTML = "";
+  CONSENTS.forEach(function(c, i){
+    var l = document.createElement("label"); l.className = "ck";
+    l.innerHTML = '<input type="checkbox" name="consent" value="'+c+'"'+(was[c]?" checked":"")+'><span>'+(i+1)+". "+t(c)+'</span>';
+    box.appendChild(l);
+  });
+}
+function letter(){
+  var n = val("f-name").toUpperCase() || "__________";
+  $("lt-open").innerHTML = t("lt_open").replace("{name}", esc(n));
+  $("lt-date").textContent = t("date") + ": " + TODAY;
+  $("lt-pid").textContent = PID ? t("pid") + ": " + PID : "";
+  $("lt-ver").textContent = t("ver").replace("{v}", CONSENT_VERSION);
+}
+$("tickall").addEventListener("click", function(){ form.querySelectorAll('input[name="consent"]').forEach(function(i){ i.checked = true; }); mark("consent", false); });
+$("f-name").addEventListener("input", letter);
+$("f-name").addEventListener("blur", function(){ if (!val("f-sign")) $("f-sign").value = val("f-name").toUpperCase(); });
+$("f-city").addEventListener("blur", function(){ if (!val("f-place")) $("f-place").value = val("f-city"); });
+
+/* ---------- language ---------- */
+function setLang(l){
+  LANG = T[l] ? l : "en";
+  document.documentElement.lang = LANG;
+  document.title = t("title");
+  document.querySelectorAll("[data-t]").forEach(function(el){ el.innerHTML = t(el.getAttribute("data-t")); });
+  document.querySelectorAll(".langbar button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-lang") === LANG); });
+  buildDocs(); buildConsents(); letter();
+  try { localStorage.setItem("rkyc_lang", LANG); } catch(e){}
+}
+document.querySelectorAll("[data-lang]").forEach(function(b){
+  b.addEventListener("click", function(){ setLang(b.getAttribute("data-lang")); $("gate").hidden = true; });
+});
+var cc = $("f-cc");
+CC.forEach(function(c){ var op = document.createElement("option"); op.value = c[0]; op.textContent = c[1]; cc.appendChild(op); });
+
+/* ---------- address toggle ---------- */
+function radio(n){ var r = form.querySelector('input[name="'+n+'"]:checked'); return r ? r.value : ""; }
+function addrMode(){ var diff = radio("addr_same") === "Different";
+  form.querySelector('[data-k="new_address"]').classList.toggle("hide", !diff); $("addr2").classList.toggle("hide", !diff);
+  $("bank-note").classList.toggle("hide", radio("bank_same") !== "Changed");
+  $("nom-note").classList.toggle("hide", radio("nom_same") !== "Update"); }
+form.addEventListener("change", function(e){ addrMode(); var f = e.target.closest(".field"); if (f) f.classList.remove("bad"); });
+form.addEventListener("input", function(e){ var f = e.target.closest(".field"); if (f) f.classList.remove("bad"); });
+$("f-mob").addEventListener("input", function(){ this.value = digits(this.value); });
+
+/* ---------- submit ---------- */
+function mark(k, isBad){ var f = form.querySelector('[data-k="'+k+'"]'); if (!f || f.offsetParent === null) return true; f.classList.toggle("bad", !!isBad); return !isBad; }
+function fail(text){ msg.innerHTML = text + " " + t("help"); msg.classList.add("show"); btn.disabled = false; btn.textContent = t("submit"); }
+
+form.addEventListener("submit", function(ev){
+  ev.preventDefault(); msg.classList.remove("show");
+  var ccv = cc.value, mob = digits(val("f-mob"));
+  var same = form.querySelector('input[name="addr_same"]:checked');
+  var diff = same && same.value === "Different";
+  var ok = [
+    mark("name", val("f-name").length < 3),
+    mark("mobile", ccv === "+91" ? !/^[6-9]\d{9}$/.test(mob) : !/^\d{6,13}$/.test(mob))
+  ].concat(DOCS.map(function(d){ return mark("doc_"+d.k, !files[d.k]); })).concat([
+    mark("email", val("f-email") !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("f-email"))),
+    mark("panlink", !form.querySelector('input[name="panlink"]:checked')),
+    mark("addr_same", !same),
+    mark("new_address", diff && val("f-addr").length < 8),
+    mark("city", diff && val("f-city").length < 2),
+    mark("pin", diff && val("f-pin").length < 4),
+    mark("bank_same", !radio("bank_same")),
+    mark("nom_same", !radio("nom_same")),
+    mark("consent", form.querySelectorAll('input[name="consent"]:checked').length !== CONSENTS.length),
+    mark("decl", !$("f-decl").checked),
+    mark("sign", val("f-sign").length < 3),
+    mark("place", val("f-place").length < 2)
+  ]).every(Boolean);
+  if (!ok){ var b = form.querySelector(".field.bad"); if (b) b.scrollIntoView({behavior:"smooth", block:"center"}); return; }
+  if (!ENDPOINT){ fail(t("not_open")); return; }
+
+  btn.disabled = true; btn.textContent = t("saving");
+  var p = {
+    name: val("f-name"), mobile: ccv + " " + mob, email: val("f-email"), partner_id: PID, panlink: radio("panlink"),
+    bank_same: radio("bank_same"), nom_same: radio("nom_same"), version: CONSENT_VERSION,
+    consent_en: CONSENTS.map(function(c){ return T.en[c].replace(/<[^>]+>/g, ""); }).concat(["Declaration. " + T.en.decl]),
+    addr_same: same.value, new_address: diff ? val("f-addr") : "", city: diff ? val("f-city") : "", pin: diff ? val("f-pin") : "",
+    consents: form.querySelectorAll('input[name="consent"]:checked').length + "/" + CONSENTS.length, decl: "Yes",
+    sign: val("f-sign").toUpperCase(), place: val("f-place"), date: TODAY, rm_call: $("f-call").checked ? "Yes" : "No",
+    lang: LANG, ua: navigator.userAgent.slice(0, 160), website: form.website.value,
+    docs: DOCS.map(function(d){ var f = files[d.k]; return {kind:d.k, name:f.name, mime:f.mime, data:f.data}; })
+  };
+  var ctrl = window.AbortController ? new AbortController() : null;
+  var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 120000);
+  // text/plain body = no CORS preflight; Apps Script answers with readable JSON.
+  fetch(ENDPOINT, { method:"POST", body: JSON.stringify(p), signal: ctrl ? ctrl.signal : undefined })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      clearTimeout(timer);
+      if (!res || res.ok !== true) throw new Error("not saved");
+      $("d-h").textContent = t("d_h").replace("{n}", ", " + p.name.split(/\s+/)[0]);
+      $("d-ref").textContent = res.ref || "—";
+      form.style.display = "none";
+      var d = $("done"); d.style.display = "block"; d.focus(); d.scrollIntoView({behavior:"smooth"});
+    })
+    .catch(function(){ clearTimeout(timer); fail(t("save_fail")); });
+});
+
+/* ---------- start ---------- */
+var q = (location.search.match(/[?&]lang=(en|hi|gu)/) || [])[1], saved = null;
+try { saved = localStorage.getItem("rkyc_lang"); } catch(e){}
+setLang(q || saved || "en");
+if (!q && !saved){ $("gate").hidden = false; $("gate").querySelector("button").focus(); }
+})();
+</script>
+</body>
+</html>
