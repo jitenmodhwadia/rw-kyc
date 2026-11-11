@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Richwealth Re-KYC</title>
-<meta name="description" content="Richwealth partner re-KYC — PAN, Aadhaar and how your money works.">
+<meta name="description" content="Richwealth partner re-KYC — PAN, Aadhaar and partner consent.">
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -227,11 +227,10 @@
       <p class="note hide" id="nom-note" data-t="nom_note"></p>
     </section>
 
-    <!-- 3 · how your money works -->
+    <!-- 3 · partner consent -->
     <section class="card">
       <h2><span class="num">3</span><span data-t="s3"></span></h2>
       <p class="intro" data-t="s3_i"></p>
-      <div class="partner"><b data-t="pt_h"></b><span data-t="pt_p"></span></div>
 
       <div class="letter">
         <div class="lt-top"><span data-t="lt_to"></span><span><span id="lt-date"></span><br><span class="pid" id="lt-pid"></span></span></div>
@@ -255,6 +254,7 @@
         </div>
         <p class="lt-ver" id="lt-ver"></p>
       </div>
+      <div class="partner" style="margin:16px 0 0"><b data-t="pt_h"></b><span data-t="pt_p"></span></div>
 
       <div class="field" style="margin:12px 0 0">
         <label class="agree"><input type="checkbox" id="f-call"><span data-t="ag3"></span></label></div>
@@ -294,8 +294,8 @@ var T = {
 en:{
  title:"Richwealth Re-KYC",
  h1:"Re-KYC — takes 2 minutes",
- sub:"We already have your details. Just share your PAN and Aadhaar, and read how your money works.",
- p1:"<b>1</b> PAN &amp; Aadhaar", p2:"<b>2</b> Address &amp; bank", p3:"<b>3</b> How your money works",
+ sub:"We already have your details. Just share your PAN and Aadhaar, and sign your partner consent.",
+ p1:"<b>1</b> PAN &amp; Aadhaar", p2:"<b>2</b> Address &amp; bank", p3:"<b>3</b> Partner consent",
  s1:"Your PAN &amp; Aadhaar", s1_i:"Take clear photos with your phone camera. Nothing else to fill.",
  name:"Your name", mobile:"Your WhatsApp number", mobile_h:"The number registered with Richwealth.",
  tap:"Tap to take a photo or choose a file", added:"Added", change:"Change",
@@ -306,23 +306,23 @@ en:{
  s2:"Address, bank &amp; nominee", addr_q:"Is your current address the same as on your Aadhaar card?",
  addr_yes:"Yes, same as Aadhaar", addr_no:"No, I live at a different address now",
  new_addr:"Your current address", city:"City", pin:"PIN code",
- s3:"Consent &amp; acknowledgement", s3_i:"Please read each point carefully and tick it. Your Relationship Manager (RM) will explain any point in detail.",
- pt_h:"We are partners — not client and company.", pt_p:"Richwealth is not a scheme or a plan. Your income is contractual income — like two business partners who do business together and earn together.",
+ s3:"Partner consent letter", s3_i:"Please read each point and tick it. Your Relationship Manager (RM) will gladly explain any point.",
+ pt_h:"Partners in business — together", pt_p:"Our relationship is not that of a client and a company, and Richwealth is not a scheme or a plan. We do business together as partners, and your earnings are contractual income.",
  lt_to:"To,<br>Richwealth<br>Ranmal Lake, Gate No. 1, Jamnagar 361001", lt_sub:"Subject: Re-KYC and partner consent",
- lt_open:"I, <b>{name}</b>, hereby confirm, acknowledge and agree that:",
- c1:"<b>Partnership.</b> My association with Richwealth is that of a business partner. My earnings from Richwealth are contractual income from the business we carry on together — like two business partners working and earning together. It is not a scheme, a plan or a deposit.",
- c2:"<b>Use of funds.</b> My funds are deployed by Richwealth in business activities under its 40-40-20 model — equity markets, real estate (including projects such as Vishram Dwarka) and bank deposits.",
- c3:"<b>Source of payouts.</b> My monthly payouts are my contractual share of the earnings of this business. They are not bank interest, and my investment is not a bank fixed deposit.",
- c4:"<b>Returns and risk.</b> The business aims to earn returns higher than a bank fixed deposit. However, business and market-linked activities carry risk, returns are not fixed, and there is no guarantee from any government body or bank. Past payment record does not assure future returns.",
- c5:"<b>Privé membership.</b> My Relationship Manager has explained, or will explain, the Privé membership plans, membership fees and related benefits (including the EV car programme). I may ask for any clarification at any time.",
- c6:"<b>Payouts and TDS.</b> All payouts are made only by bank transfer to my own registered bank account and never to any third party. TDS is deducted and deposited against my PAN at 10%. <b>If my PAN is not linked with my Aadhaar (inoperative PAN), TDS will be deducted at the higher rate of 20%</b> as required under the Income-tax Act, 1961, and Richwealth will not be responsible for this higher deduction.",
- c7:"<b>Early exit.</b> Closure or withdrawal before maturity may attract a penalty or deduction as per the terms of my certificate or agreement.",
- c8:"<b>Voluntary participation.</b> I have invested voluntarily, from my own lawful sources of income, after understanding the above. No one has pressured or misled me.",
- c9:"<b>Use of my data.</b> I authorise Richwealth to store and use my KYC details and documents for verification, payouts, statutory compliance, and to set up my account on the upcoming Richwealth mobile application.",
- c10:"<b>Updates.</b> I will inform Richwealth within 7 days of any change in my bank account, mobile number or address.",
- c11:"<b>Official accounts only.</b> All amounts I pay to Richwealth are paid only into Richwealth's official company bank accounts. I will not pay any amount to any employee, agent or other person personally, and I will never share any OTP or password with anyone.",
- c12:"<b>Communication.</b> I agree to receive calls and messages from Richwealth on WhatsApp, SMS, email and phone about my investment, payouts and updates.",
- c13:"<b>Nominee.</b> In the event of my death, my investment and payouts will pass to my registered nominee or legal heirs as per Richwealth records, after due verification.",
+ lt_open:"I, <b>{name}</b>, give this consent freely, after reading and understanding each point below. I confirm, acknowledge and agree that:",
+ c1:"<b>My documents.</b> The PAN card, Aadhaar card and address I have submitted for re-KYC are my own, valid and up to date.",
+ c2:"<b>Use of my data.</b> I authorise Richwealth to store and use my KYC details and documents for verification, payouts, statutory compliance, and to set up my account on the upcoming Richwealth mobile application.",
+ c3:"<b>Payouts and TDS.</b> All payouts are made only by bank transfer to my own registered bank account and never to any third party. TDS is deducted and deposited against my PAN at 10%. <b>If my PAN is not linked with my Aadhaar (inoperative PAN), TDS will be deducted at the higher rate of 20%</b> as required under the Income-tax Act, 1961, and Richwealth will not be responsible for this higher deduction.",
+ c4:"<b>Official accounts only.</b> All amounts I pay to Richwealth are paid only into Richwealth's official company bank accounts. I will not pay any amount to any employee, agent or other person personally, and I will never share any OTP or password with anyone.",
+ c5:"<b>How the business works.</b> Richwealth deploys our business capital under its 40-40-20 model — equity markets, real estate (including projects such as Vishram Dwarka) and bank deposits.",
+ c6:"<b>Partners, not client and company.</b> I am associated with Richwealth as a business partner. What I earn is contractual income — my agreed share of the earnings of the business we carry on together, just as two business partners work together and earn together. It is not a scheme, a plan, a deposit or bank interest.",
+ c7:"<b>Understanding the business.</b> My Relationship Manager has explained to me how the business works, including its market-linked activities, and I have joined as a partner with full understanding.",
+ c8:"<b>Privé membership.</b> My Relationship Manager has explained, or will explain, the Privé membership plans, membership fees and related benefits (including the EV car programme). I may ask for any clarification at any time.",
+ c9:"<b>Early exit.</b> Closure or withdrawal before maturity may attract a penalty or deduction as per the terms of my certificate or agreement.",
+ c10:"<b>Free will.</b> I have joined as a partner voluntarily, with funds from my own lawful sources, after understanding the above. No one has pressured or misled me.",
+ c11:"<b>Updates.</b> I will inform Richwealth within 7 days of any change in my bank account, mobile number or address.",
+ c12:"<b>Nominee.</b> In the event of my death, my investment and payouts will pass to my registered nominee or legal heirs as per Richwealth records, after due verification.",
+ c13:"<b>Communication.</b> I agree to receive calls and messages from Richwealth on WhatsApp, SMS, email and phone about my investment, payouts and updates.",
  c14:"<b>Electronic consent.</b> I agree that this online consent, given by ticking each point and typing my name, is as valid and binding as a physically signed document under the Information Technology Act, 2000.",
  c15:"<b>Jurisdiction.</b> Any dispute shall be subject to the jurisdiction of the courts at Jamnagar, Gujarat.",
  email:"Email (optional)", email_h:"For your TDS certificate (Form 16A) and the Richwealth app.", e_email:"Please enter a valid email or leave it blank.",
@@ -350,8 +350,8 @@ en:{
 gu:{
  title:"રિચવેલ્થ રી-KYC",
  h1:"રી-KYC — ફક્ત 2 મિનિટ",
- sub:"તમારી વિગતો અમારી પાસે છે જ. ફક્ત PAN અને આધાર આપો, અને તમારા પૈસા કેવી રીતે કામ કરે છે તે વાંચો.",
- p1:"<b>1</b> PAN અને આધાર", p2:"<b>2</b> સરનામું અને બેંક", p3:"<b>3</b> તમારા પૈસા કેવી રીતે કામ કરે છે",
+ sub:"તમારી વિગતો અમારી પાસે છે જ. ફક્ત PAN અને આધાર આપો, અને તમારી પાર્ટનર સંમતિ પર સહી કરો.",
+ p1:"<b>1</b> PAN અને આધાર", p2:"<b>2</b> સરનામું અને બેંક", p3:"<b>3</b> પાર્ટનર સંમતિ",
  s1:"તમારું PAN અને આધાર", s1_i:"ફોનના કેમેરાથી સ્પષ્ટ ફોટા લો. બીજું કંઈ ભરવાનું નથી.",
  name:"તમારું નામ", mobile:"તમારો વોટ્સએપ નંબર", mobile_h:"રિચવેલ્થમાં રજિસ્ટર થયેલો નંબર.",
  tap:"ફોટો લેવા અથવા ફાઇલ પસંદ કરવા ટેપ કરો", added:"ઉમેર્યું", change:"બદલો",
@@ -362,23 +362,23 @@ gu:{
  s2:"સરનામું, બેંક અને નોમિની", addr_q:"શું તમારું હાલનું સરનામું આધાર કાર્ડ પર છે તે જ છે?",
  addr_yes:"હા, આધાર મુજબ જ", addr_no:"ના, હવે હું બીજા સરનામે રહું છું",
  new_addr:"તમારું હાલનું સરનામું", city:"શહેર", pin:"પિન કોડ",
- s3:"સંમતિ અને સ્વીકૃતિ", s3_i:"કૃપા કરીને દરેક મુદ્દો ધ્યાનથી વાંચો અને ટિક કરો. કોઈ પણ મુદ્દો તમારા રિલેશનશિપ મેનેજર (RM) વિગતે સમજાવશે.",
- pt_h:"આપણે પાર્ટનર છીએ — ક્લાયન્ટ અને કંપની નહીં.", pt_p:"રિચવેલ્થ કોઈ સ્કીમ કે પ્લાન નથી. તમારી આવક કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે — જેમ બે બિઝનેસ પાર્ટનર સાથે મળીને બિઝનેસ કરે અને સાથે કમાય.",
+ s3:"પાર્ટનર સંમતિ પત્ર", s3_i:"કૃપા કરીને દરેક મુદ્દો વાંચીને ટિક કરો. કોઈ પણ મુદ્દો તમારા રિલેશનશિપ મેનેજર (RM) ખુશીથી સમજાવશે.",
+ pt_h:"બિઝનેસમાં સાથે — આપણે પાર્ટનર છીએ", pt_p:"આપણો સંબંધ ક્લાયન્ટ અને કંપનીનો નથી, અને રિચવેલ્થ કોઈ સ્કીમ કે પ્લાન નથી. આપણે પાર્ટનર તરીકે સાથે બિઝનેસ કરીએ છીએ, અને તમારી કમાણી કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે.",
  lt_to:"પ્રતિ,<br>રિચવેલ્થ<br>રણમલ તળાવ, ગેટ નં. 1, જામનગર 361001", lt_sub:"વિષય: રી-KYC અને પાર્ટનર સંમતિ",
- lt_open:"હું, <b>{name}</b>, આથી પુષ્ટિ કરું છું, સ્વીકારું છું અને સંમત છું કે:",
- c1:"<b>પાર્ટનરશિપ.</b> રિચવેલ્થ સાથે મારો સંબંધ બિઝનેસ પાર્ટનર તરીકેનો છે. રિચવેલ્થમાંથી મારી કમાણી આપણે સાથે મળીને કરતા બિઝનેસમાંથી મળતી કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે — જેમ બે બિઝનેસ પાર્ટનર સાથે કામ કરે અને સાથે કમાય. આ કોઈ સ્કીમ, પ્લાન કે ડિપોઝિટ નથી.",
- c2:"<b>ભંડોળનો ઉપયોગ.</b> રિચવેલ્થ મારું ભંડોળ તેના 40-40-20 મોડેલ હેઠળ બિઝનેસમાં રોકે છે — શેરબજાર, રિયલ એસ્ટેટ (વિશ્રામ દ્વારકા જેવા પ્રોજેક્ટ સહિત) અને બેંક ડિપોઝિટ.",
- c3:"<b>પેમેન્ટનો સ્રોત.</b> મારું માસિક પેમેન્ટ આ બિઝનેસની કમાણીમાંથી કરાર મુજબનો મારો હિસ્સો છે. તે બેંકનું વ્યાજ નથી, અને મારું રોકાણ બેંક ફિક્સ્ડ ડિપોઝિટ નથી.",
- c4:"<b>વળતર અને જોખમ.</b> બિઝનેસનો હેતુ બેંક ફિક્સ્ડ ડિપોઝિટ કરતાં વધુ વળતર મેળવવાનો છે. પરંતુ બિઝનેસ અને બજાર સાથે જોડાયેલી પ્રવૃત્તિમાં જોખમ હોય છે, વળતર ફિક્સ નથી, અને કોઈ સરકારી સંસ્થા કે બેંકની ગેરંટી નથી. ભૂતકાળનો પેમેન્ટ રેકોર્ડ ભવિષ્યના વળતરની ખાતરી નથી.",
- c5:"<b>પ્રિવે મેમ્બરશિપ.</b> મારા રિલેશનશિપ મેનેજરે પ્રિવે મેમ્બરશિપ પ્લાન, મેમ્બરશિપ ફી અને સંબંધિત લાભો (EV કાર પ્રોગ્રામ સહિત) સમજાવ્યા છે અથવા સમજાવશે. હું ગમે ત્યારે કોઈ પણ સ્પષ્ટતા માગી શકું છું.",
- c6:"<b>પેમેન્ટ અને TDS.</b> બધા પેમેન્ટ ફક્ત બેંક ટ્રાન્સફરથી મારા પોતાના રજિસ્ટર્ડ બેંક ખાતામાં જ થાય છે — બીજા કોઈના ખાતામાં ક્યારેય નહીં. TDS 10% ના દરે કપાઈને મારા PAN સામે જમા થાય છે. <b>જો મારું PAN આધાર સાથે લિંક ન હોય (નિષ્ક્રિય PAN), તો આવકવેરા કાયદો, 1961 મુજબ TDS 20% ના ઊંચા દરે કપાશે</b>, અને આ વધારાની કપાત માટે રિચવેલ્થ જવાબદાર રહેશે નહીં.",
- c7:"<b>વહેલું બહાર નીકળવું.</b> મુદત પહેલાં રોકાણ બંધ કરવા કે ઉપાડવા પર મારા સર્ટિફિકેટ અથવા કરારની શરતો મુજબ પેનલ્ટી કે કપાત થઈ શકે છે.",
- c8:"<b>સ્વૈચ્છિક ભાગીદારી.</b> ઉપરની બાબતો સમજીને, મારી પોતાની કાયદેસર આવકમાંથી, મેં સ્વેચ્છાએ રોકાણ કર્યું છે. કોઈએ મારા પર દબાણ કર્યું નથી કે મને ગેરમાર્ગે દોર્યો નથી.",
- c9:"<b>મારી માહિતીનો ઉપયોગ.</b> હું રિચવેલ્થને મારી KYC વિગતો અને દસ્તાવેજો વેરિફિકેશન, પેમેન્ટ, કાયદાકીય પાલન અને આવનારી રિચવેલ્થ મોબાઇલ એપમાં મારું એકાઉન્ટ બનાવવા માટે રાખવા અને વાપરવાની મંજૂરી આપું છું.",
- c10:"<b>ફેરફારની જાણ.</b> મારું બેંક ખાતું, મોબાઇલ નંબર કે સરનામું બદલાય તો હું 7 દિવસમાં રિચવેલ્થને જાણ કરીશ.",
- c11:"<b>ફક્ત સત્તાવાર ખાતાં.</b> હું રિચવેલ્થને જે પણ રકમ ચૂકવું તે ફક્ત રિચવેલ્થના સત્તાવાર કંપની બેંક ખાતામાં જ ચૂકવીશ. હું કોઈ કર્મચારી, એજન્ટ કે અન્ય વ્યક્તિને અંગત રીતે કોઈ રકમ ચૂકવીશ નહીં, અને મારો OTP કે પાસવર્ડ ક્યારેય કોઈને આપીશ નહીં.",
- c12:"<b>સંદેશાવ્યવહાર.</b> મારા રોકાણ, પેમેન્ટ અને અપડેટ્સ અંગે રિચવેલ્થ તરફથી વોટ્સએપ, SMS, ઇમેઇલ અને ફોન પર કોલ અને મેસેજ મેળવવા હું સંમત છું.",
- c13:"<b>નોમિની.</b> મારા અવસાનના સંજોગોમાં, યોગ્ય ચકાસણી પછી, મારું રોકાણ અને પેમેન્ટ રિચવેલ્થના રેકોર્ડ મુજબ મારા રજિસ્ટર્ડ નોમિની અથવા કાયદેસર વારસદારોને મળશે.",
+ lt_open:"હું, <b>{name}</b>, નીચેના દરેક મુદ્દા વાંચી અને સમજીને, મારી સ્વેચ્છાએ આ સંમતિ આપું છું. હું પુષ્ટિ કરું છું, સ્વીકારું છું અને સંમત છું કે:",
+ c1:"<b>મારા દસ્તાવેજો.</b> રી-KYC માટે મેં આપેલા PAN કાર્ડ, આધાર કાર્ડ અને સરનામું મારા પોતાના, માન્ય અને અદ્યતન છે.",
+ c2:"<b>મારી માહિતીનો ઉપયોગ.</b> હું રિચવેલ્થને મારી KYC વિગતો અને દસ્તાવેજો વેરિફિકેશન, પેમેન્ટ, કાયદાકીય પાલન અને આવનારી રિચવેલ્થ મોબાઇલ એપમાં મારું એકાઉન્ટ બનાવવા માટે રાખવા અને વાપરવાની મંજૂરી આપું છું.",
+ c3:"<b>પેમેન્ટ અને TDS.</b> બધા પેમેન્ટ ફક્ત બેંક ટ્રાન્સફરથી મારા પોતાના રજિસ્ટર્ડ બેંક ખાતામાં જ થાય છે — બીજા કોઈના ખાતામાં ક્યારેય નહીં. TDS 10% ના દરે કપાઈને મારા PAN સામે જમા થાય છે. <b>જો મારું PAN આધાર સાથે લિંક ન હોય (નિષ્ક્રિય PAN), તો આવકવેરા કાયદો, 1961 મુજબ TDS 20% ના ઊંચા દરે કપાશે</b>, અને આ વધારાની કપાત માટે રિચવેલ્થ જવાબદાર રહેશે નહીં.",
+ c4:"<b>ફક્ત સત્તાવાર ખાતાં.</b> હું રિચવેલ્થને જે પણ રકમ ચૂકવું તે ફક્ત રિચવેલ્થના સત્તાવાર કંપની બેંક ખાતામાં જ ચૂકવીશ. હું કોઈ કર્મચારી, એજન્ટ કે અન્ય વ્યક્તિને અંગત રીતે કોઈ રકમ ચૂકવીશ નહીં, અને મારો OTP કે પાસવર્ડ ક્યારેય કોઈને આપીશ નહીં.",
+ c5:"<b>ભંડોળનો ઉપયોગ.</b> રિચવેલ્થ મારું ભંડોળ તેના 40-40-20 મોડેલ હેઠળ બિઝનેસમાં રોકે છે — શેરબજાર, રિયલ એસ્ટેટ (વિશ્રામ દ્વારકા જેવા પ્રોજેક્ટ સહિત) અને બેંક ડિપોઝિટ.",
+ c6:"<b>પાર્ટનર — ક્લાયન્ટ અને કંપની નહીં.</b> રિચવેલ્થ સાથે હું બિઝનેસ પાર્ટનર તરીકે જોડાયેલ છું. મારી કમાણી કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે — આપણે સાથે મળીને કરતા બિઝનેસની કમાણીમાંથી કરાર મુજબનો મારો હિસ્સો, જેમ બે બિઝનેસ પાર્ટનર સાથે કામ કરે અને સાથે કમાય. આ કોઈ સ્કીમ, પ્લાન, ડિપોઝિટ કે બેંકનું વ્યાજ નથી.",
+ c7:"<b>બિઝનેસની સમજ.</b> મારા રિલેશનશિપ મેનેજરે મને બિઝનેસ કેવી રીતે ચાલે છે — તેની બજાર સાથે જોડાયેલી પ્રવૃત્તિઓ સહિત — તે સમજાવ્યું છે, અને હું પૂરી સમજ સાથે પાર્ટનર તરીકે જોડાયેલ છું.",
+ c8:"<b>પ્રિવે મેમ્બરશિપ.</b> મારા રિલેશનશિપ મેનેજરે પ્રિવે મેમ્બરશિપ પ્લાન, મેમ્બરશિપ ફી અને સંબંધિત લાભો (EV કાર પ્રોગ્રામ સહિત) સમજાવ્યા છે અથવા સમજાવશે. હું ગમે ત્યારે કોઈ પણ સ્પષ્ટતા માગી શકું છું.",
+ c9:"<b>વહેલું બહાર નીકળવું.</b> મુદત પહેલાં રોકાણ બંધ કરવા કે ઉપાડવા પર મારા સર્ટિફિકેટ અથવા કરારની શરતો મુજબ પેનલ્ટી કે કપાત થઈ શકે છે.",
+ c10:"<b>સ્વેચ્છાએ ભાગીદારી.</b> ઉપરની બાબતો સમજીને, મારી પોતાની કાયદેસર આવકમાંથી, હું સ્વેચ્છાએ પાર્ટનર તરીકે જોડાયેલ છું. કોઈએ મારા પર દબાણ કર્યું નથી કે મને ગેરમાર્ગે દોર્યો નથી.",
+ c11:"<b>ફેરફારની જાણ.</b> મારું બેંક ખાતું, મોબાઇલ નંબર કે સરનામું બદલાય તો હું 7 દિવસમાં રિચવેલ્થને જાણ કરીશ.",
+ c12:"<b>નોમિની.</b> મારા અવસાનના સંજોગોમાં, યોગ્ય ચકાસણી પછી, મારું રોકાણ અને પેમેન્ટ રિચવેલ્થના રેકોર્ડ મુજબ મારા રજિસ્ટર્ડ નોમિની અથવા કાયદેસર વારસદારોને મળશે.",
+ c13:"<b>સંદેશાવ્યવહાર.</b> મારા રોકાણ, પેમેન્ટ અને અપડેટ્સ અંગે રિચવેલ્થ તરફથી વોટ્સએપ, SMS, ઇમેઇલ અને ફોન પર કોલ અને મેસેજ મેળવવા હું સંમત છું.",
  c14:"<b>ઇલેક્ટ્રોનિક સંમતિ.</b> હું સંમત છું કે દરેક મુદ્દો ટિક કરીને અને મારું નામ લખીને આપેલી આ ઓનલાઇન સંમતિ, માહિતી ટેકનોલોજી કાયદો, 2000 હેઠળ, હાથે સહી કરેલા દસ્તાવેજ જેટલી જ માન્ય અને બંધનકર્તા છે.",
  c15:"<b>ન્યાયક્ષેત્ર.</b> કોઈ પણ વિવાદ જામનગર, ગુજરાતની અદાલતોના ન્યાયક્ષેત્રને આધીન રહેશે.",
  email:"ઇમેઇલ (વૈકલ્પિક)", email_h:"તમારા TDS સર્ટિફિકેટ (ફોર્મ 16A) અને રિચવેલ્થ એપ માટે.", e_email:"કૃપા કરીને સાચો ઇમેઇલ લખો અથવા ખાલી રાખો.",
@@ -406,8 +406,8 @@ gu:{
 hi:{
  title:"रिचवेल्थ री-KYC",
  h1:"री-KYC — सिर्फ़ 2 मिनट",
- sub:"आपकी जानकारी हमारे पास पहले से है। बस PAN और आधार दें, और पढ़ें कि आपका पैसा कैसे काम करता है।",
- p1:"<b>1</b> PAN और आधार", p2:"<b>2</b> पता और बैंक", p3:"<b>3</b> आपका पैसा कैसे काम करता है",
+ sub:"आपकी जानकारी हमारे पास पहले से है। बस PAN और आधार दें, और अपनी पार्टनर सहमति पर हस्ताक्षर करें।",
+ p1:"<b>1</b> PAN और आधार", p2:"<b>2</b> पता और बैंक", p3:"<b>3</b> पार्टनर सहमति",
  s1:"आपका PAN और आधार", s1_i:"फ़ोन के कैमरे से साफ़ फ़ोटो लें। और कुछ भरने की ज़रूरत नहीं।",
  name:"आपका नाम", mobile:"आपका व्हाट्सऐप नंबर", mobile_h:"रिचवेल्थ में रजिस्टर्ड नंबर।",
  tap:"फ़ोटो लेने या फ़ाइल चुनने के लिए टैप करें", added:"जोड़ा गया", change:"बदलें",
@@ -418,23 +418,23 @@ hi:{
  s2:"पता, बैंक और नॉमिनी", addr_q:"क्या आपका वर्तमान पता वही है जो आधार कार्ड पर है?",
  addr_yes:"हाँ, आधार के अनुसार ही", addr_no:"नहीं, अब मैं दूसरे पते पर रहता/रहती हूँ",
  new_addr:"आपका वर्तमान पता", city:"शहर", pin:"पिन कोड",
- s3:"सहमति और स्वीकृति", s3_i:"कृपया हर बिंदु ध्यान से पढ़ें और टिक करें। कोई भी बिंदु आपके रिलेशनशिप मैनेजर (RM) विस्तार से समझाएँगे।",
- pt_h:"हम पार्टनर हैं — क्लाइंट और कंपनी नहीं।", pt_p:"रिचवेल्थ कोई स्कीम या प्लान नहीं है। आपकी आय कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है — जैसे दो बिज़नेस पार्टनर साथ मिलकर बिज़नेस करते हैं और साथ कमाते हैं।",
+ s3:"पार्टनर सहमति पत्र", s3_i:"कृपया हर बिंदु पढ़कर टिक करें। कोई भी बिंदु आपके रिलेशनशिप मैनेजर (RM) खुशी से समझाएँगे।",
+ pt_h:"बिज़नेस में साथ — हम पार्टनर हैं", pt_p:"हमारा रिश्ता क्लाइंट और कंपनी का नहीं है, और रिचवेल्थ कोई स्कीम या प्लान नहीं है। हम पार्टनर के रूप में साथ बिज़नेस करते हैं, और आपकी कमाई कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है।",
  lt_to:"सेवा में,<br>रिचवेल्थ<br>रणमल तालाब, गेट नं. 1, जामनगर 361001", lt_sub:"विषय: री-KYC और पार्टनर सहमति",
- lt_open:"मैं, <b>{name}</b>, एतद्द्वारा पुष्टि करता/करती हूँ, स्वीकार करता/करती हूँ और सहमत हूँ कि:",
- c1:"<b>पार्टनरशिप।</b> रिचवेल्थ के साथ मेरा संबंध एक बिज़नेस पार्टनर का है। रिचवेल्थ से मेरी कमाई हमारे साथ मिलकर किए जा रहे बिज़नेस से मिलने वाली कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है — जैसे दो बिज़नेस पार्टनर साथ काम करते हैं और साथ कमाते हैं। यह कोई स्कीम, प्लान या डिपॉज़िट नहीं है।",
- c2:"<b>धन का उपयोग।</b> रिचवेल्थ मेरा धन अपने 40-40-20 मॉडल के तहत बिज़नेस में लगाता है — शेयर बाज़ार, रियल एस्टेट (विश्राम द्वारका जैसे प्रोजेक्ट सहित) और बैंक डिपॉज़िट।",
- c3:"<b>भुगतान का स्रोत।</b> मेरा मासिक भुगतान इस बिज़नेस की कमाई में से अनुबंध के अनुसार मेरा हिस्सा है। यह बैंक का ब्याज नहीं है, और मेरा निवेश बैंक फ़िक्स्ड डिपॉज़िट नहीं है।",
- c4:"<b>रिटर्न और जोखिम।</b> बिज़नेस का उद्देश्य बैंक फ़िक्स्ड डिपॉज़िट से अधिक रिटर्न कमाना है। लेकिन बिज़नेस और बाज़ार से जुड़ी गतिविधियों में जोखिम होता है, रिटर्न फ़िक्स नहीं है, और किसी सरकारी संस्था या बैंक की गारंटी नहीं है। पिछला भुगतान रिकॉर्ड भविष्य के रिटर्न का आश्वासन नहीं है।",
- c5:"<b>प्रिवे मेंबरशिप।</b> मेरे रिलेशनशिप मैनेजर ने प्रिवे मेंबरशिप प्लान, मेंबरशिप फ़ीस और संबंधित लाभ (EV कार प्रोग्राम सहित) समझाए हैं या समझाएँगे। मैं कभी भी कोई भी स्पष्टीकरण माँग सकता/सकती हूँ।",
- c6:"<b>भुगतान और TDS।</b> सभी भुगतान केवल बैंक ट्रांसफ़र से मेरे अपने रजिस्टर्ड बैंक खाते में ही होते हैं — किसी और के खाते में कभी नहीं। TDS 10% की दर से काटकर मेरे PAN पर जमा किया जाता है। <b>यदि मेरा PAN आधार से लिंक नहीं है (निष्क्रिय PAN), तो आयकर अधिनियम, 1961 के अनुसार TDS 20% की ऊँची दर से काटा जाएगा</b>, और इस अधिक कटौती के लिए रिचवेल्थ ज़िम्मेदार नहीं होगा।",
- c7:"<b>जल्दी निकासी।</b> मियाद से पहले निवेश बंद करने या निकालने पर मेरे सर्टिफ़िकेट या अनुबंध की शर्तों के अनुसार पेनल्टी या कटौती हो सकती है।",
- c8:"<b>स्वैच्छिक भागीदारी।</b> ऊपर की बातें समझकर, अपनी वैध आय से, मैंने स्वेच्छा से निवेश किया है। किसी ने मुझ पर दबाव नहीं डाला और न ही गुमराह किया।",
- c9:"<b>मेरी जानकारी का उपयोग।</b> मैं रिचवेल्थ को अपनी KYC जानकारी और दस्तावेज़ वेरिफ़िकेशन, भुगतान, क़ानूनी अनुपालन और आने वाले रिचवेल्थ मोबाइल ऐप में मेरा अकाउंट बनाने के लिए रखने और उपयोग करने की अनुमति देता/देती हूँ।",
- c10:"<b>बदलाव की सूचना।</b> मेरा बैंक खाता, मोबाइल नंबर या पता बदलने पर मैं 7 दिनों के भीतर रिचवेल्थ को सूचित करूँगा/करूँगी।",
- c11:"<b>केवल आधिकारिक खाते।</b> रिचवेल्थ को मैं जो भी राशि दूँगा/दूँगी, वह केवल रिचवेल्थ के आधिकारिक कंपनी बैंक खातों में ही दूँगा/दूँगी। मैं किसी कर्मचारी, एजेंट या अन्य व्यक्ति को निजी तौर पर कोई राशि नहीं दूँगा/दूँगी, और अपना OTP या पासवर्ड कभी किसी को नहीं बताऊँगा/बताऊँगी।",
- c12:"<b>संचार।</b> मैं अपने निवेश, भुगतान और अपडेट के बारे में रिचवेल्थ से व्हाट्सऐप, SMS, ईमेल और फ़ोन पर कॉल और संदेश प्राप्त करने के लिए सहमत हूँ।",
- c13:"<b>नॉमिनी।</b> मेरी मृत्यु की स्थिति में, उचित सत्यापन के बाद, मेरा निवेश और भुगतान रिचवेल्थ के रिकॉर्ड के अनुसार मेरे रजिस्टर्ड नॉमिनी या क़ानूनी वारिसों को मिलेगा।",
+ lt_open:"मैं, <b>{name}</b>, नीचे दिए गए हर बिंदु को पढ़कर और समझकर, अपनी इच्छा से यह सहमति देता/देती हूँ। मैं पुष्टि करता/करती हूँ, स्वीकार करता/करती हूँ और सहमत हूँ कि:",
+ c1:"<b>मेरे दस्तावेज़।</b> री-KYC के लिए मेरे द्वारा दिए गए PAN कार्ड, आधार कार्ड और पता मेरे अपने, वैध और अद्यतन हैं।",
+ c2:"<b>मेरी जानकारी का उपयोग।</b> मैं रिचवेल्थ को अपनी KYC जानकारी और दस्तावेज़ वेरिफ़िकेशन, भुगतान, क़ानूनी अनुपालन और आने वाले रिचवेल्थ मोबाइल ऐप में मेरा अकाउंट बनाने के लिए रखने और उपयोग करने की अनुमति देता/देती हूँ।",
+ c3:"<b>भुगतान और TDS।</b> सभी भुगतान केवल बैंक ट्रांसफ़र से मेरे अपने रजिस्टर्ड बैंक खाते में ही होते हैं — किसी और के खाते में कभी नहीं। TDS 10% की दर से काटकर मेरे PAN पर जमा किया जाता है। <b>यदि मेरा PAN आधार से लिंक नहीं है (निष्क्रिय PAN), तो आयकर अधिनियम, 1961 के अनुसार TDS 20% की ऊँची दर से काटा जाएगा</b>, और इस अधिक कटौती के लिए रिचवेल्थ ज़िम्मेदार नहीं होगा।",
+ c4:"<b>केवल आधिकारिक खाते।</b> रिचवेल्थ को मैं जो भी राशि दूँगा/दूँगी, वह केवल रिचवेल्थ के आधिकारिक कंपनी बैंक खातों में ही दूँगा/दूँगी। मैं किसी कर्मचारी, एजेंट या अन्य व्यक्ति को निजी तौर पर कोई राशि नहीं दूँगा/दूँगी, और अपना OTP या पासवर्ड कभी किसी को नहीं बताऊँगा/बताऊँगी।",
+ c5:"<b>धन का उपयोग।</b> रिचवेल्थ मेरा धन अपने 40-40-20 मॉडल के तहत बिज़नेस में लगाता है — शेयर बाज़ार, रियल एस्टेट (विश्राम द्वारका जैसे प्रोजेक्ट सहित) और बैंक डिपॉज़िट।",
+ c6:"<b>पार्टनर — क्लाइंट और कंपनी नहीं।</b> रिचवेल्थ से मैं एक बिज़नेस पार्टनर के रूप में जुड़ा/जुड़ी हूँ। मेरी कमाई कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है — हमारे साथ मिलकर किए जा रहे बिज़नेस की कमाई में से अनुबंध के अनुसार मेरा हिस्सा, जैसे दो बिज़नेस पार्टनर साथ काम करते हैं और साथ कमाते हैं। यह कोई स्कीम, प्लान, डिपॉज़िट या बैंक ब्याज नहीं है।",
+ c7:"<b>बिज़नेस की समझ।</b> मेरे रिलेशनशिप मैनेजर ने मुझे समझाया है कि बिज़नेस कैसे चलता है — उसकी बाज़ार से जुड़ी गतिविधियों सहित — और मैं पूरी समझ के साथ पार्टनर के रूप में जुड़ा/जुड़ी हूँ।",
+ c8:"<b>प्रिवे मेंबरशिप।</b> मेरे रिलेशनशिप मैनेजर ने प्रिवे मेंबरशिप प्लान, मेंबरशिप फ़ीस और संबंधित लाभ (EV कार प्रोग्राम सहित) समझाए हैं या समझाएँगे। मैं कभी भी कोई भी स्पष्टीकरण माँग सकता/सकती हूँ।",
+ c9:"<b>जल्दी निकासी।</b> मियाद से पहले निवेश बंद करने या निकालने पर मेरे सर्टिफ़िकेट या अनुबंध की शर्तों के अनुसार पेनल्टी या कटौती हो सकती है।",
+ c10:"<b>स्वैच्छिक भागीदारी।</b> ऊपर की बातें समझकर, अपनी वैध आय से, मैं स्वेच्छा से पार्टनर के रूप में जुड़ा/जुड़ी हूँ। किसी ने मुझ पर दबाव नहीं डाला और न ही गुमराह किया।",
+ c11:"<b>बदलाव की सूचना।</b> मेरा बैंक खाता, मोबाइल नंबर या पता बदलने पर मैं 7 दिनों के भीतर रिचवेल्थ को सूचित करूँगा/करूँगी।",
+ c12:"<b>नॉमिनी।</b> मेरी मृत्यु की स्थिति में, उचित सत्यापन के बाद, मेरा निवेश और भुगतान रिचवेल्थ के रिकॉर्ड के अनुसार मेरे रजिस्टर्ड नॉमिनी या क़ानूनी वारिसों को मिलेगा।",
+ c13:"<b>संचार।</b> मैं अपने निवेश, भुगतान और अपडेट के बारे में रिचवेल्थ से व्हाट्सऐप, SMS, ईमेल और फ़ोन पर कॉल और संदेश प्राप्त करने के लिए सहमत हूँ।",
  c14:"<b>इलेक्ट्रॉनिक सहमति।</b> मैं सहमत हूँ कि हर बिंदु पर टिक करके और अपना नाम लिखकर दी गई यह ऑनलाइन सहमति, सूचना प्रौद्योगिकी अधिनियम, 2000 के तहत, हाथ से हस्ताक्षरित दस्तावेज़ जितनी ही मान्य और बाध्यकारी है।",
  c15:"<b>क्षेत्राधिकार।</b> कोई भी विवाद जामनगर, गुजरात की अदालतों के क्षेत्राधिकार के अधीन होगा।",
  email:"ईमेल (वैकल्पिक)", email_h:"आपके TDS सर्टिफ़िकेट (फ़ॉर्म 16A) और रिचवेल्थ ऐप के लिए।", e_email:"कृपया सही ईमेल लिखें या खाली छोड़ दें।",
@@ -463,7 +463,7 @@ hi:{
 var CC = [["+91","🇮🇳 +91"],["+971","🇦🇪 +971"],["+966","🇸🇦 +966"],["+968","🇴🇲 +968"],["+974","🇶🇦 +974"],["+965","🇰🇼 +965"],["+973","🇧🇭 +973"],["+1","🇺🇸 +1"],["+44","🇬🇧 +44"],["+61","🇦🇺 +61"],["+65","🇸🇬 +65"],["+254","🇰🇪 +254"]];
 var DOCS = [{k:"pan", t:"d_pan"}, {k:"aadhaar_front", t:"d_aadf"}, {k:"aadhaar_back", t:"d_aadb"}];
 var CONSENTS = ["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15"];
-var CONSENT_VERSION = "v1.1 (10-Nov-2026)";   // change when the wording changes; stored with every submission
+var CONSENT_VERSION = "v1.2 (11-Nov-2026)";   // change when the wording changes; stored with every submission
 var PID = ((location.search.match(/[?&](?:id|p)=([A-Za-z0-9-]{1,20})/) || [])[1] || "").toUpperCase();   // personal link: ?id=RI-1234
 var MAX_RAW = 8*1024*1024, MAX_EDGE = 1700, JPEG_Q = 0.8;
 var NOW = new Date(), TODAY = ("0"+NOW.getDate()).slice(-2) + "-" + ("0"+(NOW.getMonth()+1)).slice(-2) + "-" + NOW.getFullYear();
