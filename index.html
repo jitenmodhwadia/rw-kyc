@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Richwealth Re-KYC</title>
-<meta name="description" content="Richwealth partner re-KYC — PAN, Aadhaar and partner consent.">
+<title>Richwealth Re-KYC &amp; Consent</title>
+<meta name="description" content="Richwealth re-KYC and consent — PAN, Aadhaar, photo and consent.">
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +56,7 @@
   .field > label, .field > .lbl, .field legend{display:block; font-weight:600; font-size:16px; margin-bottom:6px; padding:0}
   .req{color:var(--err)}
   .hint{display:block; font-weight:400; color:var(--muted); font-size:13.5px; margin:2px 0 6px}
-  input[type=text],input[type=tel],textarea{width:100%; font:17px var(--body); color:var(--ink); background:var(--paper); border:1.5px solid #d9c98f; border-radius:9px; padding:12px 13px}
+  input[type=text],input[type=tel],input[type=email],textarea{width:100%; font:17px var(--body); color:var(--ink); background:var(--paper); border:1.5px solid #d9c98f; border-radius:9px; padding:12px 13px}
   textarea{min-height:90px; resize:vertical}
   input:focus,textarea:focus,select:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(176,141,46,.2); background:#fff}
   .phone{display:flex; gap:8px}
@@ -142,6 +142,35 @@
 
   footer{padding:24px 0 36px; text-align:center; font-size:14px; color:var(--muted)}
   footer a{color:var(--gold-dk); font-weight:600}
+  /* v2 additions */
+  .selfie{display:flex; gap:10px; flex-wrap:wrap}
+  .selfie .sbtn{flex:1 1 150px; display:flex; align-items:center; justify-content:center; gap:8px; border:1.5px dashed #cdb873; background:var(--paper); border-radius:10px; padding:13px 12px; cursor:pointer; font:600 15.5px var(--body); color:var(--navy)}
+  .selfie .sbtn:hover{background:#fdf7e6}
+  .selfie input{position:absolute; width:1px; height:1px; opacity:0}
+  .sprev{display:flex; align-items:center; gap:14px; border:1.5px solid var(--green); background:var(--green-bg); border-radius:10px; padding:10px 12px}
+  .sprev img{width:96px; height:96px; object-fit:cover; border-radius:50%; border:3px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  .sprev .acts{display:flex; flex-direction:column; gap:6px}
+  .sprev b{color:var(--green); font-size:15px}
+  .sprev button{background:#fff; border:1px solid var(--line); border-radius:8px; padding:7px 12px; cursor:pointer; font:600 14px var(--body); color:var(--navy); text-align:left}
+  .lt-meta{font-size:14.5px; color:#3d3a30; line-height:1.7}
+  .lt-meta b{color:var(--navy)}
+  .ck .ct{display:block}
+  .ck .ct b{display:block; color:var(--navy); font-size:15px; margin-bottom:1px}
+  .ck a, .agree a, footer a.pn{color:var(--gold-dk); font-weight:700}
+  .prive{margin-top:16px; border:1px solid var(--line); border-left:4px solid var(--gold); border-radius:10px; background:#fff; padding:12px 12px 2px}
+  .prive h3{font:700 15.5px/1.4 var(--body); color:var(--gold-dk); margin:0 0 8px; text-transform:uppercase; letter-spacing:.03em}
+  .decl2{display:block; margin-top:6px; color:#4a4536; font-size:14.5px}
+  .optin{margin-top:14px}
+  .optin .agree{font-size:14.5px; background:#fff}
+  .helpbox{margin-top:16px; text-align:center; background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px}
+  .helpbox p{margin:0 0 8px; color:var(--muted); font-size:15px}
+  .helpbtn{border:1.5px solid var(--navy); background:#fff; color:var(--navy); border-radius:10px; padding:12px 16px; cursor:pointer; font:700 15.5px var(--body); width:100%}
+  .helpbtn:hover{background:var(--navy); color:#fff}
+  .helpbtn:disabled{opacity:.6; cursor:wait}
+  .helpmsg{display:none; margin-top:10px; font-size:14.5px; border-radius:8px; padding:9px 12px}
+  .helpmsg.ok{display:block; background:var(--green-bg); color:#35520f}
+  .helpmsg.no{display:block; background:var(--err-bg); color:#4a1c18}
+  .otpnote{display:block; margin-top:6px; font-size:13.5px; color:var(--err)}
 </style>
 </head>
 <body>
@@ -174,30 +203,36 @@
   <form id="kyc" novalidate autocomplete="on">
     <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
-    <!-- 1 · who + documents -->
+    <!-- 1 · your details -->
     <section class="card">
       <h2><span class="num">1</span><span data-t="s1"></span></h2>
-      <p class="intro" data-t="s1_i"></p>
       <div class="field" data-k="name"><label for="f-name"><span data-t="name"></span> <span class="req">*</span></label>
         <input id="f-name" type="text" maxlength="80" autocomplete="name"><span class="err" data-t="e_req"></span></div>
       <div class="field" data-k="mobile"><label for="f-mob"><span data-t="mobile"></span> <span class="req">*</span></label>
-        <span class="hint" data-t="mobile_h"></span>
         <div class="phone"><select id="f-cc" aria-label="Country code"></select><input id="f-mob" type="tel" inputmode="numeric" maxlength="13" autocomplete="tel-national"></div>
         <span class="err" data-t="e_mob"></span></div>
       <div class="field" data-k="email"><label for="f-email" data-t="email"></label>
         <span class="hint" data-t="email_h"></span>
         <input id="f-email" type="email" maxlength="80" autocomplete="email" inputmode="email"><span class="err" data-t="e_email"></span></div>
+      <p class="lbl" style="font-weight:600; margin:0 0 8px" data-t="docs_h"></p>
       <div id="docs"></div>
+      <div class="field" data-k="selfie"><span class="lbl"><span data-t="ph_l"></span> <span class="req">*</span></span>
+        <span class="hint" data-t="ph_h"></span>
+        <div id="selfie"></div>
+        <input id="in-cam" type="file" accept="image/*" capture="user" hidden>
+        <input id="in-up" type="file" accept="image/*" hidden>
+        <span class="err" data-t="e_photo"></span></div>
       <fieldset class="field" data-k="panlink" style="margin-bottom:0"><legend><span data-t="pl_q"></span> <span class="req">*</span></legend>
         <div class="chips">
           <label class="chip"><input type="radio" name="panlink" value="Linked"><span data-t="pl_yes"></span></label>
           <label class="chip"><input type="radio" name="panlink" value="Not linked"><span data-t="pl_no"></span></label>
           <label class="chip"><input type="radio" name="panlink" value="Not sure"><span data-t="pl_ns"></span></label>
+          <label class="chip"><input type="radio" name="panlink" value="Exempt / NA"><span data-t="pl_ex"></span></label>
         </div><span class="err" data-t="e_choose"></span></fieldset>
-      <div class="tdsnote" role="note"><b data-t="tds_h"></b><span data-t="tds_p"></span></div>
+      <div class="tdsnote" role="note"><span data-t="tds_p"></span></div>
     </section>
 
-    <!-- 2 · address -->
+    <!-- 2 · address, bank & nominee -->
     <section class="card">
       <h2><span class="num">2</span><span data-t="s2"></span></h2>
       <fieldset class="field" data-k="addr_same"><legend><span data-t="addr_q"></span> <span class="req">*</span></legend>
@@ -205,13 +240,18 @@
           <label class="chip"><input type="radio" name="addr_same" value="Same as Aadhaar"><span data-t="addr_yes"></span></label>
           <label class="chip"><input type="radio" name="addr_same" value="Different"><span data-t="addr_no"></span></label>
         </div><span class="err" data-t="e_choose"></span></fieldset>
-      <div class="field hide" data-k="new_address"><label for="f-addr"><span data-t="new_addr"></span> <span class="req">*</span></label>
-        <textarea id="f-addr" maxlength="300" autocomplete="street-address"></textarea><span class="err" data-t="e_req"></span></div>
-      <div class="row2 hide" id="addr2">
-        <div class="field" data-k="city"><label for="f-city"><span data-t="city"></span> <span class="req">*</span></label>
-          <input id="f-city" type="text" maxlength="60" autocomplete="address-level2"><span class="err" data-t="e_req"></span></div>
+      <div id="addrbox" class="hide">
+        <p class="lbl" style="font-weight:600; margin:0 0 8px" data-t="addr_h"></p>
+        <div class="field" data-k="new_address"><label for="f-addr"><span data-t="new_addr"></span> <span class="req">*</span></label>
+          <textarea id="f-addr" maxlength="300" autocomplete="street-address"></textarea><span class="err" data-t="e_req"></span></div>
+        <div class="row2">
+          <div class="field" data-k="city"><label for="f-city"><span data-t="city"></span> <span class="req">*</span></label>
+            <input id="f-city" type="text" maxlength="60" autocomplete="address-level2"><span class="err" data-t="e_req"></span></div>
+          <div class="field" data-k="state"><label for="f-state"><span data-t="state"></span> <span class="req">*</span></label>
+            <input id="f-state" type="text" maxlength="40" autocomplete="address-level1"><span class="err" data-t="e_req"></span></div>
+        </div>
         <div class="field" data-k="pin"><label for="f-pin"><span data-t="pin"></span> <span class="req">*</span></label>
-          <input id="f-pin" type="text" maxlength="10" autocomplete="postal-code"><span class="err" data-t="e_req"></span></div>
+          <input id="f-pin" type="text" maxlength="10" inputmode="numeric" autocomplete="postal-code" style="max-width:220px"><span class="err" data-t="e_req"></span></div>
       </div>
       <fieldset class="field" data-k="bank_same"><legend><span data-t="bank_q"></span> <span class="req">*</span></legend>
         <div class="chips">
@@ -223,60 +263,91 @@
         <div class="chips">
           <label class="chip"><input type="radio" name="nom_same" value="Same nominee"><span data-t="nom_yes"></span></label>
           <label class="chip"><input type="radio" name="nom_same" value="Update"><span data-t="nom_no"></span></label>
+          <label class="chip"><input type="radio" name="nom_same" value="None / not sure"><span data-t="nom_none"></span></label>
         </div><span class="err" data-t="e_choose"></span></fieldset>
       <p class="note hide" id="nom-note" data-t="nom_note"></p>
     </section>
 
-    <!-- 3 · partner consent -->
+    <!-- 3 · your consent -->
     <section class="card">
       <h2><span class="num">3</span><span data-t="s3"></span></h2>
       <p class="intro" data-t="s3_i"></p>
 
       <div class="letter">
-        <div class="lt-top"><span data-t="lt_to"></span><span><span id="lt-date"></span><br><span class="pid" id="lt-pid"></span></span></div>
+        <div class="lt-meta">
+          <div><span data-t="lt_to"></span> <b>Richwealth</b></div>
+          <div><span data-t="lt_cn"></span>: <b id="lt-name">—</b></div>
+          <div><span data-t="lt_cid"></span>: <b id="lt-cid">—</b></div>
+          <div><span data-t="date"></span>: <b id="lt-date"></b></div>
+        </div>
         <p class="lt-sub" data-t="lt_sub"></p>
-        <p class="lt-open" id="lt-open"></p>
+        <p class="lt-open" data-t="lt_open"></p>
         <div class="field" data-k="consent" style="margin:0">
           <button type="button" class="allbtn" id="tickall" data-t="tickall"></button>
           <div class="consent" id="consents"></div>
           <span class="err" data-t="e_tickall"></span>
         </div>
-        <div class="field" data-k="decl" style="margin:14px 0 0">
+
+        <div class="prive">
+          <h3 data-t="pv_h"></h3>
+          <fieldset class="field" data-k="prive"><legend><span data-t="pv_q"></span> <span class="req">*</span></legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="prive" value="Yes"><span data-t="yes"></span></label>
+              <label class="chip"><input type="radio" name="prive" value="No"><span data-t="no"></span></label>
+              <label class="chip"><input type="radio" name="prive" value="Not sure"><span data-t="pv_ns"></span></label>
+            </div><span class="err" data-t="e_choose"></span></fieldset>
+          <div class="field hide" data-k="prive_ack" id="pv-ackbox">
+            <label class="agree"><input type="checkbox" id="f-pvack"><span data-t="pv_ack"></span></label>
+            <span class="err" data-t="e_tick"></span></div>
+        </div>
+
+        <div class="field" data-k="decl" style="margin:16px 0 0">
           <span class="lbl lt-h" data-t="decl_h"></span>
-          <label class="agree"><input type="checkbox" id="f-decl"><span data-t="decl"></span></label>
+          <label class="agree"><input type="checkbox" id="f-decl"><span><span data-t="decl"></span><span class="decl2" data-t="decl2"></span></span></label>
           <span class="err" data-t="e_tick"></span>
         </div>
         <div class="row2" style="margin-top:14px">
           <div class="field" data-k="sign"><label for="f-sign"><span data-t="sign"></span> <span class="req">*</span></label>
-            <input id="f-sign" type="text" class="sig" maxlength="80"><span class="hint" data-t="sign_h"></span><span class="err" data-t="e_sign"></span></div>
+            <span class="hint" data-t="sign_h"></span>
+            <input id="f-sign" type="text" class="sig" maxlength="80"><span class="err" data-t="e_sign"></span></div>
           <div class="field" data-k="place"><label for="f-place"><span data-t="place"></span> <span class="req">*</span></label>
+            <span class="hint" data-t="place_h"></span>
             <input id="f-place" type="text" maxlength="60"><span class="err" data-t="e_req"></span></div>
         </div>
+        <div class="field hide" data-k="otp" id="otpbox"><label for="f-otp"><span data-t="otp_l"></span> <span class="req">*</span></label>
+          <span class="hint" data-t="otp_h"></span>
+          <input id="f-otp" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code" style="max-width:220px">
+          <span class="otpnote" data-t="otp_notice"></span><span class="err" data-t="e_req"></span></div>
         <p class="lt-ver" id="lt-ver"></p>
       </div>
-      <div class="partner" style="margin:16px 0 0"><b data-t="pt_h"></b><span data-t="pt_p"></span></div>
 
-      <div class="field" style="margin:12px 0 0">
-        <label class="agree"><input type="checkbox" id="f-call"><span data-t="ag3"></span></label></div>
+      <div class="optin"><label class="agree"><input type="checkbox" id="f-promo"><span data-t="promo"></span></label></div>
     </section>
 
     <div class="formmsg" id="formmsg" role="alert"></div>
     <button type="submit" class="btn" id="subbtn" data-t="submit"></button>
+
+    <div class="helpbox">
+      <p data-t="help_q"></p>
+      <button type="button" class="helpbtn" id="helpbtn" data-t="help_btn"></button>
+      <div class="helpmsg" id="helpmsg" role="status"></div>
+    </div>
   </form>
 
   <div class="done" id="done" tabindex="-1">
     <div class="tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
     <h2 id="d-h"></h2>
-    <div class="ref" id="d-ref"></div>
     <p data-t="d_p1"></p>
+    <p style="margin-top:12px"><span data-t="d_ref"></span><br><span class="ref" id="d-ref"></span></p>
     <p data-t="d_p2"></p>
-    <div class="app"><div class="ph">24/7</div><div><b data-t="app_h"></b><span data-t="app_p"></span></div></div>
+    <p data-t="d_p3"></p>
+    <div class="app"><div class="ph">APP</div><div><b data-t="app_h"></b><span data-t="app_p"></span></div></div>
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <p data-t="help"></p>
+    <p data-t="foot_help"></p>
     <p data-t="privacy"></p>
     <p>© Richwealth · Trusted since 2011</p>
   </div>
@@ -287,183 +358,208 @@
 "use strict";
 // Apps Script web-app /exec URL. Empty = page refuses to submit and shows the help number.
 var ENDPOINT = "https://script.google.com/macros/s/AKfycbzGERg5w4vrki5SgFIOJLZwu4pKEKbVFJcV_NYEGektxlo_IB2r5TzvlD1bDl6WfA4H/exec";
-var HELP = '<a href="https://wa.me/919913121121">+91 99131 21121</a>';
-var LINK = '<a href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/link-aadhaar-status" target="_blank" rel="noopener">Income Tax e-filing portal (Link Aadhaar Status)</a>';
+// Mobile OTP needs an SMS/WhatsApp sending channel. Until one is connected the OTP box stays hidden
+// and every submission is recorded as "Mobile verification: not enabled".
+var OTP_ON = false;
+var WA = '<a href="https://wa.me/919913121121">+91 99131 21121</a>';
+var PN = function(txt){ return "<a href='privacy.html' target='_blank' rel='noopener'>" + txt + "</a>"; };
 
 var T = {
 en:{
- title:"Richwealth Re-KYC",
- h1:"Re-KYC — takes 2 minutes",
- sub:"We already have your details. Just share your PAN and Aadhaar, and sign your partner consent.",
- p1:"<b>1</b> PAN &amp; Aadhaar", p2:"<b>2</b> Address &amp; bank", p3:"<b>3</b> Partner consent",
- s1:"Your PAN &amp; Aadhaar", s1_i:"Take clear photos with your phone camera. Nothing else to fill.",
- name:"Your name", mobile:"Your WhatsApp number", mobile_h:"The number registered with Richwealth.",
+ title:"Richwealth Re-KYC & Consent", h1:"Richwealth Re-KYC &amp; Consent",
+ sub:"Please confirm your details, upload clear photos of your documents and read the consent below.",
+ p1:"<b>1</b> Your details", p2:"<b>2</b> Address, bank &amp; nominee", p3:"<b>3</b> Your consent",
+ s1:"Your details",
+ name:"Full name as shown on your PAN card", mobile:"WhatsApp number registered with Richwealth",
+ email:"Email address — optional", email_h:"For your TDS certificates and account updates.",
+ docs_h:"Upload clear photos of:", d_pan:"PAN card", d_aadf:"Aadhaar card — front", d_aadb:"Aadhaar card — back",
  tap:"Tap to take a photo or choose a file", added:"Added", change:"Change",
- d_pan:"PAN card", d_aadf:"Aadhaar card — front", d_aadb:"Aadhaar card — back",
- pl_q:"Is your PAN linked with your Aadhaar?", pl_yes:"Yes, linked", pl_no:"No, not linked", pl_ns:"Not sure",
- tds_h:"Important: PAN–Aadhaar link and TDS",
- tds_p:"Under the Income-tax Act, 1961, if your PAN is not linked with Aadhaar it becomes inoperative and TDS must be deducted at <b>20% instead of 10%</b>. Please make sure your PAN is linked. You can check your status on the " + LINK + ".",
- s2:"Address, bank &amp; nominee", addr_q:"Is your current address the same as on your Aadhaar card?",
- addr_yes:"Yes, same as Aadhaar", addr_no:"No, I live at a different address now",
- new_addr:"Your current address", city:"City", pin:"PIN code",
- s3:"Partner consent letter", s3_i:"Please read each point and tick it. Your Relationship Manager (RM) will gladly explain any point.",
- pt_h:"Partners in business — together", pt_p:"Our relationship is not that of a client and a company, and Richwealth is not a scheme or a plan. We do business together as partners, and your earnings are contractual income.",
- lt_to:"To,<br>Richwealth<br>Ranmal Lake, Gate No. 1, Jamnagar 361001", lt_sub:"Subject: Re-KYC and partner consent",
- lt_open:"I, <b>{name}</b>, give this consent freely, after reading and understanding each point below. I confirm, acknowledge and agree that:",
- c1:"<b>My documents.</b> The PAN card, Aadhaar card and address I have submitted for re-KYC are my own, valid and up to date.",
- c2:"<b>Use of my data.</b> I authorise Richwealth to store and use my KYC details and documents for verification, payouts, statutory compliance, and to set up my account on the upcoming Richwealth mobile application.",
- c3:"<b>Payouts and TDS.</b> All payouts are made only by bank transfer to my own registered bank account and never to any third party. TDS is deducted and deposited against my PAN at 10%. <b>If my PAN is not linked with my Aadhaar (inoperative PAN), TDS will be deducted at the higher rate of 20%</b> as required under the Income-tax Act, 1961, and Richwealth will not be responsible for this higher deduction.",
- c4:"<b>Official accounts only.</b> All amounts I pay to Richwealth are paid only into Richwealth's official company bank accounts. I will not pay any amount to any employee, agent or other person personally, and I will never share any OTP or password with anyone.",
- c5:"<b>How the business works.</b> Richwealth deploys our business capital under its 40-40-20 model — equity markets, real estate (including projects such as Vishram Dwarka) and bank deposits.",
- c6:"<b>Partners, not client and company.</b> I am associated with Richwealth as a business partner. What I earn is contractual income — my agreed share of the earnings of the business we carry on together, just as two business partners work together and earn together. It is not a scheme, a plan, a deposit or bank interest.",
- c7:"<b>Understanding the business.</b> My Relationship Manager has explained to me how the business works, including its market-linked activities, and I have joined as a partner with full understanding.",
- c8:"<b>Privé membership.</b> My Relationship Manager has explained, or will explain, the Privé membership plans, membership fees and related benefits (including the EV car programme). I may ask for any clarification at any time.",
- c9:"<b>Early exit.</b> Closure or withdrawal before maturity may attract a penalty or deduction as per the terms of my certificate or agreement.",
- c10:"<b>Free will.</b> I have joined as a partner voluntarily, with funds from my own lawful sources, after understanding the above. No one has pressured or misled me.",
- c11:"<b>Updates.</b> I will inform Richwealth within 7 days of any change in my bank account, mobile number or address.",
- c12:"<b>Nominee.</b> In the event of my death, my investment and payouts will pass to my registered nominee or legal heirs as per Richwealth records, after due verification.",
- c13:"<b>Communication.</b> I agree to receive calls and messages from Richwealth on WhatsApp, SMS, email and phone about my investment, payouts and updates.",
- c14:"<b>Electronic consent.</b> I agree that this online consent, given by ticking each point and typing my name, is as valid and binding as a physically signed document under the Information Technology Act, 2000.",
- c15:"<b>Jurisdiction.</b> Any dispute shall be subject to the jurisdiction of the courts at Jamnagar, Gujarat.",
- email:"Email (optional)", email_h:"For your TDS certificate (Form 16A) and the Richwealth app.", e_email:"Please enter a valid email or leave it blank.",
- bank_q:"Should your payouts continue to the same bank account as before?", bank_yes:"Yes, same account", bank_no:"No, my account has changed",
- bank_note:"No problem — your RM will call you to update it. Please keep a cancelled cheque or passbook ready. Your balance will be paid after the new account is verified.",
- nom_q:"Is your nominee still the same?", nom_yes:"Yes, same nominee", nom_no:"No, I want to update it",
- nom_note:"Your RM will call you to update your nominee.",
- pid:"Partner ID", ver:"Consent version {v}",
+ ph_l:"Your photo / selfie", ph_h:"Take or upload a clear, recent photo of yourself for our records. Make sure your full face is visible.",
+ ph_take:"Take a photo", ph_up:"Upload a photo", ph_retake:"Retake", ph_replace:"Replace",
+ pl_q:"Is your PAN linked with Aadhaar?", pl_yes:"Yes", pl_no:"No", pl_ns:"Not sure", pl_ex:"Exempt / not applicable",
+ tds_p:"If your PAN is inoperative, a higher TDS rate may apply. If you are unsure, our team can help you check.",
+ s2:"Address, bank &amp; nominee",
+ addr_q:"Is your current address the same as the address on your Aadhaar card?", addr_yes:"Yes", addr_no:"No",
+ addr_h:"If no, enter your current address:", new_addr:"Address", city:"City", state:"State", pin:"PIN code",
+ bank_q:"Should your payouts continue to your existing registered bank account?", bank_yes:"Yes", bank_no:"No, I need to update it",
+ bank_note:"Your Relationship Manager will contact you. Please keep a cancelled cheque or bank statement ready. Payouts to your new account can begin after verification.",
+ nom_q:"Do you want to keep your existing nominee details?", nom_yes:"Yes", nom_no:"No, I want to update them", nom_none:"I have not registered a nominee / I am not sure",
+ nom_note:"Your Relationship Manager will contact you if you need to add or update a nominee.",
+ s3:"Your consent", s3_i:"Please read each point and tick the box if you agree. If you need help, ask your Relationship Manager before submitting.",
+ lt_to:"To:", lt_cn:"Client name", lt_cid:"Client ID", date:"Date",
+ lt_sub:"Subject: Re-KYC and client consent", lt_open:"I confirm the following:",
+ c1:"<b>My information</b>The details and documents I have submitted belong to me and are correct to the best of my knowledge.",
+ c2:"<b>Use of my details</b>I allow Richwealth to use my details and documents to verify my identity, maintain my records, process payouts, meet legal requirements and set up my Richwealth app account. I also allow Richwealth to keep my photo with my account records for identification and verification. Further details are available in the " + PN("Privacy Notice") + ".",
+ c3:"<b>My bank account</b>My payouts must be sent only to my verified bank account. I will inform Richwealth if my bank details change.",
+ c4:"<b>TDS</b>Richwealth will deduct tax where required at the applicable rate and deposit it against my PAN. I understand that an inoperative PAN may result in a higher deduction.",
+ c5:"<b>Payments to Richwealth</b>I will transfer money only to Richwealth’s official bank account. I will not pay into the personal account of an employee, agent or any other person.",
+ c6:"<b>Account security</b>I will not share my OTP, password or banking PIN with anyone, including anyone claiming to represent Richwealth.",
+ c7:"<b>My agreement and income</b>My investment amount, contractual income, payment dates and other terms are recorded in my agreement or certificate. I have reviewed these details and had an opportunity to ask questions.",
+ c8:"<b>Business activities</b>I understand that Richwealth uses funds for its business activities, including equity markets, real estate and bank deposits, as explained in the terms applicable to my investment.",
+ c9:"<b>Early withdrawal</b>If I request an early withdrawal, the deductions and payment timeline stated in my agreement or certificate will apply. I may ask Richwealth for a calculation before proceeding.",
+ c10:"<b>My decision</b>I have chosen to invest voluntarily, using funds from lawful sources. I have had an opportunity to ask questions and seek clarification.",
+ c11:"<b>Changes to my details</b>I will inform Richwealth promptly if my mobile number, address, bank account or nominee details change.",
+ c12:"<b>Nominee and legal heirs</b>In the event of my death, Richwealth will verify the required documents and process the amounts payable in accordance with my agreement and applicable law.",
+ c13:"<b>Account messages</b>I agree to receive messages and calls about my account, verification, payouts, tax documents and service updates through WhatsApp, SMS, email or phone.",
+ c14:"<b>Online confirmation</b>By ticking these boxes, typing my full name and submitting this form, I confirm that I have read, understood and accepted this consent.",
+ c15:"<b>Existing terms</b>This form updates my records and confirms my consent. It does not change my existing agreement, payment terms or amounts payable to me.",
  tickall:"I have read all the points — tick all",
- decl_h:"Declaration", decl:"I hereby declare that the information and documents submitted by me are true, correct and complete. I understand that Richwealth may withhold payouts until any discrepancy is resolved.",
- sign:"Signature — type your full name", sign_h:"Your typed name is your signature on this consent.", place:"Place", date:"Date",
- ag3:"Please ask my RM to call me and explain. (optional)",
- e_tickall:"Please read and tick every point.", e_sign:"Please type your full name.",
- submit:"Submit", saving:"Uploading… please wait",
+ pv_h:"Privé members only", pv_q:"Are you currently a Privé member?", yes:"Yes", no:"No", pv_ns:"Not sure",
+ pv_ack:"I have reviewed the membership fees, benefits and conditions applicable to my Privé membership.",
+ decl_h:"Declaration", decl:"I confirm that the information I have provided is correct and complete to the best of my knowledge.",
+ decl2:"If any information is missing or does not match the records, Richwealth may contact me for clarification. If this affects a payout, Richwealth will explain the issue and what is needed to resolve it.",
+ sign:"Full name", sign_h:"Type your full name.", place:"Place", place_h:"City",
+ otp_l:"Mobile verification", otp_h:"Enter the OTP sent to your registered mobile number.", otp_notice:"Never share this OTP with another person. Enter it only on this form.",
+ ver:"Consent version: {v}",
+ promo:"(Optional) I would also like to receive information about new offers, memberships, projects and events. I can opt out of these promotional messages at any time.",
+ submit:"Submit Re-KYC &amp; Consent", saving:"Uploading… please wait",
+ help_q:"Need clarification before submitting?", help_btn:"Ask my Relationship Manager to call me",
+ help_sending:"Sending…", help_ok:"Thank you. Your Relationship Manager will call you soon.", help_need:"Please enter your name and WhatsApp number above first.",
+ help_fail:"The request could not be sent. Please WhatsApp us on " + WA + ".",
+ foot_help:"Need help? WhatsApp: " + WA,
+ privacy:"Your documents will be used for the purposes explained above. Read our " + PN("Privacy Notice") + " for details about how your information is handled.",
+ d_h:"Thank you{n}!", d_p1:"We have received your re-KYC form.", d_ref:"Your reference number:",
+ d_p2:"Our team will review your details and contact you if anything else is needed.",
+ d_p3:"Any pending payout will be processed according to your agreed payment terms after the required verification is complete.",
+ app_h:"Your Richwealth app account", app_p:"Once the app is ready, we will guide you through accessing your account using your verified details.",
  e_req:"Please fill this.", e_choose:"Please choose one.", e_mob:"Please enter a valid mobile number.", e_doc:"Please add this photo.",
- e_big:"This file is too large (max 8 MB). Please take a new photo.", e_type:"Please add a photo or PDF.", e_tick:"Please tick to continue.",
- not_open:"The form is not open yet.", save_fail:"It could not be submitted. Please check your internet and try again.",
- help:"Need help? WhatsApp us on " + HELP + ".",
- privacy:"Your documents are stored privately by Richwealth and used only for KYC, payouts and your Richwealth app account.",
- d_h:"Thank you{n}!", d_p1:"Your re-KYC is received. Please keep this reference number.",
- d_p2:"After our team verifies it, your remaining payout will be credited within 48 hours.",
- app_h:"Richwealth is coming to your mobile — 24/7", app_p:"Thank you for sharing your details. We are building the Richwealth app, and this information will set up your account in it. Very soon Richwealth will be available on your phone, anytime.",
- cc_other:"Other"
-},
-gu:{
- title:"રિચવેલ્થ રી-KYC",
- h1:"રી-KYC — ફક્ત 2 મિનિટ",
- sub:"તમારી વિગતો અમારી પાસે છે જ. ફક્ત PAN અને આધાર આપો, અને તમારી પાર્ટનર સંમતિ પર સહી કરો.",
- p1:"<b>1</b> PAN અને આધાર", p2:"<b>2</b> સરનામું અને બેંક", p3:"<b>3</b> પાર્ટનર સંમતિ",
- s1:"તમારું PAN અને આધાર", s1_i:"ફોનના કેમેરાથી સ્પષ્ટ ફોટા લો. બીજું કંઈ ભરવાનું નથી.",
- name:"તમારું નામ", mobile:"તમારો વોટ્સએપ નંબર", mobile_h:"રિચવેલ્થમાં રજિસ્ટર થયેલો નંબર.",
- tap:"ફોટો લેવા અથવા ફાઇલ પસંદ કરવા ટેપ કરો", added:"ઉમેર્યું", change:"બદલો",
- d_pan:"PAN કાર્ડ", d_aadf:"આધાર કાર્ડ — આગળની બાજુ", d_aadb:"આધાર કાર્ડ — પાછળની બાજુ",
- pl_q:"શું તમારું PAN આધાર સાથે લિંક છે?", pl_yes:"હા, લિંક છે", pl_no:"ના, લિંક નથી", pl_ns:"ખબર નથી",
- tds_h:"મહત્વપૂર્ણ: PAN–આધાર લિંક અને TDS",
- tds_p:"આવકવેરા કાયદો, 1961 મુજબ, PAN આધાર સાથે લિંક ન હોય તો તે નિષ્ક્રિય બને છે અને TDS <b>10% ને બદલે 20%</b> કાપવો ફરજિયાત છે. કૃપા કરીને ખાતરી કરો કે તમારું PAN લિંક છે. તમારું સ્ટેટસ " + LINK + " પર ચકાસી શકો છો.",
- s2:"સરનામું, બેંક અને નોમિની", addr_q:"શું તમારું હાલનું સરનામું આધાર કાર્ડ પર છે તે જ છે?",
- addr_yes:"હા, આધાર મુજબ જ", addr_no:"ના, હવે હું બીજા સરનામે રહું છું",
- new_addr:"તમારું હાલનું સરનામું", city:"શહેર", pin:"પિન કોડ",
- s3:"પાર્ટનર સંમતિ પત્ર", s3_i:"કૃપા કરીને દરેક મુદ્દો વાંચીને ટિક કરો. કોઈ પણ મુદ્દો તમારા રિલેશનશિપ મેનેજર (RM) ખુશીથી સમજાવશે.",
- pt_h:"બિઝનેસમાં સાથે — આપણે પાર્ટનર છીએ", pt_p:"આપણો સંબંધ ક્લાયન્ટ અને કંપનીનો નથી, અને રિચવેલ્થ કોઈ સ્કીમ કે પ્લાન નથી. આપણે પાર્ટનર તરીકે સાથે બિઝનેસ કરીએ છીએ, અને તમારી કમાણી કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે.",
- lt_to:"પ્રતિ,<br>રિચવેલ્થ<br>રણમલ તળાવ, ગેટ નં. 1, જામનગર 361001", lt_sub:"વિષય: રી-KYC અને પાર્ટનર સંમતિ",
- lt_open:"હું, <b>{name}</b>, નીચેના દરેક મુદ્દા વાંચી અને સમજીને, મારી સ્વેચ્છાએ આ સંમતિ આપું છું. હું પુષ્ટિ કરું છું, સ્વીકારું છું અને સંમત છું કે:",
- c1:"<b>મારા દસ્તાવેજો.</b> રી-KYC માટે મેં આપેલા PAN કાર્ડ, આધાર કાર્ડ અને સરનામું મારા પોતાના, માન્ય અને અદ્યતન છે.",
- c2:"<b>મારી માહિતીનો ઉપયોગ.</b> હું રિચવેલ્થને મારી KYC વિગતો અને દસ્તાવેજો વેરિફિકેશન, પેમેન્ટ, કાયદાકીય પાલન અને આવનારી રિચવેલ્થ મોબાઇલ એપમાં મારું એકાઉન્ટ બનાવવા માટે રાખવા અને વાપરવાની મંજૂરી આપું છું.",
- c3:"<b>પેમેન્ટ અને TDS.</b> બધા પેમેન્ટ ફક્ત બેંક ટ્રાન્સફરથી મારા પોતાના રજિસ્ટર્ડ બેંક ખાતામાં જ થાય છે — બીજા કોઈના ખાતામાં ક્યારેય નહીં. TDS 10% ના દરે કપાઈને મારા PAN સામે જમા થાય છે. <b>જો મારું PAN આધાર સાથે લિંક ન હોય (નિષ્ક્રિય PAN), તો આવકવેરા કાયદો, 1961 મુજબ TDS 20% ના ઊંચા દરે કપાશે</b>, અને આ વધારાની કપાત માટે રિચવેલ્થ જવાબદાર રહેશે નહીં.",
- c4:"<b>ફક્ત સત્તાવાર ખાતાં.</b> હું રિચવેલ્થને જે પણ રકમ ચૂકવું તે ફક્ત રિચવેલ્થના સત્તાવાર કંપની બેંક ખાતામાં જ ચૂકવીશ. હું કોઈ કર્મચારી, એજન્ટ કે અન્ય વ્યક્તિને અંગત રીતે કોઈ રકમ ચૂકવીશ નહીં, અને મારો OTP કે પાસવર્ડ ક્યારેય કોઈને આપીશ નહીં.",
- c5:"<b>ભંડોળનો ઉપયોગ.</b> રિચવેલ્થ મારું ભંડોળ તેના 40-40-20 મોડેલ હેઠળ બિઝનેસમાં રોકે છે — શેરબજાર, રિયલ એસ્ટેટ (વિશ્રામ દ્વારકા જેવા પ્રોજેક્ટ સહિત) અને બેંક ડિપોઝિટ.",
- c6:"<b>પાર્ટનર — ક્લાયન્ટ અને કંપની નહીં.</b> રિચવેલ્થ સાથે હું બિઝનેસ પાર્ટનર તરીકે જોડાયેલ છું. મારી કમાણી કોન્ટ્રાક્ચ્યુઅલ (કરાર આધારિત) આવક છે — આપણે સાથે મળીને કરતા બિઝનેસની કમાણીમાંથી કરાર મુજબનો મારો હિસ્સો, જેમ બે બિઝનેસ પાર્ટનર સાથે કામ કરે અને સાથે કમાય. આ કોઈ સ્કીમ, પ્લાન, ડિપોઝિટ કે બેંકનું વ્યાજ નથી.",
- c7:"<b>બિઝનેસની સમજ.</b> મારા રિલેશનશિપ મેનેજરે મને બિઝનેસ કેવી રીતે ચાલે છે — તેની બજાર સાથે જોડાયેલી પ્રવૃત્તિઓ સહિત — તે સમજાવ્યું છે, અને હું પૂરી સમજ સાથે પાર્ટનર તરીકે જોડાયેલ છું.",
- c8:"<b>પ્રિવે મેમ્બરશિપ.</b> મારા રિલેશનશિપ મેનેજરે પ્રિવે મેમ્બરશિપ પ્લાન, મેમ્બરશિપ ફી અને સંબંધિત લાભો (EV કાર પ્રોગ્રામ સહિત) સમજાવ્યા છે અથવા સમજાવશે. હું ગમે ત્યારે કોઈ પણ સ્પષ્ટતા માગી શકું છું.",
- c9:"<b>વહેલું બહાર નીકળવું.</b> મુદત પહેલાં રોકાણ બંધ કરવા કે ઉપાડવા પર મારા સર્ટિફિકેટ અથવા કરારની શરતો મુજબ પેનલ્ટી કે કપાત થઈ શકે છે.",
- c10:"<b>સ્વેચ્છાએ ભાગીદારી.</b> ઉપરની બાબતો સમજીને, મારી પોતાની કાયદેસર આવકમાંથી, હું સ્વેચ્છાએ પાર્ટનર તરીકે જોડાયેલ છું. કોઈએ મારા પર દબાણ કર્યું નથી કે મને ગેરમાર્ગે દોર્યો નથી.",
- c11:"<b>ફેરફારની જાણ.</b> મારું બેંક ખાતું, મોબાઇલ નંબર કે સરનામું બદલાય તો હું 7 દિવસમાં રિચવેલ્થને જાણ કરીશ.",
- c12:"<b>નોમિની.</b> મારા અવસાનના સંજોગોમાં, યોગ્ય ચકાસણી પછી, મારું રોકાણ અને પેમેન્ટ રિચવેલ્થના રેકોર્ડ મુજબ મારા રજિસ્ટર્ડ નોમિની અથવા કાયદેસર વારસદારોને મળશે.",
- c13:"<b>સંદેશાવ્યવહાર.</b> મારા રોકાણ, પેમેન્ટ અને અપડેટ્સ અંગે રિચવેલ્થ તરફથી વોટ્સએપ, SMS, ઇમેઇલ અને ફોન પર કોલ અને મેસેજ મેળવવા હું સંમત છું.",
- c14:"<b>ઇલેક્ટ્રોનિક સંમતિ.</b> હું સંમત છું કે દરેક મુદ્દો ટિક કરીને અને મારું નામ લખીને આપેલી આ ઓનલાઇન સંમતિ, માહિતી ટેકનોલોજી કાયદો, 2000 હેઠળ, હાથે સહી કરેલા દસ્તાવેજ જેટલી જ માન્ય અને બંધનકર્તા છે.",
- c15:"<b>ન્યાયક્ષેત્ર.</b> કોઈ પણ વિવાદ જામનગર, ગુજરાતની અદાલતોના ન્યાયક્ષેત્રને આધીન રહેશે.",
- email:"ઇમેઇલ (વૈકલ્પિક)", email_h:"તમારા TDS સર્ટિફિકેટ (ફોર્મ 16A) અને રિચવેલ્થ એપ માટે.", e_email:"કૃપા કરીને સાચો ઇમેઇલ લખો અથવા ખાલી રાખો.",
- bank_q:"શું તમારું પેમેન્ટ પહેલાંના જ બેંક ખાતામાં ચાલુ રાખવાનું છે?", bank_yes:"હા, એ જ ખાતું", bank_no:"ના, મારું ખાતું બદલાયું છે",
- bank_note:"કોઈ વાંધો નહીં — તમારા RM તમને ફોન કરીને ખાતું અપડેટ કરશે. કૃપા કરીને કેન્સલ ચેક કે પાસબુક તૈયાર રાખો. નવું ખાતું વેરિફાય થયા પછી તમારું બાકીનું પેમેન્ટ થશે.",
- nom_q:"શું તમારા નોમિની એ જ છે?", nom_yes:"હા, એ જ નોમિની", nom_no:"ના, મારે બદલવા છે",
- nom_note:"તમારા RM તમને ફોન કરીને નોમિની અપડેટ કરશે.",
- pid:"પાર્ટનર ID", ver:"સંમતિ આવૃત્તિ {v}",
- tickall:"મેં બધા મુદ્દા વાંચ્યા છે — બધા ટિક કરો",
- decl_h:"જાહેરનામું", decl:"હું આથી જાહેર કરું છું કે મેં આપેલી માહિતી અને દસ્તાવેજો સાચા, યોગ્ય અને સંપૂર્ણ છે. હું સમજું છું કે કોઈ વિસંગતતા દૂર ન થાય ત્યાં સુધી રિચવેલ્થ પેમેન્ટ રોકી શકે છે.",
- sign:"સહી — તમારું પૂરું નામ લખો", sign_h:"તમે લખેલું નામ આ સંમતિ પર તમારી સહી ગણાશે.", place:"સ્થળ", date:"તારીખ",
- ag3:"મારા RMને મને ફોન કરીને સમજાવવા કહો. (વૈકલ્પિક)",
- e_tickall:"કૃપા કરીને દરેક મુદ્દો વાંચીને ટિક કરો.", e_sign:"કૃપા કરીને તમારું પૂરું નામ લખો.",
- submit:"સબમિટ કરો", saving:"અપલોડ થઈ રહ્યું છે… રાહ જુઓ",
- e_req:"કૃપા કરીને આ ભરો.", e_choose:"કૃપા કરીને એક પસંદ કરો.", e_mob:"કૃપા કરીને સાચો મોબાઇલ નંબર લખો.", e_doc:"કૃપા કરીને આ ફોટો ઉમેરો.",
- e_big:"આ ફાઇલ બહુ મોટી છે (મહત્તમ 8 MB). નવો ફોટો લો.", e_type:"કૃપા કરીને ફોટો અથવા PDF ઉમેરો.", e_tick:"આગળ વધવા માટે ટિક કરો.",
- not_open:"ફોર્મ હજી શરૂ થયું નથી.", save_fail:"સબમિટ થઈ શક્યું નથી. ઇન્ટરનેટ તપાસીને ફરી પ્રયાસ કરો.",
- help:"મદદ જોઈએ છે? અમને વોટ્સએપ કરો " + HELP + ".",
- privacy:"તમારા દસ્તાવેજો રિચવેલ્થ ખાનગી રીતે રાખે છે અને ફક્ત KYC, પેમેન્ટ અને તમારા રિચવેલ્થ એપ એકાઉન્ટ માટે જ વાપરે છે.",
- d_h:"આભાર{n}!", d_p1:"તમારું રી-KYC મળી ગયું છે. આ રેફરન્સ નંબર સાચવી રાખો.",
- d_p2:"અમારી ટીમ વેરિફાય કરે પછી 48 કલાકમાં તમારું બાકીનું પેમેન્ટ જમા થશે.",
- app_h:"રિચવેલ્થ હવે તમારા મોબાઇલમાં — 24/7", app_p:"તમારી વિગતો આપવા બદલ આભાર. અમે રિચવેલ્થ એપ બનાવી રહ્યા છીએ, અને આ માહિતીથી તેમાં તમારું એકાઉન્ટ તૈયાર થશે. ખૂબ જલ્દી રિચવેલ્થ ગમે ત્યારે તમારા ફોનમાં ઉપલબ્ધ હશે.",
- cc_other:"અન્ય"
+ e_photo:"Please add your photo.", e_email:"Please enter a valid email or leave it blank.", e_tick:"Please tick to continue.",
+ e_tickall:"Please read and tick every point.", e_sign:"Please type your full name.",
+ e_big:"This file is too large (max 8 MB). Please take a new photo.", e_type:"Please add a photo or PDF.", e_img:"Please add a photo (JPG or PNG).",
+ not_open:"The form is not open yet.", save_fail:"It could not be submitted. Please check your internet and try again."
 },
 hi:{
- title:"रिचवेल्थ री-KYC",
- h1:"री-KYC — सिर्फ़ 2 मिनट",
- sub:"आपकी जानकारी हमारे पास पहले से है। बस PAN और आधार दें, और अपनी पार्टनर सहमति पर हस्ताक्षर करें।",
- p1:"<b>1</b> PAN और आधार", p2:"<b>2</b> पता और बैंक", p3:"<b>3</b> पार्टनर सहमति",
- s1:"आपका PAN और आधार", s1_i:"फ़ोन के कैमरे से साफ़ फ़ोटो लें। और कुछ भरने की ज़रूरत नहीं।",
- name:"आपका नाम", mobile:"आपका व्हाट्सऐप नंबर", mobile_h:"रिचवेल्थ में रजिस्टर्ड नंबर।",
+ title:"Richwealth री-KYC और सहमति", h1:"Richwealth री-KYC और सहमति",
+ sub:"कृपया अपनी जानकारी की पुष्टि करें, अपने दस्तावेज़ों की साफ़ फोटो अपलोड करें और नीचे दी गई सहमति पढ़ें।",
+ p1:"<b>1</b> आपकी जानकारी", p2:"<b>2</b> पता, बैंक और नॉमिनी", p3:"<b>3</b> आपकी सहमति",
+ s1:"आपकी जानकारी",
+ name:"PAN कार्ड पर लिखा आपका पूरा नाम", mobile:"Richwealth में दर्ज आपका WhatsApp नंबर",
+ email:"ईमेल पता — वैकल्पिक", email_h:"आपके TDS प्रमाणपत्र और खाते की जानकारी के लिए।",
+ docs_h:"इन दस्तावेज़ों की साफ़ फोटो अपलोड करें:", d_pan:"PAN कार्ड", d_aadf:"आधार कार्ड — आगे की तरफ", d_aadb:"आधार कार्ड — पीछे की तरफ",
  tap:"फ़ोटो लेने या फ़ाइल चुनने के लिए टैप करें", added:"जोड़ा गया", change:"बदलें",
- d_pan:"PAN कार्ड", d_aadf:"आधार कार्ड — आगे का हिस्सा", d_aadb:"आधार कार्ड — पीछे का हिस्सा",
- pl_q:"क्या आपका PAN आधार से लिंक है?", pl_yes:"हाँ, लिंक है", pl_no:"नहीं, लिंक नहीं है", pl_ns:"पता नहीं",
- tds_h:"महत्वपूर्ण: PAN–आधार लिंक और TDS",
- tds_p:"आयकर अधिनियम, 1961 के अनुसार, PAN आधार से लिंक न होने पर निष्क्रिय हो जाता है और TDS <b>10% की जगह 20%</b> काटना अनिवार्य है। कृपया सुनिश्चित करें कि आपका PAN लिंक है। आप अपना स्टेटस " + LINK + " पर जाँच सकते हैं।",
- s2:"पता, बैंक और नॉमिनी", addr_q:"क्या आपका वर्तमान पता वही है जो आधार कार्ड पर है?",
- addr_yes:"हाँ, आधार के अनुसार ही", addr_no:"नहीं, अब मैं दूसरे पते पर रहता/रहती हूँ",
- new_addr:"आपका वर्तमान पता", city:"शहर", pin:"पिन कोड",
- s3:"पार्टनर सहमति पत्र", s3_i:"कृपया हर बिंदु पढ़कर टिक करें। कोई भी बिंदु आपके रिलेशनशिप मैनेजर (RM) खुशी से समझाएँगे।",
- pt_h:"बिज़नेस में साथ — हम पार्टनर हैं", pt_p:"हमारा रिश्ता क्लाइंट और कंपनी का नहीं है, और रिचवेल्थ कोई स्कीम या प्लान नहीं है। हम पार्टनर के रूप में साथ बिज़नेस करते हैं, और आपकी कमाई कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है।",
- lt_to:"सेवा में,<br>रिचवेल्थ<br>रणमल तालाब, गेट नं. 1, जामनगर 361001", lt_sub:"विषय: री-KYC और पार्टनर सहमति",
- lt_open:"मैं, <b>{name}</b>, नीचे दिए गए हर बिंदु को पढ़कर और समझकर, अपनी इच्छा से यह सहमति देता/देती हूँ। मैं पुष्टि करता/करती हूँ, स्वीकार करता/करती हूँ और सहमत हूँ कि:",
- c1:"<b>मेरे दस्तावेज़।</b> री-KYC के लिए मेरे द्वारा दिए गए PAN कार्ड, आधार कार्ड और पता मेरे अपने, वैध और अद्यतन हैं।",
- c2:"<b>मेरी जानकारी का उपयोग।</b> मैं रिचवेल्थ को अपनी KYC जानकारी और दस्तावेज़ वेरिफ़िकेशन, भुगतान, क़ानूनी अनुपालन और आने वाले रिचवेल्थ मोबाइल ऐप में मेरा अकाउंट बनाने के लिए रखने और उपयोग करने की अनुमति देता/देती हूँ।",
- c3:"<b>भुगतान और TDS।</b> सभी भुगतान केवल बैंक ट्रांसफ़र से मेरे अपने रजिस्टर्ड बैंक खाते में ही होते हैं — किसी और के खाते में कभी नहीं। TDS 10% की दर से काटकर मेरे PAN पर जमा किया जाता है। <b>यदि मेरा PAN आधार से लिंक नहीं है (निष्क्रिय PAN), तो आयकर अधिनियम, 1961 के अनुसार TDS 20% की ऊँची दर से काटा जाएगा</b>, और इस अधिक कटौती के लिए रिचवेल्थ ज़िम्मेदार नहीं होगा।",
- c4:"<b>केवल आधिकारिक खाते।</b> रिचवेल्थ को मैं जो भी राशि दूँगा/दूँगी, वह केवल रिचवेल्थ के आधिकारिक कंपनी बैंक खातों में ही दूँगा/दूँगी। मैं किसी कर्मचारी, एजेंट या अन्य व्यक्ति को निजी तौर पर कोई राशि नहीं दूँगा/दूँगी, और अपना OTP या पासवर्ड कभी किसी को नहीं बताऊँगा/बताऊँगी।",
- c5:"<b>धन का उपयोग।</b> रिचवेल्थ मेरा धन अपने 40-40-20 मॉडल के तहत बिज़नेस में लगाता है — शेयर बाज़ार, रियल एस्टेट (विश्राम द्वारका जैसे प्रोजेक्ट सहित) और बैंक डिपॉज़िट।",
- c6:"<b>पार्टनर — क्लाइंट और कंपनी नहीं।</b> रिचवेल्थ से मैं एक बिज़नेस पार्टनर के रूप में जुड़ा/जुड़ी हूँ। मेरी कमाई कॉन्ट्रैक्चुअल (अनुबंध आधारित) आय है — हमारे साथ मिलकर किए जा रहे बिज़नेस की कमाई में से अनुबंध के अनुसार मेरा हिस्सा, जैसे दो बिज़नेस पार्टनर साथ काम करते हैं और साथ कमाते हैं। यह कोई स्कीम, प्लान, डिपॉज़िट या बैंक ब्याज नहीं है।",
- c7:"<b>बिज़नेस की समझ।</b> मेरे रिलेशनशिप मैनेजर ने मुझे समझाया है कि बिज़नेस कैसे चलता है — उसकी बाज़ार से जुड़ी गतिविधियों सहित — और मैं पूरी समझ के साथ पार्टनर के रूप में जुड़ा/जुड़ी हूँ।",
- c8:"<b>प्रिवे मेंबरशिप।</b> मेरे रिलेशनशिप मैनेजर ने प्रिवे मेंबरशिप प्लान, मेंबरशिप फ़ीस और संबंधित लाभ (EV कार प्रोग्राम सहित) समझाए हैं या समझाएँगे। मैं कभी भी कोई भी स्पष्टीकरण माँग सकता/सकती हूँ।",
- c9:"<b>जल्दी निकासी।</b> मियाद से पहले निवेश बंद करने या निकालने पर मेरे सर्टिफ़िकेट या अनुबंध की शर्तों के अनुसार पेनल्टी या कटौती हो सकती है।",
- c10:"<b>स्वैच्छिक भागीदारी।</b> ऊपर की बातें समझकर, अपनी वैध आय से, मैं स्वेच्छा से पार्टनर के रूप में जुड़ा/जुड़ी हूँ। किसी ने मुझ पर दबाव नहीं डाला और न ही गुमराह किया।",
- c11:"<b>बदलाव की सूचना।</b> मेरा बैंक खाता, मोबाइल नंबर या पता बदलने पर मैं 7 दिनों के भीतर रिचवेल्थ को सूचित करूँगा/करूँगी।",
- c12:"<b>नॉमिनी।</b> मेरी मृत्यु की स्थिति में, उचित सत्यापन के बाद, मेरा निवेश और भुगतान रिचवेल्थ के रिकॉर्ड के अनुसार मेरे रजिस्टर्ड नॉमिनी या क़ानूनी वारिसों को मिलेगा।",
- c13:"<b>संचार।</b> मैं अपने निवेश, भुगतान और अपडेट के बारे में रिचवेल्थ से व्हाट्सऐप, SMS, ईमेल और फ़ोन पर कॉल और संदेश प्राप्त करने के लिए सहमत हूँ।",
- c14:"<b>इलेक्ट्रॉनिक सहमति।</b> मैं सहमत हूँ कि हर बिंदु पर टिक करके और अपना नाम लिखकर दी गई यह ऑनलाइन सहमति, सूचना प्रौद्योगिकी अधिनियम, 2000 के तहत, हाथ से हस्ताक्षरित दस्तावेज़ जितनी ही मान्य और बाध्यकारी है।",
- c15:"<b>क्षेत्राधिकार।</b> कोई भी विवाद जामनगर, गुजरात की अदालतों के क्षेत्राधिकार के अधीन होगा।",
- email:"ईमेल (वैकल्पिक)", email_h:"आपके TDS सर्टिफ़िकेट (फ़ॉर्म 16A) और रिचवेल्थ ऐप के लिए।", e_email:"कृपया सही ईमेल लिखें या खाली छोड़ दें।",
- bank_q:"क्या आपका भुगतान पहले वाले बैंक खाते में ही जारी रखना है?", bank_yes:"हाँ, वही खाता", bank_no:"नहीं, मेरा खाता बदल गया है",
- bank_note:"कोई बात नहीं — आपके RM आपको फ़ोन करके खाता अपडेट करेंगे। कृपया कैंसल चेक या पासबुक तैयार रखें। नया खाता वेरिफ़ाई होने के बाद आपका बाकी भुगतान होगा।",
- nom_q:"क्या आपका नॉमिनी वही है?", nom_yes:"हाँ, वही नॉमिनी", nom_no:"नहीं, मुझे बदलना है",
- nom_note:"आपके RM आपको फ़ोन करके नॉमिनी अपडेट करेंगे।",
- pid:"पार्टनर ID", ver:"सहमति संस्करण {v}",
+ ph_l:"आपकी फोटो / सेल्फी", ph_h:"हमारे रिकॉर्ड के लिए अपनी हाल की साफ़ फोटो लें या अपलोड करें। आपका पूरा चेहरा साफ़ दिखाई देना चाहिए।",
+ ph_take:"फोटो लें", ph_up:"फोटो अपलोड करें", ph_retake:"दोबारा लें", ph_replace:"बदलें",
+ pl_q:"क्या आपका PAN आधार से लिंक है?", pl_yes:"हाँ", pl_no:"नहीं", pl_ns:"पता नहीं", pl_ex:"छूट प्राप्त है / लागू नहीं है",
+ tds_p:"यदि आपका PAN निष्क्रिय है, तो अधिक दर से TDS कट सकता है। यदि आपको पता नहीं है, तो हमारी टीम जाँच करने में आपकी मदद कर सकती है।",
+ s2:"पता, बैंक और नॉमिनी",
+ addr_q:"क्या आपका वर्तमान पता आधार कार्ड पर दिए गए पते के समान है?", addr_yes:"हाँ", addr_no:"नहीं",
+ addr_h:"यदि नहीं, तो अपना वर्तमान पता भरें:", new_addr:"पता", city:"शहर", state:"राज्य", pin:"पिन कोड",
+ bank_q:"क्या आपके भुगतान पहले से दर्ज बैंक खाते में ही जारी रखे जाएँ?", bank_yes:"हाँ", bank_no:"नहीं, मुझे बैंक खाता अपडेट करना है",
+ bank_note:"आपके रिलेशनशिप मैनेजर आपसे संपर्क करेंगे। कृपया कैंसल चेक या बैंक स्टेटमेंट तैयार रखें। जाँच पूरी होने के बाद नए खाते में भुगतान शुरू किया जा सकता है।",
+ nom_q:"क्या आप अपने मौजूदा नॉमिनी की जानकारी वही रखना चाहते हैं?", nom_yes:"हाँ", nom_no:"नहीं, मुझे जानकारी अपडेट करनी है", nom_none:"मैंने नॉमिनी दर्ज नहीं किया है / मुझे पता नहीं है",
+ nom_note:"यदि आपको नॉमिनी जोड़ना या उसकी जानकारी अपडेट करनी है, तो आपके रिलेशनशिप मैनेजर आपसे संपर्क करेंगे।",
+ s3:"आपकी सहमति", s3_i:"कृपया हर बात पढ़ें और सहमत होने पर बॉक्स पर टिक करें। मदद चाहिए तो फॉर्म जमा करने से पहले अपने रिलेशनशिप मैनेजर से पूछें।",
+ lt_to:"प्रति:", lt_cn:"क्लाइंट का नाम", lt_cid:"क्लाइंट ID", date:"तारीख",
+ lt_sub:"विषय: री-KYC और क्लाइंट की सहमति", lt_open:"मैं नीचे दी गई बातों की पुष्टि करता/करती हूँ:",
+ c1:"<b>मेरी जानकारी</b>मेरे द्वारा दी गई जानकारी और दस्तावेज़ मेरे अपने हैं और मेरी जानकारी के अनुसार सही हैं।",
+ c2:"<b>मेरी जानकारी का उपयोग</b>मैं Richwealth को मेरी पहचान की जाँच करने, मेरे रिकॉर्ड रखने, भुगतान करने, कानूनी ज़रूरतें पूरी करने और Richwealth ऐप पर मेरा खाता बनाने के लिए मेरी जानकारी और दस्तावेज़ों का उपयोग करने की अनुमति देता/देती हूँ। मैं Richwealth को मेरी पहचान और जाँच के लिए मेरी फोटो मेरे खाते के रिकॉर्ड के साथ रखने की अनुमति भी देता/देती हूँ। अधिक जानकारी " + PN("गोपनीयता सूचना") + " में उपलब्ध है।",
+ c3:"<b>मेरा बैंक खाता</b>मेरे भुगतान केवल मेरे सत्यापित बैंक खाते में किए जाएँ। बैंक की जानकारी बदलने पर मैं Richwealth को सूचित करूँगा/करूँगी।",
+ c4:"<b>TDS</b>जहाँ ज़रूरी होगा, Richwealth लागू दर से टैक्स काटकर मेरे PAN के अंतर्गत जमा करेगा। मैं समझता/समझती हूँ कि PAN निष्क्रिय होने पर अधिक टैक्स कट सकता है।",
+ c5:"<b>Richwealth को भुगतान</b>मैं पैसा केवल Richwealth के आधिकारिक बैंक खाते में भेजूँगा/भेजूँगी। मैं किसी कर्मचारी, एजेंट या अन्य व्यक्ति के निजी खाते में भुगतान नहीं करूँगा/करूँगी।",
+ c6:"<b>खाते की सुरक्षा</b>मैं अपना OTP, पासवर्ड या बैंकिंग PIN किसी के साथ साझा नहीं करूँगा/करूँगी, भले ही वह व्यक्ति खुद को Richwealth का प्रतिनिधि बताए।",
+ c7:"<b>मेरा समझौता और आय</b>मेरे निवेश की राशि, समझौते के अनुसार मिलने वाली आय, भुगतान की तारीखें और अन्य शर्तें मेरे समझौते या प्रमाणपत्र में दी गई हैं। मैंने इन बातों को पढ़ा है और मुझे सवाल पूछने का अवसर मिला है।",
+ c8:"<b>व्यवसाय की गतिविधियाँ</b>मैं समझता/समझती हूँ कि Richwealth मेरे निवेश पर लागू शर्तों में बताए अनुसार अपने व्यवसाय के लिए धन का उपयोग करता है। इनमें शेयर बाज़ार, रियल एस्टेट और बैंक जमा जैसी गतिविधियाँ शामिल हैं।",
+ c9:"<b>समय से पहले निकासी</b>यदि मैं समय से पहले पैसा निकालने का अनुरोध करता/करती हूँ, तो मेरे समझौते या प्रमाणपत्र में दी गई कटौती और भुगतान की समय-सीमा लागू होगी। आगे बढ़ने से पहले मैं Richwealth से हिसाब माँग सकता/सकती हूँ।",
+ c10:"<b>मेरा निर्णय</b>मैंने अपनी इच्छा से और वैध स्रोतों से प्राप्त धन का निवेश किया है। मुझे सवाल पूछने और अपनी शंकाएँ दूर करने का अवसर मिला है।",
+ c11:"<b>मेरी जानकारी में बदलाव</b>मोबाइल नंबर, पता, बैंक खाता या नॉमिनी की जानकारी बदलने पर मैं जल्द से जल्द Richwealth को सूचित करूँगा/करूँगी।",
+ c12:"<b>नॉमिनी और कानूनी वारिस</b>मेरी मृत्यु होने पर Richwealth ज़रूरी दस्तावेज़ों की जाँच करेगा और मेरे समझौते तथा लागू कानून के अनुसार देय राशि के भुगतान की प्रक्रिया पूरी करेगा।",
+ c13:"<b>खाते से जुड़े संदेश</b>मैं अपने खाते, जाँच, भुगतान, टैक्स दस्तावेज़ों और सेवा से जुड़ी जानकारी के लिए WhatsApp, SMS, ईमेल या फोन के माध्यम से संदेश और कॉल प्राप्त करने के लिए सहमत हूँ।",
+ c14:"<b>ऑनलाइन पुष्टि</b>इन बॉक्स पर टिक करके, अपना पूरा नाम लिखकर और यह फॉर्म जमा करके, मैं पुष्टि करता/करती हूँ कि मैंने इस सहमति को पढ़ा, समझा और स्वीकार किया है।",
+ c15:"<b>मौजूदा शर्तें</b>यह फॉर्म मेरे रिकॉर्ड अपडेट करता है और मेरी सहमति की पुष्टि करता है। इससे मेरे मौजूदा समझौते, भुगतान की शर्तों या मुझे देय राशि में कोई बदलाव नहीं होता।",
  tickall:"मैंने सभी बिंदु पढ़ लिए हैं — सब टिक करें",
- decl_h:"घोषणा", decl:"मैं एतद्द्वारा घोषणा करता/करती हूँ कि मेरे द्वारा दी गई जानकारी और दस्तावेज़ सत्य, सही और पूर्ण हैं। मैं समझता/समझती हूँ कि किसी भी विसंगति के दूर होने तक रिचवेल्थ भुगतान रोक सकता है।",
- sign:"हस्ताक्षर — अपना पूरा नाम लिखें", sign_h:"आपका लिखा नाम इस सहमति पर आपके हस्ताक्षर माना जाएगा।", place:"स्थान", date:"तारीख",
- ag3:"मेरे RM से कहें कि मुझे फ़ोन करके समझाएँ। (वैकल्पिक)",
- e_tickall:"कृपया हर बिंदु पढ़कर टिक करें।", e_sign:"कृपया अपना पूरा नाम लिखें।",
- submit:"सबमिट करें", saving:"अपलोड हो रहा है… कृपया रुकें",
+ pv_h:"केवल Privé सदस्यों के लिए", pv_q:"क्या आप अभी Privé सदस्य हैं?", yes:"हाँ", no:"नहीं", pv_ns:"पता नहीं",
+ pv_ack:"मैंने अपनी Privé सदस्यता पर लागू सदस्यता शुल्क, लाभ और शर्तें पढ़ी हैं।",
+ decl_h:"घोषणा", decl:"मैं पुष्टि करता/करती हूँ कि मेरे द्वारा दी गई जानकारी मेरी जानकारी के अनुसार सही और पूरी है।",
+ decl2:"यदि कोई जानकारी अधूरी है या रिकॉर्ड से मेल नहीं खाती, तो Richwealth स्पष्टीकरण के लिए मुझसे संपर्क कर सकता है। यदि इससे किसी भुगतान पर असर पड़ता है, तो Richwealth मुझे समस्या और उसे ठीक करने के लिए ज़रूरी जानकारी या दस्तावेज़ों के बारे में बताएगा।",
+ sign:"पूरा नाम", sign_h:"अपना पूरा नाम लिखें।", place:"स्थान", place_h:"शहर",
+ otp_l:"मोबाइल सत्यापन", otp_h:"अपने दर्ज मोबाइल नंबर पर भेजा गया OTP भरें।", otp_notice:"यह OTP किसी दूसरे व्यक्ति को न बताएँ। इसे केवल इस फॉर्म में भरें।",
+ ver:"सहमति का संस्करण: {v}",
+ promo:"(वैकल्पिक) मैं नए ऑफर, सदस्यताओं, प्रोजेक्ट और कार्यक्रमों की जानकारी भी प्राप्त करना चाहता/चाहती हूँ। मैं ऐसे प्रचार संदेश कभी भी बंद करवा सकता/सकती हूँ।",
+ submit:"री-KYC और सहमति जमा करें", saving:"अपलोड हो रहा है… कृपया रुकें",
+ help_q:"जमा करने से पहले कोई बात समझनी है?", help_btn:"मेरे रिलेशनशिप मैनेजर से मुझे कॉल करवाएँ",
+ help_sending:"भेजा जा रहा है…", help_ok:"धन्यवाद। आपके रिलेशनशिप मैनेजर जल्द ही आपको कॉल करेंगे।", help_need:"कृपया पहले ऊपर अपना नाम और WhatsApp नंबर भरें।",
+ help_fail:"अनुरोध नहीं भेजा जा सका। कृपया हमें WhatsApp करें: " + WA + "।",
+ foot_help:"मदद चाहिए? WhatsApp: " + WA,
+ privacy:"आपके दस्तावेज़ों का उपयोग ऊपर बताए गए उद्देश्यों के लिए किया जाएगा। आपकी जानकारी कैसे संभाली जाती है, यह जानने के लिए हमारी " + PN("गोपनीयता सूचना") + " पढ़ें।",
+ d_h:"धन्यवाद{n}!", d_p1:"हमें आपका री-KYC फॉर्म मिल गया है।", d_ref:"आपका रेफरेंस नंबर:",
+ d_p2:"हमारी टीम आपकी जानकारी की जाँच करेगी। कुछ और ज़रूरी होने पर हम आपसे संपर्क करेंगे।",
+ d_p3:"ज़रूरी जाँच पूरी होने के बाद, कोई भी बकाया भुगतान आपकी तय भुगतान शर्तों के अनुसार किया जाएगा।",
+ app_h:"आपका Richwealth ऐप खाता", app_p:"ऐप तैयार होने पर हम आपकी सत्यापित जानकारी से आपके खाते में प्रवेश करने का तरीका बताएँगे।",
  e_req:"कृपया इसे भरें।", e_choose:"कृपया एक चुनें।", e_mob:"कृपया सही मोबाइल नंबर लिखें।", e_doc:"कृपया यह फ़ोटो जोड़ें।",
- e_big:"यह फ़ाइल बहुत बड़ी है (अधिकतम 8 MB)। नई फ़ोटो लें।", e_type:"कृपया फ़ोटो या PDF जोड़ें।", e_tick:"आगे बढ़ने के लिए टिक करें।",
- not_open:"फ़ॉर्म अभी शुरू नहीं हुआ है।", save_fail:"सबमिट नहीं हो सका। इंटरनेट जाँचकर फिर से कोशिश करें।",
- help:"मदद चाहिए? हमें व्हाट्सऐप करें " + HELP + "।",
- privacy:"आपके दस्तावेज़ रिचवेल्थ निजी तौर पर रखता है और केवल KYC, भुगतान और आपके रिचवेल्थ ऐप अकाउंट के लिए उपयोग करता है।",
- d_h:"धन्यवाद{n}!", d_p1:"आपका री-KYC मिल गया है। यह रेफ़रेंस नंबर सँभालकर रखें।",
- d_p2:"हमारी टीम के वेरिफ़ाई करने के बाद 48 घंटे में आपका बाकी भुगतान जमा होगा।",
- app_h:"रिचवेल्थ अब आपके मोबाइल में — 24/7", app_p:"अपनी जानकारी देने के लिए धन्यवाद। हम रिचवेल्थ ऐप बना रहे हैं, और इस जानकारी से उसमें आपका अकाउंट तैयार होगा। बहुत जल्द रिचवेल्थ कभी भी आपके फ़ोन में उपलब्ध होगा।",
- cc_other:"अन्य"
-}};
+ e_photo:"कृपया अपनी फोटो जोड़ें।", e_email:"कृपया सही ईमेल लिखें या खाली छोड़ दें।", e_tick:"आगे बढ़ने के लिए टिक करें।",
+ e_tickall:"कृपया हर बिंदु पढ़कर टिक करें।", e_sign:"कृपया अपना पूरा नाम लिखें।",
+ e_big:"यह फ़ाइल बहुत बड़ी है (अधिकतम 8 MB)। नई फ़ोटो लें।", e_type:"कृपया फ़ोटो या PDF जोड़ें।", e_img:"कृपया फोटो (JPG या PNG) जोड़ें।",
+ not_open:"फ़ॉर्म अभी शुरू नहीं हुआ है।", save_fail:"सबमिट नहीं हो सका। इंटरनेट जाँचकर फिर से कोशिश करें।"
+},
+gu:{
+ title:"Richwealth રી-KYC અને સંમતિ", h1:"Richwealth રી-KYC અને સંમતિ",
+ sub:"કૃપા કરીને તમારી માહિતીની ખાતરી કરો, તમારા દસ્તાવેજોના સ્પષ્ટ ફોટા અપલોડ કરો અને નીચે આપેલી સંમતિ વાંચો.",
+ p1:"<b>1</b> તમારી માહિતી", p2:"<b>2</b> સરનામું, બેંક અને નોમિની", p3:"<b>3</b> તમારી સંમતિ",
+ s1:"તમારી માહિતી",
+ name:"PAN કાર્ડ પર લખેલું તમારું પૂરું નામ", mobile:"Richwealthમાં નોંધાયેલો તમારો WhatsApp નંબર",
+ email:"ઈમેઇલ સરનામું — વૈકલ્પિક", email_h:"તમારા TDS પ્રમાણપત્રો અને ખાતાની માહિતી માટે.",
+ docs_h:"આ દસ્તાવેજોના સ્પષ્ટ ફોટા અપલોડ કરો:", d_pan:"PAN કાર્ડ", d_aadf:"આધાર કાર્ડ — આગળની બાજુ", d_aadb:"આધાર કાર્ડ — પાછળની બાજુ",
+ tap:"ફોટો લેવા અથવા ફાઇલ પસંદ કરવા ટેપ કરો", added:"ઉમેર્યું", change:"બદલો",
+ ph_l:"તમારો ફોટો / સેલ્ફી", ph_h:"અમારા રેકોર્ડ માટે તમારો તાજેતરનો સ્પષ્ટ ફોટો લો અથવા અપલોડ કરો. તમારો આખો ચહેરો સ્પષ્ટ દેખાવો જોઈએ.",
+ ph_take:"ફોટો લો", ph_up:"ફોટો અપલોડ કરો", ph_retake:"ફરીથી લો", ph_replace:"બદલો",
+ pl_q:"શું તમારું PAN આધાર સાથે લિંક છે?", pl_yes:"હા", pl_no:"ના", pl_ns:"ખાતરી નથી", pl_ex:"છૂટ લાગુ પડે છે / લાગુ પડતું નથી",
+ tds_p:"જો તમારું PAN નિષ્ક્રિય હોય, તો વધુ દરે TDS કપાઈ શકે છે. જો તમને ખાતરી ન હોય, તો અમારી ટીમ તપાસ કરવામાં મદદ કરી શકે છે.",
+ s2:"સરનામું, બેંક અને નોમિની",
+ addr_q:"શું તમારું હાલનું સરનામું આધાર કાર્ડ પરના સરનામા જેવું જ છે?", addr_yes:"હા", addr_no:"ના",
+ addr_h:"જો ના, તો તમારું હાલનું સરનામું ભરો:", new_addr:"સરનામું", city:"શહેર", state:"રાજ્ય", pin:"પિન કોડ",
+ bank_q:"શું તમારા પેમેન્ટ અગાઉથી નોંધાયેલા બેંક ખાતામાં જ ચાલુ રાખવાના છે?", bank_yes:"હા", bank_no:"ના, મારે બેંક ખાતું અપડેટ કરવું છે",
+ bank_note:"તમારા રિલેશનશિપ મેનેજર તમારો સંપર્ક કરશે. કૃપા કરીને કેન્સલ ચેક અથવા બેંક સ્ટેટમેન્ટ તૈયાર રાખો. ચકાસણી પૂરી થયા પછી નવા ખાતામાં પેમેન્ટ શરૂ કરી શકાશે.",
+ nom_q:"શું તમે તમારા હાલના નોમિનીની માહિતી એ જ રાખવા માંગો છો?", nom_yes:"હા", nom_no:"ના, મારે માહિતી અપડેટ કરવી છે", nom_none:"મેં નોમિની નોંધાવ્યો નથી / મને ખાતરી નથી",
+ nom_note:"જો તમારે નોમિની ઉમેરવો હોય અથવા તેની માહિતી અપડેટ કરવી હોય, તો તમારા રિલેશનશિપ મેનેજર તમારો સંપર્ક કરશે.",
+ s3:"તમારી સંમતિ", s3_i:"કૃપા કરીને દરેક મુદ્દો વાંચો અને સહમત હો તો બોક્સમાં ટિક કરો. મદદ જોઈતી હોય તો ફોર્મ સબમિટ કરતાં પહેલાં તમારા રિલેશનશિપ મેનેજરને પૂછો.",
+ lt_to:"પ્રતિ:", lt_cn:"ક્લાયન્ટનું નામ", lt_cid:"ક્લાયન્ટ ID", date:"તારીખ",
+ lt_sub:"વિષય: રી-KYC અને ક્લાયન્ટની સંમતિ", lt_open:"હું નીચેની બાબતોની ખાતરી આપું છું:",
+ c1:"<b>મારી માહિતી</b>મેં આપેલી માહિતી અને દસ્તાવેજો મારા પોતાના છે અને મારી જાણ મુજબ સાચા છે.",
+ c2:"<b>મારી માહિતીનો ઉપયોગ</b>હું Richwealthને મારી ઓળખ ચકાસવા, મારા રેકોર્ડ રાખવા, પેમેન્ટ કરવા, કાનૂની જરૂરિયાતો પૂરી કરવા અને Richwealth એપમાં મારું ખાતું બનાવવા માટે મારી માહિતી અને દસ્તાવેજોનો ઉપયોગ કરવાની મંજૂરી આપું છું. હું Richwealthને મારી ઓળખ અને ચકાસણી માટે મારો ફોટો મારા ખાતાના રેકોર્ડ સાથે રાખવાની મંજૂરી પણ આપું છું. વધુ વિગતો " + PN("ગોપનીયતા સૂચના") + "માં ઉપલબ્ધ છે.",
+ c3:"<b>મારું બેંક ખાતું</b>મારા પેમેન્ટ ફક્ત મારા ચકાસાયેલા બેંક ખાતામાં જ કરવામાં આવે. બેંકની માહિતી બદલાય તો હું Richwealthને જાણ કરીશ.",
+ c4:"<b>TDS</b>જ્યાં જરૂરી હશે ત્યાં Richwealth લાગુ દરે ટેક્સ કાપીને મારા PAN હેઠળ જમા કરશે. હું સમજું છું કે PAN નિષ્ક્રિય હોય તો વધુ ટેક્સ કપાઈ શકે છે.",
+ c5:"<b>Richwealthને પેમેન્ટ</b>હું પૈસા ફક્ત Richwealthના સત્તાવાર બેંક ખાતામાં જ મોકલીશ. હું કોઈ કર્મચારી, એજન્ટ અથવા અન્ય વ્યક્તિના વ્યક્તિગત ખાતામાં પેમેન્ટ નહીં કરું.",
+ c6:"<b>ખાતાની સુરક્ષા</b>હું મારો OTP, પાસવર્ડ અથવા બેંકિંગ PIN કોઈને પણ નહીં આપું, ભલે તે વ્યક્તિ પોતાને Richwealthનો પ્રતિનિધિ કહે.",
+ c7:"<b>મારો કરાર અને આવક</b>મારી રોકાણની રકમ, કરાર મુજબ મળતી આવક, પેમેન્ટની તારીખો અને અન્ય શરતો મારા કરાર અથવા પ્રમાણપત્રમાં આપેલી છે. મેં આ વિગતો વાંચી છે અને મને પ્રશ્નો પૂછવાની તક મળી છે.",
+ c8:"<b>વ્યવસાયની પ્રવૃત્તિઓ</b>હું સમજું છું કે Richwealth મારા રોકાણને લાગુ પડતી શરતોમાં જણાવ્યા મુજબ પોતાના વ્યવસાય માટે નાણાંનો ઉપયોગ કરે છે. તેમાં શેરબજાર, રિયલ એસ્ટેટ અને બેંક ડિપોઝિટ જેવી પ્રવૃત્તિઓનો સમાવેશ થાય છે.",
+ c9:"<b>સમય પહેલાં ઉપાડ</b>જો હું સમય પહેલાં પૈસા ઉપાડવાની વિનંતી કરું, તો મારા કરાર અથવા પ્રમાણપત્રમાં જણાવેલી કપાત અને પેમેન્ટની સમયમર્યાદા લાગુ પડશે. આગળ વધતાં પહેલાં હું Richwealth પાસે ગણતરી માંગી શકું છું.",
+ c10:"<b>મારો નિર્ણય</b>મેં મારી પોતાની ઇચ્છાથી અને કાયદેસરના સ્ત્રોતોમાંથી મળેલા નાણાંનું રોકાણ કર્યું છે. મને પ્રશ્નો પૂછવાની અને મારી શંકાઓ દૂર કરવાની તક મળી છે.",
+ c11:"<b>મારી માહિતીમાં ફેરફાર</b>મારો મોબાઇલ નંબર, સરનામું, બેંક ખાતું અથવા નોમિનીની માહિતી બદલાય તો હું શક્ય તેટલી વહેલી તકે Richwealthને જાણ કરીશ.",
+ c12:"<b>નોમિની અને કાનૂની વારસદારો</b>મારા અવસાનની સ્થિતિમાં Richwealth જરૂરી દસ્તાવેજોની ચકાસણી કરશે અને મારા કરાર તથા લાગુ કાયદા મુજબ ચૂકવવાપાત્ર રકમના પેમેન્ટની પ્રક્રિયા કરશે.",
+ c13:"<b>ખાતા સંબંધિત સંદેશાઓ</b>હું મારા ખાતા, ચકાસણી, પેમેન્ટ, ટેક્સ દસ્તાવેજો અને સેવા સંબંધિત માહિતી માટે WhatsApp, SMS, ઈમેઇલ અથવા ફોન દ્વારા સંદેશાઓ અને કૉલ મેળવવા સંમત છું.",
+ c14:"<b>ઑનલાઇન પુષ્ટિ</b>આ બોક્સમાં ટિક કરીને, મારું પૂરું નામ લખીને અને આ ફોર્મ સબમિટ કરીને હું ખાતરી આપું છું કે મેં આ સંમતિ વાંચી, સમજી અને સ્વીકારી છે.",
+ c15:"<b>હાલની શરતો</b>આ ફોર્મ મારા રેકોર્ડ અપડેટ કરે છે અને મારી સંમતિની પુષ્ટિ કરે છે. તેનાથી મારા હાલના કરાર, પેમેન્ટની શરતો અથવા મને ચૂકવવાપાત્ર રકમમાં કોઈ ફેરફાર થતો નથી.",
+ tickall:"મેં બધા મુદ્દા વાંચ્યા છે — બધા ટિક કરો",
+ pv_h:"ફક્ત Privé સભ્યો માટે", pv_q:"શું તમે હાલમાં Privé સભ્ય છો?", yes:"હા", no:"ના", pv_ns:"ખાતરી નથી",
+ pv_ack:"મેં મારી Privé સભ્યતાને લાગુ પડતી સભ્યપદ ફી, લાભો અને શરતો વાંચ્યાં છે.",
+ decl_h:"જાહેરનામું", decl:"હું ખાતરી આપું છું કે મેં આપેલી માહિતી મારી જાણ મુજબ સાચી અને સંપૂર્ણ છે.",
+ decl2:"જો કોઈ માહિતી અધૂરી હોય અથવા રેકોર્ડ સાથે મેળ ન ખાતી હોય, તો Richwealth સ્પષ્ટતા માટે મારો સંપર્ક કરી શકે છે. જો તેની કોઈ પેમેન્ટ પર અસર થાય, તો Richwealth મને સમસ્યા અને તેને ઉકેલવા માટે જરૂરી માહિતી અથવા દસ્તાવેજો વિશે જણાવશે.",
+ sign:"પૂરું નામ", sign_h:"તમારું પૂરું નામ લખો.", place:"સ્થળ", place_h:"શહેર",
+ otp_l:"મોબાઇલ ચકાસણી", otp_h:"તમારા નોંધાયેલા મોબાઇલ નંબર પર મોકલેલો OTP દાખલ કરો.", otp_notice:"આ OTP કોઈ બીજી વ્યક્તિને આપશો નહીં. તેને ફક્ત આ ફોર્મમાં જ દાખલ કરો.",
+ ver:"સંમતિનું વર્ઝન: {v}",
+ promo:"(વૈકલ્પિક) હું નવી ઑફર, સભ્યપદ, પ્રોજેક્ટ અને કાર્યક્રમોની માહિતી પણ મેળવવા માંગું છું. હું આવા પ્રચાર સંદેશાઓ કોઈપણ સમયે બંધ કરાવી શકું છું.",
+ submit:"રી-KYC અને સંમતિ સબમિટ કરો", saving:"અપલોડ થઈ રહ્યું છે… રાહ જુઓ",
+ help_q:"સબમિટ કરતાં પહેલાં કોઈ વાત સમજવી છે?", help_btn:"મારા રિલેશનશિપ મેનેજરને મને કૉલ કરવા જણાવો",
+ help_sending:"મોકલી રહ્યા છીએ…", help_ok:"આભાર. તમારા રિલેશનશિપ મેનેજર ટૂંક સમયમાં તમને કૉલ કરશે.", help_need:"કૃપા કરીને પહેલાં ઉપર તમારું નામ અને WhatsApp નંબર ભરો.",
+ help_fail:"વિનંતી મોકલી શકાઈ નથી. કૃપા કરીને અમને WhatsApp કરો: " + WA + ".",
+ foot_help:"મદદ જોઈએ છે? WhatsApp: " + WA,
+ privacy:"તમારા દસ્તાવેજોનો ઉપયોગ ઉપર જણાવેલા હેતુઓ માટે કરવામાં આવશે. તમારી માહિતી કેવી રીતે સંભાળવામાં આવે છે તે જાણવા અમારી " + PN("ગોપનીયતા સૂચના") + " વાંચો.",
+ d_h:"આભાર{n}!", d_p1:"અમને તમારું રી-KYC ફોર્મ મળી ગયું છે.", d_ref:"તમારો રેફરન્સ નંબર:",
+ d_p2:"અમારી ટીમ તમારી માહિતીની ચકાસણી કરશે. બીજી કોઈ માહિતીની જરૂર હશે તો અમે તમારો સંપર્ક કરીશું.",
+ d_p3:"જરૂરી ચકાસણી પૂરી થયા પછી કોઈપણ બાકી પેમેન્ટ તમારી નક્કી થયેલી પેમેન્ટની શરતો મુજબ કરવામાં આવશે.",
+ app_h:"તમારું Richwealth એપ ખાતું", app_p:"એપ તૈયાર થયા પછી અમે તમારી ચકાસાયેલી માહિતીનો ઉપયોગ કરીને તમારા ખાતામાં પ્રવેશ કરવાની રીત સમજાવીશું.",
+ e_req:"કૃપા કરીને આ ભરો.", e_choose:"કૃપા કરીને એક પસંદ કરો.", e_mob:"કૃપા કરીને સાચો મોબાઇલ નંબર લખો.", e_doc:"કૃપા કરીને આ ફોટો ઉમેરો.",
+ e_photo:"કૃપા કરીને તમારો ફોટો ઉમેરો.", e_email:"કૃપા કરીને સાચો ઇમેઇલ લખો અથવા ખાલી રાખો.", e_tick:"આગળ વધવા માટે ટિક કરો.",
+ e_tickall:"કૃપા કરીને દરેક મુદ્દો વાંચીને ટિક કરો.", e_sign:"કૃપા કરીને તમારું પૂરું નામ લખો.",
+ e_big:"આ ફાઇલ બહુ મોટી છે (મહત્તમ 8 MB). નવો ફોટો લો.", e_type:"કૃપા કરીને ફોટો અથવા PDF ઉમેરો.", e_img:"કૃપા કરીને ફોટો (JPG અથવા PNG) ઉમેરો.",
+ not_open:"ફોર્મ હજી શરૂ થયું નથી.", save_fail:"સબમિટ થઈ શક્યું નથી. ઇન્ટરનેટ તપાસીને ફરી પ્રયાસ કરો."
+}
+};
 
 var CC = [["+91","🇮🇳 +91"],["+971","🇦🇪 +971"],["+966","🇸🇦 +966"],["+968","🇴🇲 +968"],["+974","🇶🇦 +974"],["+965","🇰🇼 +965"],["+973","🇧🇭 +973"],["+1","🇺🇸 +1"],["+44","🇬🇧 +44"],["+61","🇦🇺 +61"],["+65","🇸🇬 +65"],["+254","🇰🇪 +254"]];
 var DOCS = [{k:"pan", t:"d_pan"}, {k:"aadhaar_front", t:"d_aadf"}, {k:"aadhaar_back", t:"d_aadb"}];
 var CONSENTS = ["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15"];
-var CONSENT_VERSION = "v1.2 (11-Nov-2026)";   // change when the wording changes; stored with every submission
+var CONSENT_VERSION = "v2.0 (11-Nov-2026)";   // change when the wording changes; stored with every submission
 var PID = ((location.search.match(/[?&](?:id|p)=([A-Za-z0-9-]{1,20})/) || [])[1] || "").toUpperCase();   // personal link: ?id=RI-1234
 var MAX_RAW = 8*1024*1024, MAX_EDGE = 1700, JPEG_Q = 0.8;
 var NOW = new Date(), TODAY = ("0"+NOW.getDate()).slice(-2) + "-" + ("0"+(NOW.getMonth()+1)).slice(-2) + "-" + NOW.getFullYear();
@@ -473,6 +569,7 @@ var form = document.getElementById("kyc"), msg = document.getElementById("formms
 function $(id){ return document.getElementById(id); }
 function t(k){ return (T[LANG] && T[LANG][k]) || T.en[k] || ""; }
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function plain(h){ var d = document.createElement("div"); d.innerHTML = String(h).replace(/<\/b>/g, "</b>. "); return d.textContent.replace(/\s+/g, " ").trim(); }
 function val(id){ return $(id).value.trim(); }
 function digits(s){ return s.replace(/\D/g, ""); }
 
@@ -535,6 +632,34 @@ function drawPrev(d, field){
   box.querySelector("button").addEventListener("click", function(){ field.querySelector("input").click(); });
 }
 
+/* ---------- photo / selfie ---------- */
+var CAM_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h3l2-3h8l2 3h3v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+var UP_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>';
+function buildSelfie(){
+  var box = $("selfie"), r = files.selfie;
+  if (!r){
+    box.innerHTML = '<div class="selfie"><button type="button" class="sbtn" data-in="in-cam">'+CAM_SVG+t("ph_take")+'</button>' +
+      '<button type="button" class="sbtn" data-in="in-up">'+UP_SVG+t("ph_up")+'</button></div>';
+  } else {
+    box.innerHTML = '<div class="sprev"><img src="'+r.preview+'" alt=""><div class="acts"><b>✓ '+t("added")+'</b>' +
+      '<button type="button" data-in="in-cam">'+t("ph_retake")+'</button><button type="button" data-in="in-up">'+t("ph_replace")+'</button></div></div>';
+  }
+  box.querySelectorAll("[data-in]").forEach(function(b){ b.addEventListener("click", function(){ $(b.getAttribute("data-in")).click(); }); });
+}
+["in-cam","in-up"].forEach(function(id){
+  var inp = $(id);
+  inp.addEventListener("change", function(){
+    var file = inp.files[0], field = form.querySelector('[data-k="selfie"]'), errEl = field.querySelector(".err");
+    inp.value = "";
+    if (!file) return;
+    if (!/^image\//.test(file.type) && !/\.(heic|heif|jpe?g|png|webp)$/i.test(file.name)){ errEl.textContent = t("e_img"); field.classList.add("bad"); return; }
+    shrink(file).then(function(r){
+      if (!r || !r.preview){ errEl.textContent = t(r ? "e_img" : "e_big"); field.classList.add("bad"); return; }
+      r.name = "photo.jpg"; files.selfie = r; field.classList.remove("bad"); errEl.textContent = t("e_photo"); buildSelfie();
+    });
+  });
+});
+
 /* ---------- consent letter ---------- */
 function buildConsents(){
   var box = $("consents"), was = {};
@@ -542,15 +667,15 @@ function buildConsents(){
   box.innerHTML = "";
   CONSENTS.forEach(function(c, i){
     var l = document.createElement("label"); l.className = "ck";
-    l.innerHTML = '<input type="checkbox" name="consent" value="'+c+'"'+(was[c]?" checked":"")+'><span>'+(i+1)+". "+t(c)+'</span>';
+    l.innerHTML = '<input type="checkbox" name="consent" value="'+c+'"'+(was[c]?" checked":"")+'><span class="ct">'+t(c).replace("<b>", "<b>"+(i+1)+". ")+'</span>';
     box.appendChild(l);
   });
+  box.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(e){ e.stopPropagation(); }); });
 }
 function letter(){
-  var n = val("f-name").toUpperCase() || "__________";
-  $("lt-open").innerHTML = t("lt_open").replace("{name}", esc(n));
-  $("lt-date").textContent = t("date") + ": " + TODAY;
-  $("lt-pid").textContent = PID ? t("pid") + ": " + PID : "";
+  $("lt-name").textContent = val("f-name").toUpperCase() || "—";
+  $("lt-cid").textContent = PID || "—";
+  $("lt-date").textContent = TODAY;
   $("lt-ver").textContent = t("ver").replace("{v}", CONSENT_VERSION);
 }
 $("tickall").addEventListener("click", function(){ form.querySelectorAll('input[name="consent"]').forEach(function(i){ i.checked = true; }); mark("consent", false); });
@@ -565,7 +690,7 @@ function setLang(l){
   document.title = t("title");
   document.querySelectorAll("[data-t]").forEach(function(el){ el.innerHTML = t(el.getAttribute("data-t")); });
   document.querySelectorAll(".langbar button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-lang") === LANG); });
-  buildDocs(); buildConsents(); letter();
+  buildDocs(); buildSelfie(); buildConsents(); letter();
   try { localStorage.setItem("rkyc_lang", LANG); } catch(e){}
 }
 document.querySelectorAll("[data-lang]").forEach(function(b){
@@ -573,71 +698,104 @@ document.querySelectorAll("[data-lang]").forEach(function(b){
 });
 var cc = $("f-cc");
 CC.forEach(function(c){ var op = document.createElement("option"); op.value = c[0]; op.textContent = c[1]; cc.appendChild(op); });
+if (OTP_ON) $("otpbox").classList.remove("hide");
 
-/* ---------- address toggle ---------- */
+/* ---------- conditional parts ---------- */
 function radio(n){ var r = form.querySelector('input[name="'+n+'"]:checked'); return r ? r.value : ""; }
-function addrMode(){ var diff = radio("addr_same") === "Different";
-  form.querySelector('[data-k="new_address"]').classList.toggle("hide", !diff); $("addr2").classList.toggle("hide", !diff);
+function toggles(){
+  $("addrbox").classList.toggle("hide", radio("addr_same") !== "Different");
   $("bank-note").classList.toggle("hide", radio("bank_same") !== "Changed");
-  $("nom-note").classList.toggle("hide", radio("nom_same") !== "Update"); }
-form.addEventListener("change", function(e){ addrMode(); var f = e.target.closest(".field"); if (f) f.classList.remove("bad"); });
+  $("nom-note").classList.toggle("hide", !radio("nom_same") || radio("nom_same") === "Same nominee");
+  var pv = radio("prive") === "Yes";
+  $("pv-ackbox").classList.toggle("hide", !pv);
+  if (!pv) $("f-pvack").checked = false;
+}
+form.addEventListener("change", function(e){ toggles(); var f = e.target.closest(".field"); if (f) f.classList.remove("bad"); });
 form.addEventListener("input", function(e){ var f = e.target.closest(".field"); if (f) f.classList.remove("bad"); });
 $("f-mob").addEventListener("input", function(){ this.value = digits(this.value); });
 
 /* ---------- submit ---------- */
 function mark(k, isBad){ var f = form.querySelector('[data-k="'+k+'"]'); if (!f || f.offsetParent === null) return true; f.classList.toggle("bad", !!isBad); return !isBad; }
-function fail(text){ msg.innerHTML = text + " " + t("help"); msg.classList.add("show"); btn.disabled = false; btn.textContent = t("submit"); }
+function fail(text){ msg.innerHTML = text + " " + t("foot_help"); msg.classList.add("show"); btn.disabled = false; btn.innerHTML = t("submit"); }
+function badMobile(){ var mob = digits(val("f-mob")); return cc.value === "+91" ? !/^[6-9]\d{9}$/.test(mob) : !/^\d{6,13}$/.test(mob); }
+function stamp(){ var d = new Date(), o = -d.getTimezoneOffset(), s = o >= 0 ? "+" : "-"; o = Math.abs(o);
+  return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)+" "+d.toTimeString().slice(0,8)+" UTC"+s+("0"+Math.floor(o/60)).slice(-2)+":"+("0"+o%60).slice(-2); }
+function post(p){
+  var ctrl = window.AbortController ? new AbortController() : null;
+  var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 120000);
+  // text/plain body = no CORS preflight; Apps Script answers with readable JSON.
+  return fetch(ENDPOINT, { method:"POST", body: JSON.stringify(p), signal: ctrl ? ctrl.signal : undefined })
+    .then(function(r){ clearTimeout(timer); return r.json(); }, function(e){ clearTimeout(timer); throw e; });
+}
 
 form.addEventListener("submit", function(ev){
   ev.preventDefault(); msg.classList.remove("show");
-  var ccv = cc.value, mob = digits(val("f-mob"));
-  var same = form.querySelector('input[name="addr_same"]:checked');
-  var diff = same && same.value === "Different";
+  var diff = radio("addr_same") === "Different", pv = radio("prive");
   var ok = [
     mark("name", val("f-name").length < 3),
-    mark("mobile", ccv === "+91" ? !/^[6-9]\d{9}$/.test(mob) : !/^\d{6,13}$/.test(mob))
-  ].concat(DOCS.map(function(d){ return mark("doc_"+d.k, !files[d.k]); })).concat([
-    mark("email", val("f-email") !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("f-email"))),
-    mark("panlink", !form.querySelector('input[name="panlink"]:checked')),
-    mark("addr_same", !same),
+    mark("mobile", badMobile())
+  ].concat([
+    mark("email", val("f-email") !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("f-email")))
+  ]).concat(DOCS.map(function(d){ return mark("doc_"+d.k, !files[d.k]); })).concat([
+    mark("selfie", !files.selfie),
+    mark("panlink", !radio("panlink")),
+    mark("addr_same", !radio("addr_same")),
     mark("new_address", diff && val("f-addr").length < 8),
     mark("city", diff && val("f-city").length < 2),
+    mark("state", diff && val("f-state").length < 2),
     mark("pin", diff && val("f-pin").length < 4),
     mark("bank_same", !radio("bank_same")),
     mark("nom_same", !radio("nom_same")),
     mark("consent", form.querySelectorAll('input[name="consent"]:checked').length !== CONSENTS.length),
+    mark("prive", !pv),
+    mark("prive_ack", pv === "Yes" && !$("f-pvack").checked),
     mark("decl", !$("f-decl").checked),
     mark("sign", val("f-sign").length < 3),
-    mark("place", val("f-place").length < 2)
+    mark("place", val("f-place").length < 2),
+    mark("otp", OTP_ON && !/^\d{4,6}$/.test(val("f-otp")))
   ]).every(Boolean);
   if (!ok){ var b = form.querySelector(".field.bad"); if (b) b.scrollIntoView({behavior:"smooth", block:"center"}); return; }
   if (!ENDPOINT){ fail(t("not_open")); return; }
 
-  btn.disabled = true; btn.textContent = t("saving");
+  btn.disabled = true; btn.innerHTML = t("saving");
+  var ackTxt = pv === "Yes" ? [plain(t("pv_h")) + ": " + plain(t("pv_ack"))] : [];
+  var ackEn = pv === "Yes" ? ["Privé members only: " + plain(T.en.pv_ack)] : [];
   var p = {
-    name: val("f-name"), mobile: ccv + " " + mob, email: val("f-email"), partner_id: PID, panlink: radio("panlink"),
-    bank_same: radio("bank_same"), nom_same: radio("nom_same"), version: CONSENT_VERSION,
-    consent_en: CONSENTS.map(function(c){ return T.en[c].replace(/<[^>]+>/g, ""); }).concat(["Declaration. " + T.en.decl]),
-    addr_same: same.value, new_address: diff ? val("f-addr") : "", city: diff ? val("f-city") : "", pin: diff ? val("f-pin") : "",
+    v: 2, name: val("f-name"), mobile: cc.value + " " + digits(val("f-mob")), email: val("f-email"), client_id: PID, panlink: radio("panlink"),
+    addr_same: radio("addr_same"), new_address: diff ? val("f-addr") : "", city: diff ? val("f-city") : "", state: diff ? val("f-state") : "", pin: diff ? val("f-pin") : "",
+    bank_same: radio("bank_same"), nom_same: radio("nom_same"), prive: pv, prive_ack: pv === "Yes" ? "Yes" : "",
     consents: form.querySelectorAll('input[name="consent"]:checked').length + "/" + CONSENTS.length, decl: "Yes",
-    sign: val("f-sign").toUpperCase(), place: val("f-place"), date: TODAY, rm_call: $("f-call").checked ? "Yes" : "No",
-    lang: LANG, ua: navigator.userAgent.slice(0, 160), website: form.website.value,
-    docs: DOCS.map(function(d){ var f = files[d.k]; return {kind:d.k, name:f.name, mime:f.mime, data:f.data}; })
+    sign: val("f-sign").toUpperCase(), place: val("f-place"), date: TODAY, device_time: stamp(),
+    promo: $("f-promo").checked ? "Yes" : "No", otp: OTP_ON ? val("f-otp") : "", version: CONSENT_VERSION,
+    lang: LANG,
+    consent_en: CONSENTS.map(function(c){ return plain(T.en[c]); }).concat(ackEn, ["Declaration. " + plain(T.en.decl) + " " + plain(T.en.decl2)]),
+    consent_text: [plain(t("lt_sub")), plain(t("lt_open"))].concat(CONSENTS.map(function(c, i){ return (i+1) + ". " + plain(t(c)); }), ackTxt,
+      [plain(t("decl_h")) + ": " + plain(t("decl")) + " " + plain(t("decl2"))], $("f-promo").checked ? [plain(t("promo"))] : []),
+    ua: navigator.userAgent.slice(0, 160), website: form.website.value,
+    docs: DOCS.concat([{k:"selfie"}]).map(function(d){ var f = files[d.k]; return {kind:d.k, name:f.name, mime:f.mime, data:f.data}; })
   };
-  var ctrl = window.AbortController ? new AbortController() : null;
-  var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 120000);
-  // text/plain body = no CORS preflight; Apps Script answers with readable JSON.
-  fetch(ENDPOINT, { method:"POST", body: JSON.stringify(p), signal: ctrl ? ctrl.signal : undefined })
-    .then(function(r){ return r.json(); })
-    .then(function(res){
-      clearTimeout(timer);
+  post(p).then(function(res){
       if (!res || res.ok !== true) throw new Error("not saved");
       $("d-h").textContent = t("d_h").replace("{n}", ", " + p.name.split(/\s+/)[0]);
       $("d-ref").textContent = res.ref || "—";
       form.style.display = "none";
       var d = $("done"); d.style.display = "block"; d.focus(); d.scrollIntoView({behavior:"smooth"});
     })
-    .catch(function(){ clearTimeout(timer); fail(t("save_fail")); });
+    .catch(function(){ fail(t("save_fail")); });
+});
+
+/* ---------- ask my RM to call me (no consent needed) ---------- */
+$("helpbtn").addEventListener("click", function(){
+  var hm = $("helpmsg"), hb = this;
+  hm.className = "helpmsg";
+  var okName = mark("name", val("f-name").length < 3), okMob = mark("mobile", badMobile());
+  if (!okName || !okMob){ hm.className = "helpmsg no"; hm.innerHTML = t("help_need"); form.querySelector(".field.bad").scrollIntoView({behavior:"smooth", block:"center"}); return; }
+  if (!ENDPOINT){ hm.className = "helpmsg no"; hm.innerHTML = t("help_fail"); return; }
+  hb.disabled = true; hb.innerHTML = t("help_sending");
+  post({ action:"help", name: val("f-name"), mobile: cc.value + " " + digits(val("f-mob")), client_id: PID, lang: LANG,
+         device_time: stamp(), website: form.website.value })
+    .then(function(res){ if (!res || res.ok !== true) throw new Error("x"); hm.className = "helpmsg ok"; hm.innerHTML = t("help_ok"); hb.innerHTML = "✓ " + t("help_btn"); })
+    .catch(function(){ hm.className = "helpmsg no"; hm.innerHTML = t("help_fail"); hb.disabled = false; hb.innerHTML = t("help_btn"); });
 });
 
 /* ---------- start ---------- */
